@@ -308,3 +308,5 @@ nextflow run nf-core/rnaseq -profile singularity -c resources/my.config -params-
 crtl +b
 d
 ```
+
+- We will cover the outputs from this pipeline during the Day 3 session.
