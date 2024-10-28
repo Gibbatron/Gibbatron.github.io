@@ -14,7 +14,7 @@ author: "Alex Gibbs"
 
 - Yesterday we covered:
   - Outputs from Day 1 session (fetchngs pipeline)
-  - Inputs needed to run the rnaseq pipeline 
+  - Inputs needed to run the rnaseq pipeline
   - How to execute the rnaseq pipeline
 
 ---
@@ -201,7 +201,7 @@ scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star
 
 Required files:
 
-**diff-abund-samplesheet.csv**
+**resources/diff-abundance-samplesheet.csv**
 - We can use the samplesheet that we used for the rnaseq pipeline, but we need to make a few edits.
 - We need to add an extra column (or more depending on your comparisons).
 - The column format is as follows to compare between the two groups:
@@ -271,7 +271,7 @@ sampleB_6|path/to/file|path/to/file|auto|GroupB|ConditionB|GrpBConB
 
 ```
 cd resources
-cut -d',' -f1-4 ../input/samplesheet/samplesheet.csv > diff-abund-samplesheet.csv
+cut -d',' -f1-4 ../input/samplesheet/samplesheet.csv > ./diff-abundance-samplesheet.csv
 ```
 <details>
 <summary>Explanation of the cut command</summary>
@@ -285,7 +285,7 @@ cut -d',' -f1-4 ../input/samplesheet/samplesheet.csv > diff-abund-samplesheet.cs
 - Now if we open this new samplesheet in the nano editor, we can add the extra column with ease.
 
 ```
-nano diff-abund-samplesheet.csv
+nano diff-abundance-samplesheet.csv
 
 sample,fastq_1,fastq_2,strandedness,conditionOne
 SRX19363186,../input/fastq/SRX19363186_SRR23454126_1.fastq.gz,../input/fastq/SRX19363186_SRR23454126_2.fastq.gz,auto,HK-2
@@ -301,35 +301,153 @@ enter
 - **Note: most of you will have each variable encased in quotation marks (""), if this is the case then make sure you stick with that format!**
 
 
+**resources/contrasts.csv**
+
+- We will also need to provide a contrasts file that is used by the pipline to perform the differential gene expression analyses.
+- This file tells the pipeline what columns to use for the testing, and which groups to compare in that column.
+- The file contains 4 columns: **id, variable, reference, target**
+
+```
+nano resources/contrasts.csv
+
+id,variable,reference,target
+786-0_vs_HK-2,conditionOne,HK-2,786-0
+
+#save and exit
+ctrl + x
+y
+enter
+```
+
+- Here, `id` is used to give the analysis an id. This can be whatever you want. To keep things simple, we have kept with the cell line names. We could also name this analysis cancer_vs_control if we wanted.
+- `variable` specifies which column in the samplesheet.csv file the pipeline needs to look at to select samples for comparison. We have said to use the `conditionOne` column.
+- `reference` specifies which group in the `conditionOne` column is going to be the reference group. i.e. The group we are comparing against.
+- `target` specifies the gorup in the `conditionOne` column that will be used as the target group. i.e. The group that we use to compare.
 
 
+**resources/Homo_sapiens.GRCh38.110.gtf**
+- We also need to specify the human gene reference file.
+- This is used to annotate the genes during the analysis.
+- We already have this file downloaded.
 
 
+**resources/diff-abundance-params.yaml**
+- As with the other pipelines, we need to make a parameter file containing each option for the pipeline.
 
+```
+nano resources/diff-abundance-params.yaml
 
-**resources/reference genome files**
-- We will need to provide a reference genome for the pipeline to use.
-- The reference genome is used by the pipeline as a template for the sequencing reads. This allows for a more accurate assembly of our sequencing reads.
-- More information about the mapping process can be found in this [video](https://www.youtube.com/watch?v=tlf6wYJrwKY).
-- Luckily, reference genomes are readily available (if using commonly-researched species) for us to use.
-- Our samples are human, therefore we will need to find and download the latest human reference genome.
-- Reference genomes can be found [here](https://ftp.ensembl.org/pub/release-110/fasta/) and [here](https://ftp.ensembl.org/pub/release-110/gtf/).
+input: resources/diff-abundance-samplesheet.csv
+outdir: output
+-profile: rnaseq
+matrix: output/star_salmon/salmon.merged.gene_counts.tsv
+transcript_length_matrix: output/star_salmon/salmon.merged.gene_lengths.tsv
+contrasts: resources/contrasts.csv
+differential_min_fold_change: 1.5
+gtf: resources/Homo_sapiens.GRCh38.110.gtf
+email: <b>YOUR-EMAIL@cardiff.ac.uk</b>
+study_name: <b>MY-STUDY-NAME</b>
+study_type: rnaseq
+
+#save and exit
+ctrl + x
+y
+enter
+```
+
+- Note that we have included `study_name` and `study_type` in here, this is to make the outputs neater and is good practice.
+- In some cases, you may want to run the pipieline a few times with different comparisons etc, by changing the `study_name` parameter each time, we are ensuring a new directory is created isntead of overwriting the previous analysis.
+
+**resources/my.config**
+- We created this configuration file yesterday.
+- We do not need to edit this file any further.
+
+**bin/script.sh**
+- As with yesterday, lets update this file so we have as record of the code that we have used.
 
 <details>
-<summary>Download the human reference genome files</summary>
+<summary>Edit the script.sh file</summary>
  
 <br>
  
 <pre><span style="color:crimson;">
-#download the human GRCh38 reference DNA sequence
-#paste this chunk into your console and run. Make sure you are in the resources directory
-wget https://ftp.ensembl.org/pub/release-110/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz && gunzip Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+#open the file using nano editor
+nano bin/script.sh
+ 
+#copy and paste the following to the end of the file
+#05
+#execute differentialabundance pipeline
+nextflow run nf-core/differentialabundance -params-file resources/diff-abundance-params.yaml -profile singularity -c resources/my.config
+#if pipeline fails for whatever reason, rerun using -resume command
+nextflow run nf-core/differentialabundance -params-file resources/diff-abundance-params.yaml -profile singularity -c resources/my.config -resume
 
-#download the human GRCh38 reference gene information file
-#paste this chunk into your console and run. Make sure you are in the resources directory
-wget https://ftp.ensembl.org/pub/release-110/gtf/homo_sapiens/Homo_sapiens.GRCh38.110.gtf.gz && gunzip Homo_sapiens.GRCh38.110.gtf.gz
-
+#save and exit
+ctrl + x
+y
+enter
 </span></pre>
 </details>
 
-**resources/rnaseq-params.yaml**
+- Our scratch directory should now look like the following:
+
+```
+.
+└── rnaseq/
+    ├── bin/
+    │   └── script.sh
+    ├── resources/
+    │   ├── my.config
+    │   ├── Homo_sapiens.GRCh38.110.gtf
+    │   ├── diff-abundance-samplesheet.csv
+    │   ├── diff-abundance-params.yaml
+    │   └── contrasts.csv
+    ├── input/
+    │   ├── fastq
+    │   ├── metadata/
+    │   ├── pipeline_info/
+    │   └── samplesheet/
+    └── output/
+        ├── fastqc/
+        ├── multiqc/
+        ├── pipeline_info/
+        ├── sortmerna/
+        ├── star_salmon/
+        │   ├── salmon.merged.gene_counts.tsv
+        │   └── salmon.merged.gene_lengths.tsv
+        └── trimgalore/
+```
+
+---
+
+## Executing the pipeline
+---
+---
+
+- Now that we have the files ready for the pipeline, we can go ahead and execute it.
+- First of all, lets exit the rnaseq tmux session and create a new one for the rnaseq pipeline.
+
+```
+#detach from the fetchngs session
+ctrl + b
+d
+
+#create new tmux session
+tmux new -s diff-abundance
+```
+
+- Now we can run the pipeline
+
+```
+#load modules
+module load nextflow/23.10.0
+module load singularity/singularity-ce/3.11.4
+
+#execute pipe
+nextflow run nf-core/differentialabundance -params-file resources/diff-abundance-params.yaml -profile singularity -c resources/my.config
+
+#leave pipeline running for a few minutes to ensure its working, then we can close the session:
+crtl +b
+d
+```
+
+- We will cover the outputs from this pipeline during the Day 3 session.

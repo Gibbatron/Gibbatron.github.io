@@ -220,7 +220,7 @@ enter
 - We do not need to edit this file any further.
 
 **bin/script.sh**
-- As with yesterday,  lets update this file so we have as record of the code that we have used.
+- As with yesterday, lets update this file so we have as record of the code that we have used.
 
 <details>
 <summary>Edit the script.sh file</summary>
