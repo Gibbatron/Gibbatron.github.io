@@ -121,9 +121,14 @@ scp -r c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/outputs/report .
 
 <img src="/assets/img/figure-20.png" alt="Samples and contrasts tables" width="1000"/>
 
-- Then we come onto the **Results** section. This is where all of the plots and data are presented.
-- Firstly, we have the **counts** section which tells us how many input genes we had, and how many we had after filtering for low abundance.
-- Then we have **exploratory analysis**, which shows us a range of plots that allow us to explore the data.
+#### Results section
+- This is where all of the plots and data are presented.
+
+##### Counts
+- Tells us how many input genes we had, and how many we had after filtering for low abundance.
+
+##### Exploratory analysis
+- Shows us a range of plots that allow us to explore the data.
 - **Box plots** shows us the distribution of abundance values across the samples. 
 - Here we can see that we have 3 plots, one for each data type. We can see that normalisation and variance stabilisation has done a good gob. The purpose of this process is to adjust for differences in sequencing depth, control for different library sizes, minimize technical variability, and stabilise the variance across read counts.
 
@@ -166,4 +171,21 @@ scp -r c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/outputs/report .
 
 <img src="/assets/img/figure-25.png" alt="Outlier detection plot" width="1000"/>
 
+##### Differential analysis
+- This is where we can find the data related to the differential gene analysis.
+- **Differential gene counts** table shows us the number of up and down DEGs for the adjusted and unadjusted p-value tables.
+- When working with RNAseq data, we work with adjusted p values. Here, we can see that we have 3788 up and 4617 down significant DEGs.
+- We can visualise these via the volcano plot below the table. We can use our mouse to hover over each point to show us what gene it is also.
+
+<img src="/assets/img/figure-26.png" alt="DEG table and Volcano plot" width="1000"/>
+
+- Below the volcano is the up and down DEG tables.
+
+<img src="/assets/img/figure-27.png" alt="Up and Down DEG tables" width="1000"/>
+
+- Then we have the methods section, where you will find all the filters and information about the pipeline.
+
+## ShinyNGS App
+
+- Now we can use the ShinyNGS app and start playing with the data. 
 -
