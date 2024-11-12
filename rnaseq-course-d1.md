@@ -10,13 +10,13 @@ author: "Alex Gibbs"
 ---
 ---
 
-<span style="font-family: Consolas; color: black;">We will cover:
+We will cover:
 
 - Introduction to course.
 - Basic Unix.
 - Introduction to HAWK.
 - Basic Unix Continued.
-- Fetch data with nf-core/fetchngs pipeline.</span>
+- Fetch data with nf-core/fetchngs pipeline.
 
 ---
 
