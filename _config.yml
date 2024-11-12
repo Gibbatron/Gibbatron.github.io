@@ -140,12 +140,12 @@ navbar-var-length: false
 
 #page-col: "#FFFFFF" #original colour
 page-col: "#F1E6D6"
-text-col: "#2E2A47"
+text-col: "#1D3C4A"
 link-col: "#00BFAE"
 hover-col: "#0085A1"
 #navbar-col: "#EAEAEA" #original colour
 navbar-col: "#1D3C4A"
-navbar-text-col: "#404040"
+navbar-text-col: "#F1E6D6"
 navbar-border-col: "#DDDDDD"
 footer-col: "#1D3C4A"
 footer-text-col: "#777777"
