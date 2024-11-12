@@ -140,7 +140,7 @@ navbar-var-length: false
 
 #page-col: "#FFFFFF" #original colour
 page-col: "#FFF6ED"
-text-col: "#404040"
+text-col: "##69737B"
 link-col: "#008AFF"
 hover-col: "#0085A1"
 #navbar-col: "#EAEAEA" #original colour
