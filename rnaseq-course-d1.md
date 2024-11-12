@@ -5,7 +5,7 @@ author: "Alex Gibbs"
 ---
 
 ---
-<span style="font-family: consolas; color: black;">
+<span style="font-family: Consolas; color: black;">
 # <span style="color:black;">Day 1
 
 ---
