@@ -5,7 +5,7 @@ author: "Alex Gibbs"
 ---
 
 ---
-
+<span style="font-family: Abadi; color: black;">
 # <span style="color:black;">Day 1
 
 ---
@@ -584,7 +584,7 @@ cp name-of-file.txt path/to/directory/
 <img src="/assets/img/cp.gif" alt="Copying a File" width="1000"/>
 
 - The command works by first inputting the name of the file/directory that you want to copy, followed by the location of where you want to copy it to.
-- To copy a directory, we need to use the `-r` option:
+- To copy a directory, we need to use the `-r` option, which recursively copies the directory and all of its contents to the desired location:
 
 **Input**
 ```
@@ -1372,3 +1372,4 @@ then press d
 <br>
 
 ---
+</span>
