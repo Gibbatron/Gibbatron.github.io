@@ -5,19 +5,18 @@ author: "Alex Gibbs"
 ---
 
 ---
-<span style="font-family: Consolas; color: black;">
 # <span style="color:black;">Day 1
 
 ---
 ---
 
-We will cover:
+<span style="font-family: Consolas; color: black;">We will cover:
 
 - Introduction to course.
 - Basic Unix.
 - Introduction to HAWK.
 - Basic Unix Continued.
-- Fetch data with nf-core/fetchngs pipeline.
+- Fetch data with nf-core/fetchngs pipeline.</span>
 
 ---
 
@@ -1372,4 +1371,3 @@ then press d
 <br>
 
 ---
-</span>
