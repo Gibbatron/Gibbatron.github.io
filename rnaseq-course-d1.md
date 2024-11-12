@@ -5,7 +5,8 @@ author: "Alex Gibbs"
 ---
 
 ---
-# <span style="color:black;">Day 1
+# <span style="color:black;">
+# Day 1
 
 ---
 ---
@@ -23,7 +24,8 @@ We will cover:
 <br>
 
 ---
-## <span style="color:black;">Course Introduction
+## <span style="color:black;">
+## Course Introduction
 ---
 ---
 
@@ -39,7 +41,8 @@ You should have one of three questions:
 
 ---
 
-## <span style="color:black;">What you will learn on this course:
+## <span style="color:black;">
+## What you will learn on this course:
 ---
 ---
 
