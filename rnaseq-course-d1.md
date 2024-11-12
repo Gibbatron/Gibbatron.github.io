@@ -108,6 +108,7 @@ You should have one of three questions:
 - These operations can also be performed using the command line through the use of a shell.
 
 <img src="/assets/img/figure-1.png" alt="Shell" width="1200"/> 
+
 This is a shell. We can use this to type commands etc.
 
 ---
@@ -227,7 +228,7 @@ Syntax = Structure of statements in a computing language.
 
 ---
 
-Not all commands have options, and most commands have optional options - you don't have to use them!
+**Note: Not all commands have options, and most commands have optional options - you don't have to use them!**
 
 ---
 
@@ -307,7 +308,7 @@ ls -lah
 
 <img src="/assets/img/figure-4.png" alt="ls" width="1000"/>
 
-- We will cover permission shortly
+- We will cover permissions shortly
 
 <br>
 
@@ -315,7 +316,7 @@ ls -lah
 
 - Any file or directory with a dot (.) in front makes it hidden.
 - Hidden files are usually filesystem files and directories required by the system to correctly operate and function.
-- These hidden files are not normally needed by the user. \
+- These hidden files are not normally needed by the user.
 - In this course, we will potentially need to access a hidden file if things go wrong.
 
 ---
@@ -329,9 +330,9 @@ ls -lah
 ---
 
 - To move between different directories, we use the `cd` command.
-- In the example below,  we move into the plan to take over the world directory.
+- In the example below,  we move into the plan-to-take-over-the-world directory.
 - **Note:** we can use the `tab-key` to autofill. Start typing the name of the directory and then hit tab.
-- Note: when we use the `cd` command, we don't get any feedback from the shell. Usually, we move into the directory, then use the `ls` command to show us the contents.
+- **Note:** when we use the `cd` command, we don't get any feedback from the shell. Usually, we move into the directory, then use the `ls` command to show us the contents.
 
 **Input**
 ```
@@ -363,10 +364,12 @@ script-to-steal-all-the-money-in-the-UK.sh
 - As mentioned above, we can use the `tab-key` to autofill.
 - This will save you time and lots of errors! The `tab-key` is your friend!
 
+<br>
+
 **Making Use Of The Dot(.)**
-- As mentioned above, the dot(.) is used to tell the system where you currently are.
+- As mentioned above, the dot(**.**) is used to tell the system where you currently are.
 - This is best used for commands such as `ls` and `cd`.
-- When we combine two dots(..), this tells the system to use the directory above where we currently are.
+- When we combine two dots(**..**), this tells the system to use the directory above where we currently are.
 
 Input|Description
 -----|-----------
@@ -385,6 +388,7 @@ ls .
 
 <img src="/assets/img/ls-ls.dot.gif" alt="ls" width="1000"/>
 
+- Both give me the same output.
 - If I wanted to see what contents were above/outside of my Desktop, I would use `ls ..`
 
 **Input**
@@ -396,13 +400,18 @@ ls ..
 
 <img src="/assets/img/ls.dot.dot.gif" alt="ls" width="1000"/>
 
+<br>
+
 **Wildcard (*)**
-- The wildcard (*) can be used to select multiple things at once.
+- The wildcard (<b>*</b>) can be used to select multiple things at once.
 - It is used to match any character and is commonly used to select directories/files with common names.
-- Example, if there are multiple directories (file-1 through file-10) and I wanted to move them all into one directory (dir-1), I could use the common name to all the files followed by the wildcard.
-- `mv file* dir-1/`
+- **Example:** if there are multiple directories (file-1 through file-10) and I wanted to move them all into one directory (dir-1), I could use the common name to all the files followed by the wildcard.
+
+`mv file* dir-1/`
+
 - The wildcard can also be used to select the same file extensions. Example: If we wanted to move all the .fastq files to a new directory, we would use the wildcard followed by the extension.
-- `mv *.fastq dir-1/`
+
+`mv *.fastq dir-1/`
 
 **Input**
 ```
@@ -427,9 +436,9 @@ ls dir-1/
 ---
 ---
 
-- To give a visual explanation of what we have covered so far, let's use the HAWK directory structure that I made up:
+- To give a visual explanation of what we have covered so far, let's use the HAWK directory structure that I have made up:
 
-- I have just logged into my HAWK account and am not sure where I am located. To find out, I used the `pwd` command. This tells me that I am in the home directory:
+- I (Steve) have just logged into my HAWK account and am not sure where I am located. To find out, I used the `pwd` command. This tells me that I am in my personal directory within the home directory:
 
 **Input**
 ```
@@ -463,17 +472,17 @@ karen  steve  terry
 - Theres two ways to do this, <span style="color:red;">either move into her directory and list the contents</span>, <span style="color:green;">or use the list command</span>.
 
 **Input**
-```
-ls ../karen
-```
+
+<pre><span style="color:red;">ls ../karen</span></pre>
+
 
 **OR**
 
-```
-cd ../karen
-ls
-```
-- **Note**: As I am still in my directory, I need to use the two dots (..) to move up/out and then into Karens directory.
+
+<pre><span style="color:green;">cd ../karen
+ls</span></pre>
+
+- **Note**: As I am still in my directory, I need to use the two dots (<b>..</b>) to move up/out and then into Karens directory.
 
 **Output**
 
@@ -481,7 +490,7 @@ ls
 
 
 # This Needs To Be Completed!
-
+# How much more should I add?
 ---
 
 <br>
@@ -492,7 +501,7 @@ ls
 ---
 ---
 
-- File permissions determine who can and who can't access certain files and directories.
+- File permissions determine who can and who can't access certain files and directories. i.e. can you read, can you edit, and can you run/execute files?
 - On HAWK, each user has their own account which comes with their own home and scratch directory.
 - These directories can only be accessed by the user (and the admins). Other users can see that you have a directory, but cannot access as they do not have permission to do so.
 - To see the file and directory permissions, we must first understand how the permissions are ordered.
@@ -514,15 +523,18 @@ u/g/o|user/group/other
 +/-|enable/disable
 r/w/x|read/write/execute
 
+
 - The group section enables group access to files and directories.
 - When we run scripts, we need to make sure they are executable (x), otherwise the system will not recognise it as an executable file.
 - To check if a file is executable, we can use the `ls -l` command and check the permissions.
+
+<br>
 
 **Changing File Permissions**
 
 - A good example for changing file permissions is to make a script executable.
 - In the example below, I have made a shell script named file-permission.sh
-- These types of files (.sh) are what we use to run a script on Unix. These scripts can range from a simple one liner task, to a list of tasks that will run sequentially.
+- These types of files (**.sh**) are what we use to run a script on Unix. These scripts can range from a simple one liner task, to a list of tasks that will run sequentially.
 - When we create a file using the `touch` or `nano` command, by default it is not executable, as denoted by `-rw-r--r--`. We will cover `nano` shortly.
 - Subsequently, the system does not recognise it as an executable file and you wont be able to run it.
 - To change the file permissions and make the file executable, we use the `chmod` command.
