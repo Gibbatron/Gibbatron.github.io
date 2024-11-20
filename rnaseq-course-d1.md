@@ -5,7 +5,6 @@ author: "Alex Gibbs"
 ---
 
 ---
-# <span style="color:black;">
 # Day 1
 
 ---
@@ -24,7 +23,6 @@ We will cover:
 <br>
 
 ---
-## <span style="color:black;">
 ## Course Introduction
 ---
 ---
@@ -40,8 +38,6 @@ You should have one of three questions:
 <br>
 
 ---
-
-## <span style="color:black;">
 ## What you will learn on this course:
 ---
 ---
@@ -56,8 +52,7 @@ You should have one of three questions:
 <br>
 
 ---
-
-## <span style="color:black;">What you won't learn on this course:
+## What you won't learn on this course:
 ---
 ---
 
@@ -69,8 +64,7 @@ You should have one of three questions:
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix: Learning Objectives
+## Basic Unix: Learning Objectives
 ---
 ---
 
@@ -83,8 +77,7 @@ You should have one of three questions:
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix: Brief History
+## Basic Unix: Brief History
 ---
 ---
 
@@ -100,8 +93,7 @@ You should have one of three questions:
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix: Graphical User Interface (GUI) & Command Line/Shell
+## Basic Unix: Graphical User Interface (GUI) & Command Line/Shell
 ---
 ---
 
@@ -118,14 +110,13 @@ This is a shell. We can use this to type commands etc.
 <br>
 
 ---
-
-## <span style="color:black;">Introduction to HAWK
+## Introduction to HAWK
 ---
 ---
 
 - HAWK is Cardiff and Bangor universities High Performance Compute (HPC) system.
-- Swansea and Aberystwyth universities use SunBird - both systems are the run by Supercomputing Wales (SCW).
-- Both HPC's are the same, but are set-up slightly different - we will be working with HAWK.
+- Swansea and Aberystwyth universities use SunBird - both systems are run by Supercomputing Wales (SCW).
+- Both HPC's are the same, but set-up slightly different - we will be working with HAWK.
 - If we need to run analyses/softwares/code that requires a lot of computing power, we need to use HPC's.
 - The way we interact with HAWK is through the command line via Bash.
 - Think of HAWK as a computer that's located in the cloud. We can connect to it via out Unix shells - Terminal, MobaXterm, and FileZilla.
@@ -134,7 +125,8 @@ This is a shell. We can use this to type commands etc.
 
 <br>
 
-## <span style="color:black;">Introduction to HAWK: HAWK Filesystem
+---
+## Introduction to HAWK: HAWK Filesystem
 ---
 ---
 
@@ -161,15 +153,13 @@ This is a shell. We can use this to type commands etc.
 <br>
 
 ---
+## Basic Unix Continued: Common Commands
+---
+---
 
-## <span style="color:black;">Basic Unix Continued: Common Commands
----
----
- 
 - Now that we have covered basic Unix and introduced HAWK, we can now learn how to use the command line.
 
 - Here is a list of commonly used Unix commands that we will be using:
-  
 
 Command|Description|Common Options|Option Description
 |:----:|:----------|:-----------|:--------------|
@@ -195,8 +185,7 @@ Command|Description|Common Options|Option Description
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: Command line Syntax
+## Basic Unix Continued: Command line Syntax
 ---
 ---
 
@@ -236,7 +225,8 @@ Syntax = Structure of statements in a computing language.
 
 <br>
 
-## <span style="color:black;">Basic Unix Continued: Exploring Using Unix
+---
+## Basic Unix Continued: Exploring Using Unix
 ---
 ---
 
@@ -244,14 +234,13 @@ Syntax = Structure of statements in a computing language.
   - `pwd` = Where am I?
   - `ls` = List
   - `cd` = Change directory
-    
+
 ---
 
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: pwd Command
+## Basic Unix Continued: pwd Command
 ---
 ---
 
@@ -277,8 +266,7 @@ pwd
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: ls Command
+## Basic Unix Continued: ls Command
 ---
 ---
 
@@ -326,8 +314,7 @@ ls -lah
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: cd Command
+## Basic Unix Continued: cd Command
 ---
 ---
 
@@ -357,8 +344,7 @@ script-to-steal-all-the-money-in-the-UK.sh
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: Other Notations
+## Basic Unix Continued: Other Notations
 ---
 ---
 
@@ -366,12 +352,16 @@ script-to-steal-all-the-money-in-the-UK.sh
 - As mentioned above, we can use the `tab-key` to autofill.
 - This will save you time and lots of errors! The `tab-key` is your friend!
 
+---
+
 <br>
 
+---
+
 **Making Use Of The Dot(.)**
-- As mentioned above, the dot(**.**) is used to tell the system where you currently are.
+- As mentioned above, the dot(<b>.</b>) is used to tell the system where you currently are.
 - This is best used for commands such as `ls` and `cd`.
-- When we combine two dots(**..**), this tells the system to use the directory above where we currently are.
+- When we combine two dots(<b>..</b>), this tells the system to use the directory above where we currently are.
 
 Input|Description
 -----|-----------
@@ -402,18 +392,26 @@ ls ..
 
 <img src="/assets/img/ls.dot.dot.gif" alt="ls" width="1000"/>
 
+---
+
 <br>
+
+---
 
 **Wildcard (*)**
 - The wildcard (<b>*</b>) can be used to select multiple things at once.
 - It is used to match any character and is commonly used to select directories/files with common names.
 - **Example:** if there are multiple directories (file-1 through file-10) and I wanted to move them all into one directory (dir-1), I could use the common name to all the files followed by the wildcard.
 
-`mv file* dir-1/`
+```
+mv file* dir-1/
+```
 
 - The wildcard can also be used to select the same file extensions. Example: If we wanted to move all the .fastq files to a new directory, we would use the wildcard followed by the extension.
 
-`mv *.fastq dir-1/`
+```
+mv *.fastq dir-1/
+```
 
 **Input**
 ```
@@ -433,8 +431,7 @@ ls dir-1/
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: Working Example
+## Basic Unix Continued: Working Example
 ---
 ---
 
@@ -475,8 +472,9 @@ karen  steve  terry
 
 **Input**
 
+```
 <pre><span style="color:red;">ls ../karen</span></pre>
-
+```
 
 **OR**
 
