@@ -789,8 +789,6 @@ List contents of the each directory: <pre><span style="color:crimson;">ls -lah d
 
 Use the tree function to quickly map files and directories (does not show hidden files): <pre><span style="color:crimson;">tree</span></pre>
 
-</span></pre>
-
 <br>
 
 Use list function followed by wildcard to get multi-output: <pre><span style="color:crimson;"> ls -lah *</span></pre>
@@ -806,20 +804,22 @@ You can use multiple wildcards to list the contents further down: <pre><span sty
 
 ---
 ---
-
-## <span style="color:black;"> nf-core/fetchngs Pipeline
+# nf-core/fetchngs Pipeline
 ---
 ---
 
 - nf-core is a community effort to collect a curated set of analysis pipelines that are built using Nextflow.
 - The nf-core website contains >100 curated pipelines and is used by thousands of researchers and bioinformaticians across the globe.
-
-# Add a more punchy explanation and importance of why we should be using nf-core.
-
+- These pipelines are community-validated by bioinformaticians across the globe, and are standardized to ensure that they adhere to community standards such as FAIR principles.
 - Nextflow is a tool that allows us to run several different tasks on HAWK.
 - Each task may depend on an output from a previous task, may need to be run sequentially, or perhaps need to be run individually all at once.
 - Nextflow allows us to do this, and helps organise the way these tasks are run.
 
+---
+
+<br>
+
+---
 **Fetchngs Pipeline**
 
 - This pipeline allows us to fetch metadata and raw FastQ files from public and private databases
@@ -831,8 +831,7 @@ You can use multiple wildcards to list the contents further down: <pre><span sty
 <br>
 
 ---
-
-## <span style="color:black;"> Finding a dataset
+## Finding a dataset
 ---
 ---
 
@@ -840,7 +839,12 @@ You can use multiple wildcards to list the contents further down: <pre><span sty
 - There are multiple repositories that we can find samples on. The two most common are **Gene Expression Omnibus ([GEO](https://www.ncbi.nlm.nih.gov/geo/))** and **[Array Express](https://www.ebi.ac.uk/biostudies/arrayexpress)**.
 - For this course, we will use **GEO** to find our dataset.
 
-**GEO**
+---
+
+<br>
+
+---
+#### GEO
 
 - When accessing the GEO website, we are faced with multiple links and tools.
 - If we have a dataset in mind that we would like to find, we can use the search bar at the top right of the page.
@@ -878,7 +882,7 @@ You can use multiple wildcards to list the contents further down: <pre><span sty
 - **It's worth checking this tool out before continuing**. We won't be covering this tool during this course. If you would like a run through on it, please get in touch.
 
 <details>
-<summary>Analyze with GEO2R tool</summary>
+<summary><b>Analyze with GEO2R tool</b></summary>
 
 <br>
 
@@ -893,7 +897,7 @@ You can use multiple wildcards to list the contents further down: <pre><span sty
 - Again, this may not contain the raw sequencing data, but worth checking before proceeding.
 
 <details>
-<summary>Download RNA-seq counts</summary>
+<summary><b>Download RNA-seq counts</b></summary>
 
 <br>
 
@@ -926,22 +930,21 @@ You can use multiple wildcards to list the contents further down: <pre><span sty
 <br>
 
 ---
-
-## <span style="color:black;"> Downloading the relevant data
+#### Downloading the relevant data
 ---
 ---
 
 - We will be downloading **6 normoxia** samples, 3 from each cell line.
 - To do this, we need to click on the **SRA Run Selector** link.
-1) Once the new page has loaded, we can go ahead and use the filter tool on the top left to select **8: Treatment**, then **normoxia**.
-2) This filters the table at the bottom of the screen. We can then click the tick box at the top left of the table to **select all 6 samples**.
-3) Once all samples are selected, we can now click on the **sliding Selected tab** so move it to the right. This filters the data to include only the samples we have selected.
-4) Now we can click on the **Accession list** option. This downloads a text file called **SRR_Acc_List.txt**.
+  1) Once the new page has loaded, we can go ahead and use the filter tool on the top left to select **8: Treatment**, then **normoxia**.
+  2) This filters the table at the bottom of the screen. We can then click the tick box at the top left of the table to **select all 6 samples**.
+  3) Once all samples are selected, we can now click on the **sliding Selected tab** so move it to the right. This filters the data to include only the samples we have selected.
+  4) Now we can click on the **Accession list** option. This downloads a text file called **SRR_Acc_List.txt**.
 
 <img src="/assets/img/figure-16.png" alt="SRA Run Selector" width="1000"/>
 
 <details>
-<summary>SRR_Acc_List.txt</summary>
+<summary><b>SRR_Acc_List.txt</b></summary>
 
 <pre><span style="color:crimson;">
 SRR23454118
@@ -959,14 +962,26 @@ SRR23454126
 <br>
 
 ---
+# nf-core/fetchngs pipeline
+---
+---
 
-## <span style="color:black;"> nf-core/fetchngs pipeline
----
----
+- To keep things as simple as possible for users, I have created a GitHub repository which contains all of the directory structures and relevant scripts to perform each task for us.
+- This will hopefully make things more 
+
+
+
+
+
+
+
+
+
+
 
 - Now that we have the sample IDs, we can go ahead and run the fetchngs pipeline.
 
-#### <span style="color:black;"> Set-up
+### Set-up
 
 - Before we do anything, we first need to set-up our HAWK environment. Let's login to HAWK.
 - Once we are logged into HAWK, **navigate to the scratch directory and make a working directory named rnaseq**
