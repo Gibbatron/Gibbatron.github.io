@@ -347,7 +347,6 @@ script-to-steal-all-the-money-in-the-UK.sh
 ## Basic Unix Continued: Other Notations
 ---
 ---
-
 **Tab-key**
 - As mentioned above, we can use the `tab-key` to autofill.
 - This will save you time and lots of errors! The `tab-key` is your friend!
@@ -357,7 +356,6 @@ script-to-steal-all-the-money-in-the-UK.sh
 <br>
 
 ---
-
 **Making Use Of The Dot(.)**
 - As mentioned above, the dot(<b>.</b>) is used to tell the system where you currently are.
 - This is best used for commands such as `ls` and `cd`.
@@ -397,7 +395,6 @@ ls ..
 <br>
 
 ---
-
 **Wildcard (*)**
 - The wildcard (<b>*</b>) can be used to select multiple things at once.
 - It is used to match any character and is commonly used to select directories/files with common names.
@@ -472,15 +469,14 @@ karen  steve  terry
 
 **Input**
 
-```
-<pre><span style="color:red;">ls ../karen</span></pre>
-```
+
+<pre><span style="color:red;"><b>ls ../karen</b></span></pre>
 
 **OR**
 
 
-<pre><span style="color:green;">cd ../karen
-ls</span></pre>
+<pre><span style="color:green;"><b>cd ../karen
+ls</b></span></pre>
 
 - **Note**: As I am still in my directory, I need to use the two dots (<b>..</b>) to move up/out and then into Karens directory.
 
@@ -488,16 +484,12 @@ ls</span></pre>
 
 <img src="/assets/img/figure-7.png" alt="ls" width="1000"/>
 
-
-# This Needs To Be Completed!
-# How much more should I add?
 ---
 
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: File Permissions & File Privacy
+## Basic Unix Continued: File Permissions & File Privacy
 ---
 ---
 
@@ -506,7 +498,8 @@ ls</span></pre>
 - These directories can only be accessed by the user (and the admins). Other users can see that you have a directory, but cannot access as they do not have permission to do so.
 - To see the file and directory permissions, we must first understand how the permissions are ordered.
 - Unix splits file permission into three sections:
-  
+
+<br>
 
 Section|Description
 -------|-----------
@@ -514,7 +507,11 @@ user|The file/directory owner
 group|A group of individuals permitted to read the file
 other|Everyone
 
+<br>
+
 <img src="/assets/img/figure-8.png" alt="File Permissions" width="1000"/>
+
+<br>
 
 Symbol|Meaning
 ------|-------
@@ -523,17 +520,21 @@ u/g/o|user/group/other
 +/-|enable/disable
 r/w/x|read/write/execute
 
+<br>
 
 - The group section enables group access to files and directories.
 - When we run scripts, we need to make sure they are executable (x), otherwise the system will not recognise it as an executable file.
 - To check if a file is executable, we can use the `ls -l` command and check the permissions.
 
+---
+
 <br>
 
+---
 **Changing File Permissions**
 
 - A good example for changing file permissions is to make a script executable.
-- In the example below, I have made a shell script named file-permission.sh
+- In the example below, I have made a shell script named `file-permission.sh`
 - These types of files (**.sh**) are what we use to run a script on Unix. These scripts can range from a simple one liner task, to a list of tasks that will run sequentially.
 - When we create a file using the `touch` or `nano` command, by default it is not executable, as denoted by `-rw-r--r--`. We will cover `nano` shortly.
 - Subsequently, the system does not recognise it as an executable file and you wont be able to run it.
@@ -556,8 +557,7 @@ ls -l
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: Moving & Copying Files
+## Basic Unix Continued: Moving & Copying Files
 ---
 ---
 
@@ -569,8 +569,7 @@ ls -l
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: Copying a file using `cp` command
+## Basic Unix Continued: Copying a file using `cp` command
 ---
 ---
 
@@ -600,8 +599,7 @@ cp -r name-of-directory path/to/directory/
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: Moving a file using `mv` command
+## Basic Unix Continued: Moving a file using `mv` command
 ---
 ---
 
@@ -619,7 +617,7 @@ mv name-of-directory path/to/directory/
 
 - The command works by first inputting the name of the file/directory that you want to move, followed by the location of where you want to move it to.
 - **Note**: This command physically moves the file/directory to the location you have chosen. Be aware of typos when using this command, as it is very easy to overwrite other files/directories!
-- **I would reccomend sticking to using the cp command when you want to move files just in case you make typos**
+- **I would recommend sticking to using the cp command when you want to move files just in case you make typos**
 - The `mv` command can also be used to rename a file/directory:
 
 **Input**
@@ -635,8 +633,7 @@ mv name-of-directory new-name-of-directory
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: Making a file
+## Basic Unix Continued: Making a file
 ---
 ---
 
@@ -657,8 +654,7 @@ touch name-of-file.extension.name
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: Editing a file
+## Basic Unix Continued: Editing a file
 ---
 ---
 
@@ -684,15 +680,14 @@ enter
 
 - Along the bottom of the editor, you can see the various options that you are able to use.
 - Once we use `ctrl + x` you can see the bottom of the editor changes to `save modified buffer?`. Typing `Y` saves the file, `N` deletes it.
-- Once you have hit `Y`, you get another prompt to check the file name. Here, you get the opportunity to rename the file if needed. Then hitting `enter` saves and exits the editor. 
+- Once you have hit `Y`, you get another prompt to check the file name. Here, you get the opportunity to rename the file if needed. Then hitting `enter` saves and exits the editor.
 
 ---
 
 <br>
 
 ---
-
-## <span style="color:black;">Basic Unix Continued: Making a directory
+## Basic Unix Continued: Making a directory
 ---
 ---
 
@@ -726,8 +721,7 @@ mkdir directory1/directory1.1
 
 ---
 ---
-
-## <span style="color:black;">Exercise 1
+## Exercise 1
 ---
 ---
 
@@ -738,7 +732,7 @@ mkdir directory1/directory1.1
 
 
 <details>
-<summary>Answer</summary>
+<summary><b>Answer</b></summary>
 
 <br>
 
@@ -773,8 +767,7 @@ ls
 
 ---
 ---
-
-## <span style="color:black;">Exercise 2
+## Exercise 2
 ---
 ---
 
@@ -782,7 +775,7 @@ ls
 - Are there any hidden files?
 
 <details>
-<summary>Answer</summary>
+<summary><b>Answer</b></summary>
 
 <br>
 
@@ -790,16 +783,18 @@ List the contents: <pre><span style="color:crimson;">ls -lah</span></pre>
 
 <br>
 
-List contents of the ascii directory: <pre><span style="color:crimson;">ls -lah ascii</span></pre>
+List contents of the each directory: <pre><span style="color:crimson;">ls -lah directory-name</span></pre>
 
 <br>
 
-<pre><span style="color:crimson;">
-update this code
-  update this code
-  update this code
-  update this code
+Use the tree function to quickly map files and directories (does not show hidden files): <pre><span style="color:crimson;">tree</span></pre>
+
 </span></pre>
+
+<br>
+
+Use list function followed by wildcard to get multi-output: <pre><span style="color:crimson;"> ls -lah *</span></pre>
+You can use multiple wildcards to list the contents further down: <pre><span style="color:crimson;"> ls -lah */*</span></pre>
 
 <br>
 
