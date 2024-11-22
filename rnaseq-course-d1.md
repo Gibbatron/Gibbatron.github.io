@@ -967,53 +967,81 @@ SRR23454126
 ---
 
 - To keep things as simple as possible for users, I have created a GitHub repository which contains all of the directory structures and relevant scripts to perform each task for us.
-- This will hopefully make things more 
+- This will hopefully make things easier for users who are not so confident with coding.
 
+---
+### Fetch the project from GitHub
+---
+---
 
-
-
-
-
-
-
-
-
-
-- Now that we have the sample IDs, we can go ahead and run the fetchngs pipeline.
-
-### Set-up
-
-- Before we do anything, we first need to set-up our HAWK environment. Let's login to HAWK.
-- Once we are logged into HAWK, **navigate to the scratch directory and make a working directory named rnaseq**
+- To get the project directory from GitHub, we simply just copy and paste the one line of code below.
+- We will first want to **move into our scratch directory**, then run the code:
 
 ```
 cd /scratch/c.c1234567
-mkdir rnaseq
+git clone https://github.com/Gibbatron/rnaseq-course.git
 ```
+- You will get a notification when things are done.
+- To double check if the directory has been downloaded, we can use the `ls` command.
+
+---
+### Set-up
+---
+---
 
 - We need to change permissions of the rnaseq directory so that any daughter files and directories will inherit the same permissions:
 
 ```
-chmod 777 rnaseq #777 gives read, write, and execute permissions for everyone
+chmod -R 777 rnaseq-course #777 gives read, write, and execute permissions for everyone
 
-setfacl -d -m u::rwx,g::rwx,o::rwx rnaseq
+setfacl -d -m u::rwx,g::rwx,o::rwx rnaseq-course #this code gives same permissions to daughter files and directories that are made.
 ```
 
-- Now we can move into the rnaseq directory and make some daughter directories:
+- We also need to change permissions of the scripts in the bin directory:
 
 ```
-cd rnaseq
-mkdir input output bin resources
-ls
+cd rnaseq-course/bin
+chmod +x *.sh
 ```
 
-#### <span style="color:black;"> Required files
+---
+#### Required files
 ---
 ---
 
-- Now that we have set-up the environment, we can go ahead and create the required files for the pipeline to run.
+- Now that we have the permissions etc completed, we can now edit the required files needed for the fetchngs pipe.
+- You will see, by using the `ls` command, that we have the following directory structure:
 
-**resources/ids.csv**
+```
+.
+└── rnaseq-course/
+    ├── bin/
+    │   ├── differentialabundance.sh
+    │   ├── download-ref-genome.sh
+    │   ├── fetchngs.sh
+    │   ├── generate-samplesheet.sh
+    │   └── rnaseq.sh
+    ├── resources/
+    │   ├── conditions.csv
+    │   ├── contrasts.csv
+    │   ├── diff-abundance-params.yaml
+    │   ├── example-conditions.csv
+    │   ├── fetchngs-params.yaml
+    │   ├── ids.csv
+    │   ├── my.config
+    │   └── rnaseq-params.yaml
+    ├── input/
+    │   ├── fastq/
+    │   └── example_fastqs/
+    └── output/
+```
+
+- **Note: We will be executing the pipeline from the parent directory (rnaseq-course)**
+- **Note: In addition to above note, all file paths are in relation to the parent directory**
+
+###### resources/ids.csv
+
+- Now that we have the sample IDs, we can go ahead and add them to the `ids.csv` file.
 - This file is a comma-separated value (.csv) file that contains the list of the sample IDs that we just downloaded.
 
 <details>
@@ -1066,56 +1094,14 @@ input7,input8,input9
 
 <br>
 
-- We have two choices to make this file: transfer the SRR_Acc_List.txt file over and rename it, or make the ids.csv file using nano and copy and paste the ids over.
-- As we only have 6 sample IDs, I would reccommend the latter option. However, if we want to transfer the SRR_Acc_List.txt file over, we will need to use FileZilla or MobaXterm. 
+- To add our IDs to the .csv, we need to open `ids.csv` with nano, delete the text already there, then paste our list straight in.
 
-<details>
-<summary>Transfer files using FileZilla</summary>
-
-- After logging onto HAWK, navigate to the rnaseq directory on the connection window on the right hand side by pasting the filepath into the search bar and hitting enter:
-
-<pre><span style="color:crimson;">
-/scratch/c.c1234567/rnaseq/resources
-</span></pre>
-
-- Now find the SRR_Acc_List.txt file that you downloaded (probably Downloads directory) and simply drag and drop it from the left to right windows.
-
-<img src="/assets/img/filezilla-transfer.gif" alt="FileZilla Transfer" width="1000"/>
-
-- Now we can change the name of the file. I would reccomend not using the mv command just incase there is a typo or you end up unwantingly removing the file.
-- We will use the cp command instead. Here we copy the file to the same directory, but rename it to ids.csv.
-
-<pre><span style="color:crimson;">
-cp SRR_Acc_List.txt ./ids.csv
-</span></pre>
-
-
-</details>
-
-# add mobaxterm section below
-<details>
-<summary>Transfer files using MobaXterm</summary>
-
-- After logging onto HAWK, navigate to the rnaseq directory on the connection window on the right hand side by pasting the filepath into the search bar and hitting enter:
-
-<pre><span style="color:crimson;">
-/scratch/c.c1234567/rnaseq/resources
-</span></pre>
-
-- Now find the SRR_Acc_List.txt file that you downloaded (probably Downloads directory) and simply drag and drop it from the left to right windows.
-
-<img src="/assets/img/mobaxterm-transfer.gif" alt="MobaXterm Transfer" width="1000"/>
-
-</details>
-
-<details>
-<summary>Creating the file using nano</summary>
-
-- To do this, we simply open the nano editor, copy and paste the sample IDs in, and save.
-
-<pre><span style="color:crimson;">
+```
 nano resources/ids.csv
 
+# delete the text
+
+# paste your list in:
 SRR23454118
 SRR23454119
 SRR23454122
@@ -1123,92 +1109,60 @@ SRR23454124
 SRR23454125
 SRR23454126
 
+# save the file
 ctrl + x
 y
 enter
-</span></pre>
-
-</details>
+```
 
 <br>
 
-</details>
-
-<details>
-<summary>ids.csv</summary>
-
-<pre><span style="color:crimson;">
-SRR23454118
-SRR23454119
-SRR23454122
-SRR23454124
-SRR23454125
-SRR23454126
-</span></pre>
-
-</details>
-
-<br>
-
-**resources/fetchngs-params.yaml**
+###### resources/fetchngs-params.yaml
 
 - This file contains all of the parameters needed for the pipeline to run.
 - Instead of adding all of the options into the code when executing the pipeline, we can add them into this file. This keeps things tidier and easier to troubleshoot.
 
-<details>
-<summary>Creating fetchngs-params.yaml file</summary>
+- **We need to change the email address in this file.**
 
-- To do this, we simply open the nano editor, copy and paste the following, and save.
+- To change the email address, we need to open the file with nano editor:
 
-<pre><span style="color:crimson;">
+```
 nano resources/fetchngs-params.yaml
 
+# change your email:
 input: resources/ids.csv
 outdir: input
 nf_core_pipeline: rnaseq
-email: <b>your.email@cardiff.ac.uk</b>
+email: <b>your-email@cardiff.ac.uk</b>
 
+# save the file
 ctrl + x
 y
 enter
-</span></pre>
+```
 
-</details>
-
-input - Where the input ids.csv file is located.
-outdir: Where to save the outputs to.
-nf_core_pipeline: Formats the output data so that it conforms with the required inputs for the rnaseq pipeline that we will be using further down the line.
+- input: Where the input ids.csv file is located. *Note: This is in relation to the parent directory.*
+- outdir: Where to save the outputs to. *Note: This is in relation to the parent directory.*
+- nf_core_pipeline: Formats the output data so that it conforms with the required inputs for the rnaseq pipeline that we will be using further down the line.
 
 <br>
 
-<details>
-<summary>fetchngs-params.yaml file</summary>
-
-<pre><span style="color:crimson;">
-input: resources/ids.csv
-outdir: input
-nf_core_pipeline: rnaseq
-email: <b>your.email@cardiff.ac.uk</b>
-</span></pre>
-
-</details>
-
-**resources/my.config**
+###### resources/my.config
 
 - This file contains all of the configuration code required for the pipeline to run correctly on HAWK.
-- We only need to change the email and scw account sections.
 
-<details>
-<summary>Creating my.config file</summary>
+- **We only need to change the email and scw account sections.**
 
-- To do this, we simply open the nano editor, copy and paste the following, and save.
+- To change the email address and scw account number, we need to open the file with nano editor:
 
-<pre><span style="color:crimson;">
+```
 nano resources/my.config
 
+# change your email and scw account number:
+
 params {
   config_profile_description = 'Super Computing Wales'
-  config_profile_contact = <b>'my.email@cardif.ac.uk'</b>
+  config_profile_contact = '<b>your-email@cardif.ac.uk</b>'
   config_profile_url = 'https://supercomputing.wales/'
 }
 singularity {
@@ -1228,146 +1182,72 @@ params {
 
 process {
  beforeScript = 'module load singularity-ce/3.11.4'
- clusterOptions = <b>'--account=scw1234'</b>
+ clusterOptions = '--account=<b>scw1234</b>'
 }
 
+# save the file
 ctrl + x
 y
 enter
-</span></pre>
-
-</details>
-
-<br>
-
-<details>
-<summary>my.config file</summary>
-
-<pre><span style="color:crimson;">
-params {
-  config_profile_description = 'Super Computing Wales'
-  config_profile_contact = <b>'my.email@cardif.ac.uk'</b>
-  config_profile_url = 'https://supercomputing.wales/'
-}
-singularity {
-  enabled = true
-  autoMounts = true
-}
-executor {
-  name = 'slurm'
-  queueSize = 10
-  queue = 'htc'
-}
-params {
-  max_memory = 180.GB
-  max_cpus = 20
-  max_time = 72.h
-}
-
-process {
- beforeScript = 'module load singularity-ce/3.11.4'
- clusterOptions = <b>'--account=scw1234'</b>
-}
-</span></pre>
-
-</details>
+```
 
 ---
-
-**bin/script.sh**
-
-- Here we will make a script file to keep track of what we have run etc.
-- We will section off the file for each pipeline that we run.
-
-<details>
-<summary>Creating script.sh file</summary>
-
-- To do this, we simply open the nano editor, copy and paste the code, and save.
-
-<pre><span style="color:crimson;">
-nano bin/script.sh
-
-#01
-#load and make a new tmux session called fetchngs
-#note the node you are working on [c.1234@cl1(hawk) bin]$
-module load tmux
-tmux new -s fetchngs/rnaseq/differentialabundance
-
-
-#02
-#load nextflow and singularity modules
-module load nextflow/23.10.0
-module load singularity/singularity-ce/3.11.4
-
-
-#03
-#execute fetchngs pipeline
-nextflow run nf-core/fetchngs -r dev -profile singularity -c resources/my.config -params-file resources/fetchngs-params.yaml
-#if pipeline fails for whatever reason, rerun using -resume command
-nextflow run nf-core/fetchngs -r dev -profile singularity -c resources/my.config -params-file resources/fetchngs-params.yaml -resume
-
-ctrl + x
-y
-enter
-</span></pre>
-
-</details>
-
----
-
 ## Executing the nf-core/prefetch pipeline
 ---
 ---
 
 - Now we have everything ready to execute the pipeline.
-- We should have the following directory and file structure:
-
-```
-.
-└── rnaseq/
-    ├── bin/
-    │   └── script.sh
-    ├── resources/
-    │   ├── ids.csv
-    │   ├── fetchngs-params.yaml
-    │   └── my.config
-    ├── input
-    └── output
-```
-
-- To run the pipeline, we need to be in the **rnaseq** directory.
+- To run the pipeline, we need to be in the **parent directory (rnaseq-course)** directory.
+- To run the pipeline, we will use tmux.
 - Then we can open a tmux session, load any required modules for the pipeline to run correctly, and close the session.
 
 <details>
-<summary>tmux</summary>
-- tmux is a tool that we use to run multiple terminal sessions at once.
+<summary><b>What is tmux?</b></summary>
+- Tmux is a tool that we use to run multiple terminal sessions at once.
+- We can use tmux to run our pipelines in the background, which leaves us to do other tasks in the meantime, or logout.
 - If we were to run the pipeline without tmux, we would have to stay logged into HAWK until the pipeline has finished running.
 - This can be problematic because 1) most pipelines can take a VERY long time to run, and 2) connection problems. If you are disconnected for any reason, the pipeline will cancel.
-  
 - Using tmux allows us to open a new terminal window, run the pipeline, and close the session so that it runs in the background.
 - We can then log out of our HAWK session and log back in once we have been notified of the pipelines completion.
 
 </details>
 
 **Launch a tmux session**
+
+- From the **parent** directory (rnaseq-course), run the following:
+
 ```
 module load tmux
 tmux new -s fetchngs
 ```
 
+- This loads the tmux module in HAWK and opens a new tmux session called fetchngs.
+
 **Load Modules**
+
+- With the tmux session opened, paste the following:
 
 ```
 module load nextflow/23.10.0
 module load singularity/singularity-ce/3.11.4
 ```
 
+- This loads the required modules for the pipeline to run.
+
 **Execute pipeline**
+
+- Now we can go ahead and execute the pipeline.
+- Usually, we would run the pipeline by typing out the command followed by the options etc etc.
+- To make thinks simpler for everyone, and to avoid typos etc, I have added this command to a script (`bin/fetchngs.sh`).
+- To execute the pipeline, all we need to do is run this script.
+
+- To run the script, we simply need to do the following:
+
 ```
-nextflow run nf-core/fetchngs -r dev -profile singularity -c resources/my.config -params-file resources/fetchngs-params.yaml
+./bin/fetchngs.sh
 ```
 
-- Leave the pipeline run for a few minutes to ensure it is working, then we can close the session by doing the following:
+- This will run the pipeline for us. Leave the pipeline run for a few minutes to ensure it is working, then we can close the session by doing the following:
 
 ```
 Ctrl + b
@@ -1378,7 +1258,7 @@ then press d
 - We will cover the outputs from this pipeline during the Day 2 session.
 
 ---
-
-<br>
-
+---
+# End of Day 1
+---
 ---
