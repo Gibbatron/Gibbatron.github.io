@@ -18,6 +18,8 @@ author: "Alex Gibbs"
 
 #### Windows - MobaXterm
 
+#### Log onto HAWK
+
 
 ## Install R, RStudio, and packages
 - We will need to use Rstudio at the end of the course to run the shiny application.

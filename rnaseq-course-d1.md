@@ -141,7 +141,7 @@ This is a shell. We can use this to type commands etc.
 - <span style="color: green;">**home directory**
   - This is where we are located when we log into HAWK.
   - Has limited long-term storage.
-  - **DO NOT WORK HERE!**  
+  - **DO NOT WORK HERE!**
   <br>
 - <span style="color: red;">**scratch directory**
   - This is where we perform our compute-heavy analyses.
@@ -773,6 +773,7 @@ ls
 
 - Map out the unix-practical directory.
 - Are there any hidden files?
+- Fix the typo in the `script.sh` file and make it executable.
 
 <details>
 <summary><b>Answer</b></summary>
@@ -795,6 +796,9 @@ Use list function followed by wildcard to get multi-output: <pre><span style="co
 You can use multiple wildcards to list the contents further down: <pre><span style="color:crimson;"> ls -lah */*</span></pre>
 
 <br>
+
+Use nano editor to correct the typo in script.sh: <pre><span style="color:crimson;"> nano script.sh *</span></pre>
+Change the permissions by using chmod: <pre><span style="color:crimson;"> chmod +x script.sh *</span></pre>
 
 </details>
 
@@ -968,6 +972,21 @@ SRR23454126
 
 - To keep things as simple as possible for users, I have created a GitHub repository which contains all of the directory structures and relevant scripts to perform each task for us.
 - This will hopefully make things easier for users who are not so confident with coding.
+
+<br>
+
+---
+### Log into HAWK
+---
+---
+
+- Lets first log onto HAWK. We can do this using MobaXterm or our Terminal app. We have covered how to log on during the pre-course material section.
+- Make sure we log into the cl1 node:
+```
+ssh c.c1234567@hawklogin01.cf.ac.uk
+```
+
+<br>
 
 ---
 ### Fetch the project from GitHub
