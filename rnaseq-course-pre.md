@@ -69,6 +69,15 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 <img src="/assets/img/pre-5.png" alt="Installing Excel Viewer" width="1000"/>
 
 
+
+
+
+
+
+
+
+
+
 ## Connecting to HAWK
 
 - To connect to HAWK, click on the 'Remote Explorer' button, then click 'Connect to Host in New Window' button. This opens a new VSCode window with the remote host.
