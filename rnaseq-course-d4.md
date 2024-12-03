@@ -7,7 +7,6 @@ author: "Alex Gibbs"
 # Day 4 - Observing the outputs of the nf-core/differentialabundance pipeline and further analyses
 
 ---
-
 ## Recap from Day 3
 ---
 ---
@@ -22,7 +21,6 @@ author: "Alex Gibbs"
 <br>
 
 ---
-
 ## Outputs from the differentialabundance pipeline
 ---
 ---

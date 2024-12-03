@@ -980,10 +980,24 @@ SRR23454126
 ---
 ---
 
-- Lets first log onto HAWK. We can do this using MobaXterm or our Terminal app. We have covered how to log on during the pre-course material section.
-- Make sure we log into the cl1 node:
+- Lets first log onto HAWK. We will be doing all of our coding within VSCode which we should all have installed and set-up.
+- If you do not have VSCode set-up, please let me know now so that we can get you up and running.
+- Note: those of you using Linux will have to use code to do this. I will include the code below each section.
+
+---
+
+- In VSCode, click on the 'Remote Explorer' button, then click 'Connect to Host in New Window' button. This opens a new VSCode window with the remote host.
+- You will be prompted (top box) to enter your password. Do this and hit enter.
+- You are now connected to HAWK.
+
+<img src="/assets/img/pre-3.png" alt="Connecting to HAWK" width="1000"/>
+
+
+***Linux Users***
+- In your shell, log into HAWK with:
 ```
 ssh c.c1234567@hawklogin01.cf.ac.uk
+#Enter Password
 ```
 
 <br>
@@ -993,22 +1007,48 @@ ssh c.c1234567@hawklogin01.cf.ac.uk
 ---
 ---
 
-- To get the project directory from GitHub, we simply just copy and paste the one line of code below.
-- We will first want to **move into our scratch directory**, then run the code:
+- To get the project directory from GitHub, we simply just copy and paste one line of code below.
+- We will first want to **move into our scratch directory**.
+- To do this, we first need to click on 'Explorer' and then 'Open Folder'.
+- A drop-down box appears at the top of the screen with a filepath. We need to change this to `/scratch/c.c1234567` and then click 'OK'.
+- You may be prompted 'Do you trust the authors this folder?'. Click 'Trust all authors' or 'Yes'.
+- You will now see that the directory will be open on the left of the window. Note: Most of you won't have anything here as you have not used HAWK or scratch before. Mine is populated with various directories.
+
+<img src="/assets/img/d1-fig1.png" alt="Connecting to HAWK and navigating to scratch directory" width="1000"/>
+
+- We next want to fetch the project from GitHub. To do this, we need a terminal window open so we can paste the code into.
+- Click on 'Terminal' at the top of your screen and select 'New Terminal'. This will open a terminal window at the bottom of your VSCode window.
+
+<img src="/assets/img/d1-fig2.png" alt="Opening a terminal window in VSCode" width="1000"/>
+
+- Now we can simply paste the following code into the terminal and hit enter:
+
+```
+git clone https://github.com/Gibbatron/rnaseq-course.git
+```
+- You will get a notification when things are done.
+- To double check if the directory has been downloaded, we can use the `ls` command.
+- We should also see that the directory is now in the 'Explorer' window on the left. This may not be the case. To update the window, we can simply click the 'Refresh Explorer' button.
+
+<img src="/assets/img/d1-fig3.png" alt="Pulling the project from GitHub" width="1000"/>
+
+- To see the contents of the downloaded directory, you can click on it to expand, or use the drop-down arrow next to it.
+
+***Linux Users***
+- use `cd` command to move to your scratch directory and then input the following command:
 
 ```
 cd /scratch/c.c1234567
 git clone https://github.com/Gibbatron/rnaseq-course.git
 ```
-- You will get a notification when things are done.
-- To double check if the directory has been downloaded, we can use the `ls` command.
 
 ---
 ### Set-up
 ---
 ---
 
-- We need to change permissions of the rnaseq directory so that any daughter files and directories will inherit the same permissions:
+- We need to change permissions of the rnaseq-course directory so that any daughter files and directories will inherit the same permissions:
+- In the terminal window paste the following:
 
 ```
 chmod -R 777 rnaseq-course #777 gives read, write, and execute permissions for everyone
@@ -1023,13 +1063,18 @@ cd rnaseq-course/bin
 chmod +x *.sh
 ```
 
+- Note: When changing directories within the terminal window, **the explorer window does not update as you go**, neither does it update if you click the refresh button.
+- Note: You can move in- and out of directories using the explorer window. Right-clicking on the directory and clicking on 'Open in Integrated Terminal' will open the directory in the terminal window. There will be another section added to the terminal window on the right with two options. One named 'bash', the other named 'bash *rnaseq-course*'. The 'bash' option is where you originally were (your scratch directory) and the 'bash *rnaseq-course*' option is in the rnaseq-course directory. Clicking between these moves you to the subsequent directory and you will notice the terminal window changes with this too.
+
+<img src="/assets/img/d1-fig4.png" alt="changing directories within VSCode" width="1000"/>
+
 ---
 #### Required files
 ---
 ---
 
 - Now that we have the permissions etc completed, we can now edit the required files needed for the fetchngs pipe.
-- You will see, by using the `ls` command, that we have the following directory structure:
+- You will see, by using the `ls` command, or clicking the drop down options on the directories that we have the following directory structure:
 
 ```
 .
@@ -1113,7 +1158,16 @@ input7,input8,input9
 
 <br>
 
-- To add our IDs to the .csv, we need to open `ids.csv` with nano, delete the text already there, then paste our list straight in.
+- To add our IDs to the .csv, we need to open `ids.csv`, delete the text already there, then paste our list straight in.
+- To open the file in VSCode, we can either click on it which will open the file in the main window, or we can right-click on the file and click 'Open With...'. This will open a drop-down menu at the top of the screen. Select 'CSV Editor'.
+- This will load the file into the main window as a table rather than its native format - this will make it easier for you to edit and understand the structure of the file.
+
+<img src="/assets/img/d1-fig5.png" alt="Opening a .csv file" width="1000"/>
+
+- With the file open, delete the text in both rows and paste your IDs into the table.
+- Now save the table with `File > Save`.
+- To close the file, click on the 'X' next to the filename along the top of your window
+
 
 ```
 nano resources/ids.csv

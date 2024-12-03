@@ -58,17 +58,6 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 <br>
 
-**R**
-- We will need to use R at the end of the course to use the generated shinyApp.
-
-- To install, click on the 'Extensions' button.
-- Search for 'R'.
-- Click on the 'R' extension and then 'Install' at the top.
-
-<img src="/assets/img/pre-4.png" alt="Installing R" width="1000"/>
-
-<br>
-
 **Optional: Excel Viewer**
 - These are not required, but can massively help when editing CSV files.
 - Excel Viewer allows us to open CSV files as a table, rather than a text file.
@@ -106,7 +95,7 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 ## Install R, RStudio, and packages
 - We will need to use Rstudio at the end of the course to run the shiny application.
-- Firstly, we need to install R, then we can install RStudio, and then the packages.
+- Firstly, we need to install R. Then we can install RStudio and then the packages.
 
 **Install R**
 - Go to this [link](https://www.stats.bris.ac.uk/R/) and download the app.
@@ -122,9 +111,21 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 <img src="/assets/img/figure-pre-2.png" alt="RStudio window" width="1000"/>
 
+**Install Packages**
 
-
-
+install.packages('devtools')
+install.packages('markdown')
+install.packages('BiocManager')
+library(BiocManager)
+BiocManager::install("SummarizedExperiment")
+BiocManager::install("GSEABase")
+BiocManager::install("limma")
+devtools::install_github('pinin4fjords/shinyngs')
+library(devtools)
+library(SummarizedExperiment)
+library(GSEABase)
+library(limma)
+setwd(dir = "/scratch/c.c1427056/course-test-dir/git-repo-test/rnaseq-course/output/shinyngs_app/NAME-YOUR-PROJECT/")
 
 
 
