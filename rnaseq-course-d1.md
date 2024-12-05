@@ -1166,9 +1166,9 @@ input7,input8,input9
 
 - With the file open, delete the text in both rows and paste your IDs into the table.
 - Now save the table with `File > Save`.
-- To close the file, click on the 'X' next to the filename along the top of your window
+- To close the file, click on the 'X' next to the filename along the top of your window.
 
-
+***Linux Users***
 ```
 nano resources/ids.csv
 
@@ -1197,8 +1197,10 @@ enter
 
 - **We need to change the email address in this file.**
 
-- To change the email address, we need to open the file with nano editor:
+- Open the file in VSCode by simply clicking on it, then change your email address.
+- Then save the file by clicking `File > Save`. Close the file by clicking the 'X' next to the filename along the top of your window.
 
+***Linux Users***
 ```
 nano resources/fetchngs-params.yaml
 
@@ -1226,8 +1228,10 @@ enter
 
 - **We only need to change the email and scw account sections.**
 
-- To change the email address and scw account number, we need to open the file with nano editor:
+- Open the file in VSCode by simply clicking on it, then change your email address and scw account.
+- Then save the file by clicking `File > Save`. Close the file by clicking the 'X' next to the filename along the top of your window.
 
+***Linux Users***
 ```
 nano resources/my.config
 
@@ -1271,8 +1275,7 @@ enter
 
 - Now we have everything ready to execute the pipeline.
 - To run the pipeline, we need to be in the **parent directory (rnaseq-course)** directory.
-- To run the pipeline, we will use tmux.
-- Then we can open a tmux session, load any required modules for the pipeline to run correctly, and close the session.
+- We will be using tmux to execute the pipeline.
 
 <details>
 <summary><b>What is tmux?</b></summary>
@@ -1287,7 +1290,7 @@ enter
 
 **Launch a tmux session**
 
-- From the **parent** directory (rnaseq-course), run the following:
+- From the **parent** directory (rnaseq-course), run the following in the terminal window:
 
 ```
 module load tmux
@@ -1295,6 +1298,8 @@ tmux new -s fetchngs
 ```
 
 - This loads the tmux module in HAWK and opens a new tmux session called fetchngs.
+
+<img src="/assets/img/d1-tmux.gif" alt="Opening a tmux session" width="1000"/>
 
 **Load Modules**
 
@@ -1312,15 +1317,16 @@ module load singularity/singularity-ce/3.11.4
 - Now we can go ahead and execute the pipeline.
 - Usually, we would run the pipeline by typing out the command followed by the options etc etc.
 - To make thinks simpler for everyone, and to avoid typos etc, I have added this command to a script (`bin/fetchngs.sh`).
-- To execute the pipeline, all we need to do is run this script.
-
-- To run the script, we simply need to do the following:
+- To execute the pipeline, all we need to do is run this script:
 
 ```
 ./bin/fetchngs.sh
 ```
 
 - This will run the pipeline for us. Leave the pipeline run for a few minutes to ensure it is working, then we can close the session by doing the following:
+
+<img src="/assets/img/d1-fig6.png" alt="Executing the fetchngs pipeline" width="1000"/>
+
 
 ```
 Ctrl + b
