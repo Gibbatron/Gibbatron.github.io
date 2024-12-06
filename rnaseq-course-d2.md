@@ -26,16 +26,25 @@ author: "Alex Gibbs"
 - We should all have had an email from *SCW HAWK - HPC SERVICES* notifying you of a successful pipeline run.
 - Sometimes the email function doesn't work. We can just log in and check ourselves.
 - To check, we need to log back onto HAWK, load the tmux module, and then open the session that we created.
-- NOTE: When using tmux, we need to make sure we are logged into the correct node. When we covered the log ins yesterday, we logged onto the cl1 node. The tmux session we made will only be present on the cl1 node. If we were to log in to the cl2 node, we wouldnt be able to find the tmux session.
+
+**Log on to HAWK**
+- In VSCode, click on the 'Remote Explorer' button, then click 'Connect to Host in New Window' button. This opens a new VSCode window with the remote host.
+- You will be prompted (top box) to enter your password. Do this and hit enter.
+- You are now connected to HAWK.
+
+<img src="/assets/img/pre-3.png" alt="Connecting to HAWK" width="1000"/>
+
+- Click on 'Explorer' and then 'Open Folder'.
+- A drop-down box appears at the top of the screen with a filepath. We need to change this to `/scratch/c.c1234567/rnaseq-course` and then click 'OK'.
+- You may be prompted 'Do you trust the authors this folder?'. Click 'Trust all authors' or 'Yes'.
+- You will now see that the directory will be open on the left of the window.
+
+<img src="/assets/img/d1-fig2.png" alt="Opening a terminal window in VSCode" width="1000"/>
+
+- Click on 'Terminal' at the top of your screen and select 'New Terminal'.
+- In the terminal window at the bottom of your screen, paste the following:
 
 ```
-#log onto HAWK
-c.c1234567@hawklogin01.cf.ac.uk
-PASSWORD
-
-#move to the working directory (scratch)
-cd /scratch/c.c134567/rnaseq
-
 #load tmux
 module load tmux
 
@@ -51,6 +60,21 @@ You should also see the following text at the end (we will cover the message sho
 
 <span style="color:green;">Checksums match: All downloaded files are verified successfully.</span>
 
+***Linux Users***
+```
+#log onto HAWK
+c.c1234567@hawklogin02.cf.ac.uk
+PASSWORD
+
+#move to the working directory (scratch)
+cd /scratch/c.c134567/rnaseq
+
+#load tmux
+module load tmux
+
+#open our tmux session
+tmux attach -t fetchngs
+```
 
 - In this situation, the process took 25 minutes. As all of us were using the pipeline at the same time, these times will likely vary. Download times will also depend on the size and number of files being downloaded.
 
@@ -59,8 +83,10 @@ You should also see the following text at the end (we will cover the message sho
 ---
 ---
 
-- If we list (`ls`) the contents of the file, we will see that there is a new `work` directory.
+- We will see that there is a new `work` directory.
 - This directory is created by the pipeline and uses it as a storage space for intermediate files etc.
+
+<img src="/assets/img/d2-fig1.png" alt="Addition of the work directory" width="1000"/>
 
 ---
 #### Nextflow log file
@@ -68,8 +94,8 @@ You should also see the following text at the end (we will cover the message sho
 ---
 
 - If we were to encounter an error whilst running a pipeline, we can check the log file that is created.
-- To do this, we need to use the `ls -la` command to show hidden files.
 - We will see a file named `.nextflow.log`. This file is what contains the pipeline running information.
+- We can also find this file by using `ls -la` command in the terminal window.
 
 ---
 #### fastq files
@@ -77,8 +103,8 @@ You should also see the following text at the end (we will cover the message sho
 ---
 
 - When we run the pipeline yesterday, we asked for the fastq files to download to the input directory.
-- Running `ls` on the input directory shows that there are 4 new directories that have been created: **fastq**, **metadata**, **pipeline_info**, and **samplesheet**.
-- The fastq files can be found in the **fastq** directory. If we list the contents of the fastq directory, we will see that there is also a **md5** directory.
+- Clicking to expand the input directory (or using `ls` command) shows that there are 4 new directories that have been created: **fastq**, **metadata**, **pipeline_info**, and **samplesheet**.
+- The fastq files can be found in the **fastq** directory. If we expand the fastq directory, we will see that there is also a **md5** directory.
 - This directory contains the md5 checksums for each fastq file.
 - You would have noticed that there was a message at the end of the pipeline:
 
@@ -96,7 +122,8 @@ You can use this checksum to verify that the file hasn’t changed. For example,
 </details>
 
 - It is good practice to validate your checksums to ensure that we dont have any data loss.
-- Running checksums can take some time, but luckily for you I have added the code the end of the `fetchngs.sh` script.
+- Running checksums can take some time and can be confusing for those who haven't done it before.
+- Fortunately for you, I have added code at the end of the `fetchngs.sh` script to do this for us. The code also gives us a nice print out to tell us if the checksums are matching or not.
 
 
 ---
@@ -109,20 +136,7 @@ You can use this checksum to verify that the file hasn’t changed. For example,
 - Specifically, the **samplesheet.csv** file contains all of the relevant information such as file location, sample ID etc that we need as input for the nf-core/rnaseq pipeline.
 - This file should be formatted specifically for the rnaseq pipeline because we used the `nf_core_pipeline: rnaseq` option within the parameters file we created for the fetchngs pipeline.
 - This specific formatting should make the first four columns of the file as followes: **sample, fastq_1, fastq_2, strandedness**.
-
-<details>
-<summary><b>Check the samplesheet.csv file is correctly formatted</b></summary>
-
-<br>
-
-<pre><span style="color:crimson;">
-#check the header of the file, i.e. the columns
-head -1 input/samplesheet/samplesheet.csv
-
-#Output from console
-"sample","fastq_1","fastq_2","strandedness","run_accession","experiment_accession","sample_accession","secondary_sample_accession","study_accession","secondary_study_accession","submission_accession","run_alias","experiment_alias","sample_alias","study_alias","library_layout","library_selection","library_source","library_strategy","library_name","instrument_model","instrument_platform","base_count","read_count","tax_id","scientific_name","sample_title","experiment_title","study_title","sample_description","fastq_md5","fastq_bytes","fastq_ftp","fastq_galaxy","fastq_aspera"
-</span></pre>
-</details>
+- We can check this by right-clicking on the file, clicking 'Open With...' and then clicking on 'CSV Editor'.
 
 ---
 #### Metadata directory
@@ -154,6 +168,7 @@ Required files:
 ---
 
 - As asforementioned, this file is generated by the nf-core/fetchngs pipeline. We have already checked to ensure the formatting of the first four columns is correct.
+- **Note**: If you will be using this pipeline in the future on your own samples, you can run the `bin/generate-samplesheet.sh` script to generate one for you. You must have the fastq files in the `input/fastq` directory. Please check the `README.md` file for more information.
 
 ---
 #### resources/reference genome files
@@ -166,60 +181,35 @@ Required files:
 - Luckily, reference genomes are readily available (if using commonly-researched species) for us to use.
 - Our samples are human, therefore we will need to find and download the latest human reference genome.
 - Reference genomes can be found [here](https://ftp.ensembl.org/pub/release-110/fasta/) and [here](https://ftp.ensembl.org/pub/release-110/gtf/).
-
-<details>
-<summary><b>Download the human reference genome files</b></summary>
-
-<br>
-
-<pre><span style="color:crimson;">
-#download the human GRCh38 reference DNA sequence
-#paste this chunk into your console and run. Make sure you are in the resources directory
-wget https://ftp.ensembl.org/pub/release-110/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz && gunzip Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
-
-#download the human GRCh38 reference gene information file
-#paste this chunk into your console and run. Make sure you are in the resources directory
-wget https://ftp.ensembl.org/pub/release-110/gtf/homo_sapiens/Homo_sapiens.GRCh38.110.gtf.gz && gunzip Homo_sapiens.GRCh38.110.gtf.gz
-
-</span></pre>
-</details>
+- Again, to keep things simpler for us, I have added reference genome downloads to the pipeline script so we don't have to do this.
+- **Note**: If you are using your own data and are using a different species, you will need to edit the `bin/rnaseq.sh` file to match your species. I can go through this with you.
 
 ---
 #### resources/rnaseq-params.yaml
 ---
 ---
 
-- We need to create another parameter file for this pipeline.
+- Another parameter file is needed for this pipeline.
+- Again, we will need to edit it before we run.
 
-<details>
-<summary><b>Make the rnaseq-params.yaml file</b></summary>
+- **We need to change the email address in this file (and the species if using a different one)**
 
-<br>
+- Open the file in VSCode by simply clicking on it, then change your email address and scw account.
+- Then save the file by clicking `File > Save`. Close the file by clicking the 'X' next to the filename along the top of your window.
 
-<pre><span style="color:crimson;">
-#create and open the file using nano editor
-nano rnaseq-params.yaml
+***Linux Users***
+```
+nano resources/rnaseq-params.yaml
 
-#copy and paste the following
-input: input/samplesheet/samplesheet.csv
-outdir: output
-aligner: star_salmon
-save_align_intermeds: false
-save_unaligned: true
-remove_ribo_rna: true
-save_non_ribo_reads: false
-save_trimmed:  false
-save_reference: false
-gtf: resources/Homo_sapiens.GRCh38.110.gtf
-fasta: resources/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa
-email: <b>my.email@cardiff.ac.uk</b>
+# change your email:
 
-#save and exit
-crtl + x
+email: <b>your-email@cardiff.ac.uk</b>
+
+# save the file
+ctrl + x
 y
 enter
-</span></pre>
-</details>
+```
 
 ---
 #### resources/my.config
@@ -229,6 +219,7 @@ enter
 - We created this configuration file yesterday.
 - We do not need to edit this file any further.
 
+---
 
 - Our scratch directory should now look like the following:
 
@@ -236,12 +227,10 @@ enter
 .
 └── rnaseq/
     ├── bin/
-    │   └── script.sh
+    │   └── rnaseq.sh
     ├── resources/
     │   ├── rnaseq-params.yaml
     │   ├── my.config
-    │   ├── Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa
-    │   └── Homo_sapiens.GRCh38.110.gtf
     ├── input/
     │   ├── fastq/
     │   │   ├── SRX19363186_SRR23454126_1.fastq.gz
@@ -262,32 +251,33 @@ enter
 ```
 
 ---
-
-## Executing the pipeline
+## Executing the nf-core/rnaseq pipeline
 ---
 ---
 
 - Now that we have the files ready for the pipeline, we can go ahead and execute it.
+- To run the pipeline, we need to be in the **parent directory (rnaseq-course)** directory.
 - First of all, lets exit the prefetch tmux session and create a new one for the rnaseq pipeline.
+- In the terminal window at the bottom of your screen:
 
 ```
-#detach from the fetchngs session
+# detach from the fetchngs session
 ctrl + b
 d
 
-#create new tmux session
+# create new tmux session
 tmux new -s rnaseq
+
+# load modules
+module load nextflow/23.10.0
+module load singularity/singularity-ce/3.11.4
 ```
 
 - Now we can run the pipeline
 
 ```
-#load modules
-module load nextflow/23.10.0
-module load singularity/singularity-ce/3.11.4
-
-#execute pipe
-nextflow run nf-core/rnaseq -profile singularity -c resources/my.config -params-file resources/rnaseq-params.yaml
+# execute pipe
+./bin/rnaseq.sh
 
 #leave pipeline running for a few minutes to ensure its working, then we can close the session:
 crtl +b
@@ -295,3 +285,9 @@ d
 ```
 
 - We will cover the outputs from this pipeline during the Day 3 session.
+
+---
+---
+# End of Day 2
+---
+---
