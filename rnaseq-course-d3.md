@@ -18,11 +18,6 @@ author: "Alex Gibbs"
   - How to execute the rnaseq pipeline
 
 ---
-
-<br>
-
----
-
 ## Outputs from the rnaseq pipeline
 ---
 ---
@@ -30,17 +25,44 @@ author: "Alex Gibbs"
 - We should all have had an email from *SCW HAWK - HPC SERVICES* notifying you of a successful pipeline run.
 - Sometimes the email function doesn't work. We can just log in and check ourselves.
 - To check, we need to log back onto HAWK, load the tmux module, and then open the session that we created.
-- NOTE: When using tmux, we need to make sure we are logged into the correct node. When we covered the log ins yesterday, we logged onto the cl1 node. The tmux session we made will only be present on the cl1 node. If we were to log in to the cl2 node, we wouldnt be able to find the tmux session.
 
-<br>
+**Log on to HAWK**
+- In VSCode, click on the 'Remote Explorer' button, then click 'Connect to Host in New Window' button. This opens a new VSCode window with the remote host.
+- You will be prompted (top box) to enter your password. Do this and hit enter.
+- You are now connected to HAWK.
+
+<img src="/assets/img/pre-3.png" alt="Connecting to HAWK" width="1000"/>
+
+- Click on 'Explorer' and then 'Open Folder'.
+- A drop-down box appears at the top of the screen with a filepath. We need to change this to `/scratch/c.c1234567/rnaseq-course` and then click 'OK'.
+- You may be prompted 'Do you trust the authors this folder?'. Click 'Trust all authors' or 'Yes'.
+- You will now see that the directory will be open on the left of the window.
+
+<img src="/assets/img/d1-fig2.png" alt="Opening a terminal window in VSCode" width="1000"/>
+
+- Click on 'Terminal' at the top of your screen and select 'New Terminal'.
+- In the terminal window at the bottom of your screen, paste the following:
 
 ```
+#load tmux
+module load tmux
+
+#open our tmux session
+tmux attach -t rnaseq
+```
+
+- Upon opening the session, we should have a window that looks like this:
+# add screenshot here
+<img src="/assets/img/d3-fig1.png" alt="tmux rnaseq completed run" width="1000"/>
+
+***Linux Users***
+```
 #log onto HAWK
-c.c1234567@hawklogin01.cf.ac.uk
+c.c1234567@hawklogin02.cf.ac.uk
 PASSWORD
 
 #move to the working directory (scratch)
-cd /scratch/c.c134567/rnaseq
+cd /scratch/c.c134567/rnaseq-course
 
 #load tmux
 module load tmux
@@ -49,70 +71,88 @@ module load tmux
 tmux attach -t rnaseq
 ```
 
-<br>
-
 - The process took almost 6 hours. As all of us were using the pipeline at the same time, these times will likely vary. Download times will also depend on the size and number of files being downloaded.
-- Some of you may have yours still running. Please let me know if this is the case and we can get you access to the outputs so you can continue.
+- **Some of you may have yours still running. Please let me know if this is the case and we can get you access to the outputs so you can continue**.
 
-### Population of the output directory
+---
+#### Population of the output directory
+---
+---
 
 - All of the outputs from the pipeline will have been placed into the output directory.
 - We should have the following: **fastqc, multiqc, pipeline_info, sortmerna, star_salmon, trimgalore**.
 
-#### pipeline_info
+---
+##### pipeline_info directory
+---
+---
+
 - This directory contains all the files relevant to the pipeline that was run, such as a nextflow report, pipeline report.
 - These files can be used to make a report if needed (handy when writing methods section).
 - We don’t need any of these files for the next stages.
 
-#### sortmerna
-- This directory contains the log files for each sample during the ribosomal RNA removal step. 
+---
+#### sortmerna directory
+---
+---
+
+- This directory contains the log files for each sample during the ribosomal RNA removal step.
 - The log files contain information about the reads that matched the reference database(s).
 - We do not need anything from this directory for the next stages.
 
-#### trimgalore
+---
+#### trimgalore directory
+---
+---
+
 - This directory contains the log files for each sample during the trimgalore step.
 - Trimgalore tool is used to trim the adapter sequences from each sequencing file.
 - The log files contain information about what sequencing adapters were removed from the samples etc.
 - We don't need any of these files for the next stages.
 
-#### fastqc and multiqc
+---
+#### fastqc and multiqc directories
+---
+---
+
 - One thing we need to check is the quality of the sequencing reads.
 - The way we do this is to perform FastQC on each sample, which produces a report for each fastq file.
 - As you can imagine, this can be a painstaking process if we were to check every file one by one.
 - This is where MultiQC comes in handy - it produces one report for all of the FastQC results.
 - It also takes the data from the other processing steps and feeds it into the report, giving us an overall rnaseq pipeline sequencing statistics report.
-- The easiest way to read the report is to transfer the webpage report from HAWK to our PCs.
+- We can view the report via the **'Preview on Web Server'** extension. If anyone hasn't installed this extension, please let me know so we can get you going.
 
-<details>
-<summary>Transfer MultiQC report to your PC</summary>
-
-<br>
-
-- The easiest way to do this is to transfer using Filezilla or MobaXterm.
-- The MultiQC webpage report is located in `/scratch/c.c1234567/rnaseq/output/multiqc/star_salmon/'
+***Linux Users***
+- The MultiQC webpage report is located in `/scratch/c.c1234567/rnaseq-course/output/multiqc/star_salmon/'
 - You will need to transfer the `multiqc_report.html' file.
 
-- You can also transfer the file by using the following code in a unix shell onm your pc.
-
-<pre><span style="color:crimson;">
+```
 #move to a directory where you want to download the file to. I reccommend Downloads
 cd Downloads
 
 #transfer file from HAWK to the current directory. Make sure you include the dot (.)!
 scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star_salmon/multiqc_report.html .
-</span></pre>
+```
 
-</details>
+---
+##### Assessing the MultiQC report
+---
+---
 
-**Assessing the MultiQC report**
 - There is a great video that covers the outputs of the MultiQC report [here](https://www.youtube.com/watch?v=qPbIlO_KWN0).
-- I won't cover the whole report as there is too much to cover in one session. 
+- I won't cover the whole report as there is too much to cover in one session.
 - I will cover what I believe to be the most important parts, but please do have a good look through the whole report if you are interested.
 
 <br>
 
-<details>
-<summary>STAR_SALMON DESeq2 sample similarity</summary>
+- Using the 'Explorer' tab, navigate to following: `rnaseq-course/output/multiqc/star_salmon`.
+- Right-click on `multiqc_report.html` file and click on 'vscode-preview-server: Launch on browser'.
+- This will open the report on your default web browser.
+
+---
+###### STAR_SALMON DESeq2 sample similarity
+---
+---
 
 - This section provides the user with a heatmap of sample-sample distances.
 - It allows us to quickly check the similarity, and differences, between our samples.
@@ -121,14 +161,10 @@ scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star
 - If we were to analyse the whole dataset, which consists of 2 cell lines that have hypoxic and normoxic conditions (12 samples total, 6 samples per cell line, 3 samples per condition), we would expect a clear difference in similarities between the two cell lines, with only a slight difference in similarities between the conditions in the same cell line.
 - We can use this plot to also quickly see if there are any potential outliers in our data.
 
-<b>INSERT FIGURE</b>
-
-</details>
-
-<br>
-
-<details>
-<summary>STAR_SALMON DESeq2 PCA Plot</summary>
+---
+###### STAR_SALMON DESeq2 PCA Plot
+---
+---
 
 - This Principal Component Analysis (PCA) plot is used to show us how similar or different each sample is to each other.
 - PCA analysis is a method of simplifying multi-dimensional data.
@@ -144,12 +180,10 @@ scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star
 
 <b>INSERT FIGURE</b>
 
-</details>
-
-<br>
-
-<details>
-<summary>QualiMap</summary>
+---
+###### QualiMap
+---
+---
 
 **Genomic origin of reads**
 - This tools is useful for giving us information about the mapped reads.
@@ -157,12 +191,10 @@ scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star
 - In a good experiment, we would expect to get >80% of reads mapping to the exonic regions.
 - I would say <60% reads mapping to the exonic regions would be a cause for concern.
 
-</details>
-
-<br>
-
-<details>
-<summary>FastQC Raw & Trimmed</summary>
+---
+###### FastQC Raw & Trimmed
+---
+---
 
 - The pipeline performs FastQC on the raw reads and then on the trimmed reads.
 - It is good practice to check both raw and trimmed fastQC results to ensure sample quality is improved or consistent after trimming.
@@ -182,9 +214,10 @@ scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star
 
 <b>INSERT FIGURE</b>
 
-</details>
-
-#### star_salmon
+---
+#### star_salmon directory
+---
+---
 
 - This directory contains all of the main outputs for the pipeline.
 - Here we will find the processed sample files as well as various other files such as files that contain the stats outputs from the various tools used during the pipeline. These files are used to generate the multiqc report that we just covered.
@@ -194,15 +227,30 @@ scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star
   - ```SAMPLE/quant.sf```: Salmon transcript-level quantification of the sample, including feature length, effective length, TPM, and number of reads.
 
 ---
-
 ## nf-core/differentialabundance pipeline
 ---
 ---
 
 Required files:
 
-**resources/diff-abundance-samplesheet.csv**
-- We can use the samplesheet that we used for the rnaseq pipeline, but we need to make a few edits.
+---
+#### resources/conditions.csv
+---
+---
+
+- This file is not required by the pipeline, but is instead required by the script that I have written which runs the pipeline at the end.
+- This file contains the sample ID's and the corresponding condition information.
+- I have created this file already for you, as to edit it may take you some time and head scratching.
+- If you open the file by left-clicking, you will see that we are just using the cell line names as the condition information.
+- When we run the pipeline, this file is merged with the first 4 columns from the `samplesheet.csv` file to create a new samplesheet that is needed for this pipeline to run.
+
+---
+#### resources/diff-abundance-samplesheet.csv
+---
+---
+
+- This file is similar to the `samplesheet.csv` file that we used for the rnaseq pipeline, but differs in that it contains additional columns that contain information the pipeline needs to differentiate between sample groups etc.
+- This means that we can use the samplesheet that we used for the rnaseq pipeline, but we need to make a few edits.
 - We need to add an extra column (or more depending on your comparisons).
 - The column format is as follows to compare between the two groups:
 
@@ -265,24 +313,10 @@ sampleB_6|path/to/file|path/to/file|auto|GroupB|ConditionB|GrpBConB
 
 <br>
 
-- Now that we have covered how the condition column works, we can now edit the samplesheet.csv file to contain it.
-- We can use the samplesheet.csv as is and add the condition column to the end. This can be quite messy for some though, as there is a lot of columns in the file, which can lead us to typos etc.
-- To make our lives a bit easier, we can use a nice bash one-liner to take the first 4 columns from the samplesheet.csv file and make a new file for us:
+- Now that we have covered how the condition column works, we can now edit the `conditions.csv` file to contain it.
+- Again, to keep things as simple as possible, I have added some code into the `bin/differentialabundance.sh` script which takes the `samplesheet.csv` file from the rnaseq pipe and the `conditions.csv` file that we will shortly edit, to make `diff-abundance-samplesheet.csv` prior to executing the pipeline.
 
-```
-cd resources
-cut -d',' -f1-4 ../input/samplesheet/samplesheet.csv > ./diff-abundance-samplesheet.csv
-```
-<details>
-<summary>Explanation of the cut command</summary>
 
-- The cut command extracts information from a file at specified locations.
-- The `-d','` option specifies the comma deliminator of the file. i.e. cut at the commas.
-- `-f1-4` option specifies the fields. When the file is cut at the commas, each field represents a column in the table. So here we are specifying the first 4 fields.
-
-</details>
-
-- Now if we open this new samplesheet in the nano editor, we can add the extra column with ease.
 
 ```
 nano diff-abundance-samplesheet.csv
@@ -300,8 +334,10 @@ enter
 ```
 - **Note: most of you will have each variable encased in quotation marks (""), if this is the case then make sure you stick with that format!**
 
-
-**resources/contrasts.csv**
+---
+#### resources/contrasts.csv
+---
+---
 
 - We will also need to provide a contrasts file that is used by the pipline to perform the differential gene expression analyses.
 - This file tells the pipeline what columns to use for the testing, and which groups to compare in that column.
@@ -324,14 +360,20 @@ enter
 - `reference` specifies which group in the `conditionOne` column is going to be the reference group. i.e. The group we are comparing against.
 - `target` specifies the gorup in the `conditionOne` column that will be used as the target group. i.e. The group that we use to compare.
 
+---
+#### resources/Homo_sapiens.GRCh38.110.gtf
+---
+---
 
-**resources/Homo_sapiens.GRCh38.110.gtf**
 - We also need to specify the human gene reference file.
 - This is used to annotate the genes during the analysis.
 - We already have this file downloaded.
 
+---
+#### resources/diff-abundance-params.yaml
+---
+---
 
-**resources/diff-abundance-params.yaml**
 - As with the other pipelines, we need to make a parameter file containing each option for the pipeline.
 
 ```
@@ -358,35 +400,13 @@ enter
 - Note that we have included `study_name` and `study_type` in here, this is to make the outputs neater and is good practice.
 - In some cases, you may want to run the pipieline a few times with different comparisons etc, by changing the `study_name` parameter each time, we are ensuring a new directory is created isntead of overwriting the previous analysis.
 
-**resources/my.config**
+---
+#### resources/my.config
+---
+---
+
 - We created this configuration file yesterday.
 - We do not need to edit this file any further.
-
-**bin/script.sh**
-- As with yesterday, lets update this file so we have as record of the code that we have used.
-
-<details>
-<summary>Edit the script.sh file</summary>
- 
-<br>
- 
-<pre><span style="color:crimson;">
-#open the file using nano editor
-nano bin/script.sh
- 
-#copy and paste the following to the end of the file
-#05
-#execute differentialabundance pipeline
-nextflow run nf-core/differentialabundance -params-file resources/diff-abundance-params.yaml -profile singularity -c resources/my.config
-#if pipeline fails for whatever reason, rerun using -resume command
-nextflow run nf-core/differentialabundance -params-file resources/diff-abundance-params.yaml -profile singularity -c resources/my.config -resume
-
-#save and exit
-ctrl + x
-y
-enter
-</span></pre>
-</details>
 
 - Our scratch directory should now look like the following:
 
@@ -418,8 +438,7 @@ enter
 ```
 
 ---
-
-## Executing the pipeline
+## Executing the nf-core/differentialabundance pipeline
 ---
 ---
 

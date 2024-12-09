@@ -54,7 +54,7 @@ tmux attach -t fetchngs
 
 - Upon opening the session, we should have a window that looks like this:
 
-<img src="/assets/img/figure-17.png" alt="tmux completed run" width="1000"/>
+<img src="/assets/img/figure-17.png" alt="tmux fetchngs completed run" width="1000"/>
 
 You should also see the following text at the end (we will cover the message shortly):
 
@@ -67,7 +67,7 @@ c.c1234567@hawklogin02.cf.ac.uk
 PASSWORD
 
 #move to the working directory (scratch)
-cd /scratch/c.c134567/rnaseq
+cd /scratch/c.c134567/rnaseq-course
 
 #load tmux
 module load tmux
