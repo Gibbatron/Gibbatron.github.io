@@ -240,7 +240,7 @@ Required files:
 
 - This file is not required by the pipeline, but is instead required by the script that I have written which runs the pipeline at the end.
 - This file contains the sample ID's and the corresponding condition information.
-- I have created this file already for you, as to edit it may take you some time and head scratching.
+- To keep things less complicated and running smoothly, I have created this for you. If we needed to change this for another sequencing dataset though, we would right-click on the file and click on 'Open With...' then select the 'CSV Editor'. This will open the file as a table, which will make it easier for you to edit.
 - If you open the file by left-clicking, you will see that we are just using the cell line names as the condition information.
 - When we run the pipeline, this file is merged with the first 4 columns from the `samplesheet.csv` file to create a new samplesheet that is needed for this pipeline to run.
 
@@ -249,9 +249,7 @@ Required files:
 ---
 ---
 
-- This file is similar to the `samplesheet.csv` file that we used for the rnaseq pipeline, but differs in that it contains additional columns that contain information the pipeline needs to differentiate between sample groups etc.
-- This means that we can use the samplesheet that we used for the rnaseq pipeline, but we need to make a few edits.
-- We need to add an extra column (or more depending on your comparisons).
+- This file is similar to the `samplesheet.csv` file that we used for the rnaseq pipeline, but differs in that it contains additional columns that contain information the pipeline needs to differentiate between sample groups etc. These columns are taken from the `conditions.csv` file.
 - The column format is as follows to compare between the two groups:
 
 sample|fastq_1|fastq_2|strandedness|conditionOne
@@ -263,8 +261,8 @@ sampleB_1|path/to/file|path/to/file|auto|GroupB
 sampleB_2|path/to/file|path/to/file|auto|GroupB
 sampleB_3|path/to/file|path/to/file|auto|GroupB
 
-- In order to run this pipeline, we need to provide it with a condition column. As we are only using two groups, one condition column will suffice.
-- However, The whole dataset has 2 cell lines with 2 conditions. If we wanted to use the whole dataset and run different comparisons, we would need to add extra columns.
+- As we are running a truncated dataset for this course, we only have 2 conditions, GroupA and GroupB (HK-2 and 786-0). We will therefore only require one condition column.
+- However, The whole dataset has 2 cell lines with 2 conditions. If we wanted to use the whole dataset and run different comparisons, we would need to add extra columns which group the samples accordingly.
 
 
 <details>
@@ -313,26 +311,7 @@ sampleB_6|path/to/file|path/to/file|auto|GroupB|ConditionB|GrpBConB
 
 <br>
 
-- Now that we have covered how the condition column works, we can now edit the `conditions.csv` file to contain it.
-- Again, to keep things as simple as possible, I have added some code into the `bin/differentialabundance.sh` script which takes the `samplesheet.csv` file from the rnaseq pipe and the `conditions.csv` file that we will shortly edit, to make `diff-abundance-samplesheet.csv` prior to executing the pipeline.
-
-
-
-```
-nano diff-abundance-samplesheet.csv
-
-sample,fastq_1,fastq_2,strandedness,conditionOne
-SRX19363186,../input/fastq/SRX19363186_SRR23454126_1.fastq.gz,../input/fastq/SRX19363186_SRR23454126_2.fastq.gz,auto,HK-2
-SRX19363187,../input/fastq/SRX19363187_SRR23454125_1.fastq.gz,../input/fastq/SRX19363187_SRR23454125_2.fastq.gz,auto,HK-2
-SRX19363188,../input/fastq/SRX19363188_SRR23454124_1.fastq.gz,../input/fastq/SRX19363188_SRR23454124_2.fastq.gz,auto,HK-2
-SRX19363192,../input/fastq/SRX19363192_SRR23454119_1.fastq.gz,../input/fastq/SRX19363192_SRR23454119_2.fastq.gz,auto,786-0
-SRX19363193,../input/fastq/SRX19363193_SRR23454122_1.fastq.gz,../input/fastq/SRX19363193_SRR23454122_2.fastq.gz,auto,786-0
-SRX19363194,../input/fastq/SRX19363194_SRR23454118_1.fastq.gz,../input/fastq/SRX19363194_SRR23454118_2.fastq.gz,auto,786-0
-
-ctrl + x
-enter
-```
-- **Note: most of you will have each variable encased in quotation marks (""), if this is the case then make sure you stick with that format!**
+- Again, to keep things as simple as possible, I have added some code into the `bin/differentialabundance.sh` script which takes the `samplesheet.csv` file from the rnaseq pipe and the `conditions.csv` file to make the `diff-abundance-samplesheet.csv` prior to executing the pipeline.
 
 ---
 #### resources/contrasts.csv
@@ -342,21 +321,15 @@ enter
 - We will also need to provide a contrasts file that is used by the pipline to perform the differential gene expression analyses.
 - This file tells the pipeline what columns to use for the testing, and which groups to compare in that column.
 - The file contains 4 columns: **id, variable, reference, target**
+- This file is already made and should be located in your `resources` directory. If you click on it (or open it with the CSV Editor), it should look like this:
 
-```
-nano resources/contrasts.csv
 
-id,variable,reference,target
-786-0_vs_HK-2,conditionOne,HK-2,786-0
+id|variable|reference|target
+|-|--------|---------|------|
+786-0_vs_HK-2|conditionOne|HK-2|786-0
 
-#save and exit
-ctrl + x
-y
-enter
-```
-
-- Here, `id` is used to give the analysis an id. This can be whatever you want. To keep things simple, we have kept with the cell line names. We could also name this analysis cancer_vs_control if we wanted.
-- `variable` specifies which column in the samplesheet.csv file the pipeline needs to look at to select samples for comparison. We have said to use the `conditionOne` column.
+- Here, `id` is used to give the analysis an id. This can be whatever you want. To keep things simple, we have kept with the cell line names.
+- `variable` specifies which column in the `samplesheet.csv` file the pipeline needs to look at to select samples for comparison. We have said to use the `conditionOne` column.
 - `reference` specifies which group in the `conditionOne` column is going to be the reference group. i.e. The group we are comparing against.
 - `target` specifies the gorup in the `conditionOne` column that will be used as the target group. i.e. The group that we use to compare.
 
@@ -365,17 +338,23 @@ enter
 ---
 ---
 
-- We also need to specify the human gene reference file.
-- This is used to annotate the genes during the analysis.
-- We already have this file downloaded.
+- We also need to specify the human gene reference file which is used to annotate the genes during the analysis.
+- We already have this file downloaded from the rnaseq pipeline.
 
 ---
 #### resources/diff-abundance-params.yaml
 ---
 ---
 
-- As with the other pipelines, we need to make a parameter file containing each option for the pipeline.
+- As with the other pipelines, we need a parameter file containing each option for the pipeline.
+- Again, we will need to edit it before we run.
 
+- **We need to change the email address, and study name in this file (and the species if using a different one)**
+
+- Open the file in VSCode by simply clicking on it, then change your email address and scw account.
+- Then save the file by clicking `File > Save`. Close the file by clicking the 'X' next to the filename along the top of your window.
+
+***Linux Users***
 ```
 nano resources/diff-abundance-params.yaml
 
@@ -408,18 +387,21 @@ enter
 - We created this configuration file yesterday.
 - We do not need to edit this file any further.
 
+---
+
 - Our scratch directory should now look like the following:
 
 ```
 .
 └── rnaseq/
     ├── bin/
-    │   └── script.sh
+    │   └── differentialabundance.sh
     ├── resources/
     │   ├── my.config
     │   ├── Homo_sapiens.GRCh38.110.gtf
-    │   ├── diff-abundance-samplesheet.csv
+    │   ├── *diff-abundance-samplesheet.csv* (This will be generated by the script)
     │   ├── diff-abundance-params.yaml
+    │   ├── conditions.csv
     │   └── contrasts.csv
     ├── input/
     │   ├── fastq
@@ -443,30 +425,38 @@ enter
 ---
 
 - Now that we have the files ready for the pipeline, we can go ahead and execute it.
+- To run the pipeline, we need to be in the **parent directory (rnaseq-course)** directory.
 - First of all, lets exit the rnaseq tmux session and create a new one for the rnaseq pipeline.
+- In the terminal window at the bottom of your screen:
 
 ```
-#detach from the fetchngs session
+# detach from the fetchngs session
 ctrl + b
 d
 
-#create new tmux session
+# create new tmux session
 tmux new -s diff-abundance
+
+# load modules
+module load nextflow/23.10.0
+module load singularity/singularity-ce/3.11.4
 ```
 
 - Now we can run the pipeline
 
 ```
-#load modules
-module load nextflow/23.10.0
-module load singularity/singularity-ce/3.11.4
+# execute pipe
+./bin/differentialabundance.sh
 
-#execute pipe
-nextflow run nf-core/differentialabundance -params-file resources/diff-abundance-params.yaml -profile singularity -c resources/my.config
-
-#leave pipeline running for a few minutes to ensure its working, then we can close the session:
+# leave pipeline running for a few minutes to ensure its working, then we can close the session:
 crtl +b
 d
 ```
 
 - We will cover the outputs from this pipeline during the Day 3 session.
+
+---
+---
+# End of Day 3
+---
+---
