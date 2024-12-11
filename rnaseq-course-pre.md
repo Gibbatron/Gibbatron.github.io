@@ -18,6 +18,8 @@ author: "Alex Gibbs"
 - Select the version for your operating system, download and install the software.
 - Note: I am not sure how well this app works for Linux users.
 
+- Tick all the boxes in the start up window and click 'Mark Done'.
+
 ---
 
 <br>
@@ -81,7 +83,10 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 ## Connecting to HAWK
 
 - To connect to HAWK, click on the 'Remote Explorer' button, then click 'Connect to Host in New Window' button. This opens a new VSCode window with the remote host.
-- You will be prompted (top box) to enter your password. Do this and hit enter.
+- You will be prompted (top box) to enter the host operating platform.
+- Click **Linux**.
+- Then you will be prompted to continue, click **Yes**.
+- Then you will be asked for your password. Do this and hit enter.
 - You are now connected to HAWK.
 
 <img src="/assets/img/pre-3.png" alt="Connecting to HAWK" width="1000"/>
