@@ -151,27 +151,45 @@ tmux attach -t diff-abundance
 
 <img src="/assets/img/figure-20.png" alt="Samples and contrasts tables" width="1000"/>
 
+---
 #### Results section
+---
+---
+
 - This is where all of the plots and data are presented.
 
+---
 ##### Counts
+---
+---
+
 - Tells us how many input genes we had, and how many we had after filtering for low abundance.
 
+---
 ##### Exploratory analysis
+---
+---
+
 - Shows us a range of plots that allow us to explore the data.
-- **Box plots** shows us the distribution of abundance values across the samples. 
+
+**Box plots** 
+- show us the distribution of abundance values across the samples. 
 - Here we can see that we have 3 plots, one for each data type. We can see that normalisation and variance stabilisation has done a good gob. The purpose of this process is to adjust for differences in sequencing depth, control for different library sizes, minimize technical variability, and stabilise the variance across read counts.
 
 <img src="/assets/img/figure-21.png" alt="boxplots" width="1000"/>
 
-- **Density plots** give us an idea of overall expression levels across the dataset. Again, this section shows us the density plots across the 3 different data types.
+**Density plots**
+- Give us an idea of overall expression levels across the dataset. Again, this section shows us the density plots across the 3 different data types.
 - From the top 2 plots, it would be difficult to determine what is considered 'normal' expression here, as we have a lot of expression across the board. The point of normalisation and variance stabilisation is to make this easier to determine what is considered 'normal' expression and what is considered over expressed.
 - We can see that in the variance stabilised plot, most of our genes are lowly/normally expressed (as indicated by the high peak on the left) and then we have a lwoer number of genes that would be considered over expressed.
 
 <img src="/assets/img/figure-22.png" alt="density plots" width="1000"/>
 
-- Next we have the **sample relationships** section. Here we will find PCA plots, Scree plots, association plots, dendrograms, and outlier detection plots.
-- **PCA** plots show us how the samples cluster together. We can use this to see how similar or different samples are to eachother.
+**sample relationships**
+- Here we will find PCA plots, Scree plots, association plots, dendrograms, and outlier detection plots.
+ 
+**PCA** 
+- Plots show us how the samples cluster together. We can use this to see how similar or different samples are to eachother.
 - The analysis is performed by using the top 500 most variable genes.
 - We can see here that the Cancer samples (786-0) tightly cluster together on both PC1 and PC2 axes, whereas the Control samples (HK-2) are not so tightly clustered.
 - However, there is a clear distinction between the two groups which is important when we are performing out differential analyses. We should see that there will be a higher number of differentially expressed genes in this analysis as theres a better separation between the groups.
@@ -182,28 +200,38 @@ tmux attach -t diff-abundance
 
 <img src="/assets/img/figure-23.png" alt="PCA plots" width="1000"/>
 
-- **Scree plots** show us the percent of variance that is explained by each principle component. We typically get most variance explained by PC1 and PC2, and then less and less explained by the latter PCs.
+**Scree plots** 
+- Show us the percent of variance that is explained by each principle component. We typically get most variance explained by PC1 and PC2, and then less and less explained by the latter PCs.
 - We don't really need to pay any attention to this plot.
 
 
-- **Association plot** shows the association between the principle components and the categorical covariates.
+**Association plot**
+- Shows the association between the principle components and the categorical covariates.
 - I have not looked at this plot before, so can't comment much on it. I think this plot could potentially show more meaningful data if we had multiple conditions and we wanted to delve deeper into the PCA analyis.
 
 
-- **Dendrogram plots** show us, similar to PCA, how the samples cluster in relation to eachother. 
+**Dendrogram plots**
+- Show us, similar to PCA, how the samples cluster in relation to eachother. 
 - Like the PCA plots, we can see that each group cluster togeher and are clearly separated from each other.
 - These plots can be handy to identify any potential outliers, as you will see them cluster apart from their respective groups.
 
 <img src="/assets/img/figure-24.png" alt="Dendrograms" width="1000"/>
 
-- **Outlier detection** plot is a handy plot that performs an analysis that can attempt to detect outliers in the dataset. 
+**Outlier detection**
+- Plot is a handy plot that performs an analysis that can attempt to detect outliers in the dataset. 
 - As we can see, all samples come up as FALSE, indicating that none are classed as outliers.
 
 <img src="/assets/img/figure-25.png" alt="Outlier detection plot" width="1000"/>
 
+---
 ##### Differential analysis
+---
+---
+
 - This is where we can find the data related to the differential gene analysis.
-- **Differential gene counts** table shows us the number of up and down DEGs for the adjusted and unadjusted p-value tables.
+
+**Differential gene counts** 
+- Table shows us the number of up and down DEGs for the adjusted and unadjusted p-value tables.
 - When working with RNAseq data, we work with adjusted p values. Here, we can see that we have 3788 up and 4617 down significant DEGs.
 - We can visualise these via the volcano plot below the table. We can use our mouse to hover over each point to show us what gene it is also.
 
@@ -215,7 +243,10 @@ tmux attach -t diff-abundance
 
 - Then we have the methods section, where you will find all the filters and information about the pipeline.
 
+---
 ## ShinyNGS App
+---
+---
 
 - Now we can use the ShinyNGS app and start playing with the data. 
 -
