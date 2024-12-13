@@ -195,8 +195,8 @@ tmux attach -t diff-abundance
 - The analysis is performed by using the top 500 most variable genes.
 - We can see here that the Cancer samples (786-0) tightly cluster together on both PC1 and PC2 axes, whereas the Control samples (HK-2) are not so tightly clustered.
 - However, there is a clear distinction between the two groups which is important when we are performing out differential analyses. We should see that there will be a higher number of differentially expressed genes in this analysis as theres a better separation between the groups.
-- If we were to compare groups that didn't have a distinct separation, we would expect to see a lot less DEGs. We can also use this as an indicator of experimental conditions or techniques. 
-  - If one sample in condition A is clustering with the samples in conditon B, was there a chance that somebody mislabelled the sample? 
+- If we were to compare groups that didn't have a distinct separation, we would expect to see a lot less DEGs. We can also use this as an indicator of experimental conditions or techniques.
+  - If one sample in condition A is clustering with the samples in conditon B, was there a chance that somebody mislabelled the sample?
   - If you drugged the same cell line for 1 hour and then compared drugged vs untreated, we would expect there to be very little difference between the groups and subsequently cluster close on a pca.
 - When we look at the 3D PCA plot, where we are adding PC3 into the mix, we can see that there is more spread amongst the groups, but still a distinct separation between them.
 
@@ -213,14 +213,14 @@ tmux attach -t diff-abundance
 
 
 **Dendrogram plots**
-- Show us, similar to PCA, how the samples cluster in relation to eachother. 
+- Show us, similar to PCA, how the samples cluster in relation to eachother.
 - Like the PCA plots, we can see that each group cluster togeher and are clearly separated from each other.
 - These plots can be handy to identify any potential outliers, as you will see them cluster apart from their respective groups.
 
 <img src="/assets/img/figure-24.png" alt="Dendrograms" width="1000"/>
 
 **Outlier detection**
-- Plot is a handy plot that performs an analysis that can attempt to detect outliers in the dataset. 
+- Plot is a handy plot that performs an analysis that can attempt to detect outliers in the dataset.
 - As we can see, all samples come up as FALSE, indicating that none are classed as outliers.
 
 <img src="/assets/img/figure-25.png" alt="Outlier detection plot" width="1000"/>
@@ -252,7 +252,7 @@ tmux attach -t diff-abundance
 
 - Now we can use the ShinyNGS app and start playing with the data.
 - To use the app, we will be using arrca open OnDemand. This is a webpage where we can request the supercompute resources to run an R session, which saves us having to download R onto our PCs.
-- Paste this link into your web browser and log in using your SCW account details: https://arcondemand.cardiff.ac.uk/ 
+- Paste this link into your web browser and log in using your SCW account details: https://arcondemand.cardiff.ac.uk/
 - Now click 'Interactive Apps' and select 'RStudio Server'
 
 <img src="/assets/img/figure-32.png" alt="RStudio Server" width="1000"/>
@@ -262,3 +262,181 @@ tmux attach -t diff-abundance
 - Once it is ready to launch, you will see this window. Select 'Connect to RStudio Server'. This will open a new tab with the server
 
 <img src="/assets/img/figure-33.png" alt="RStudio Server" width="1000"/>
+
+- Now we have an RStudio server opened up which will allow us to run whatever we want without using our own computers resources. It also means that we can work directly with the files on our HAWK account without having to transfer them to our computers.
+- We now want to open the shinyngs app directory and launch the app. To do this, we first need to navigate to it.
+- Click on 'File > Open File...', this launches a popup window.
+- Navigate to `rnaseq-course/output/shinyngs_app/MY-STUDY-NAME` and click on `app.R and then 'Open'.
+
+<img src="/assets/img/figure-34.png" alt="Opening app.R" width="1000"/>
+
+- This opens the script that is needed to launch the Shinyngs app.
+- In an ideal world, we could launch this app by simply clicking on 'Run App' at the top right of this script. But in reality, the script needs certain packages to be installed and loaded before we can do this.
+- We can install and load these packages by editing this script.
+- To do this, click on the script and hit enter a few times to move the code lower down the page.
+- We can now copy and paste the code below into the top of the script.
+- **Note: Make sure you change the your username:**
+
+```
+install.packages('devtools')
+install.packages('markdown')
+install.packages('BiocManager')
+library(BiocManager)
+BiocManager::install("SummarizedExperiment")
+BiocManager::install("GSEABase")
+BiocManager::install("limma")
+devtools::install_github('pinin4fjords/shinyngs')
+library(devtools)
+library(SummarizedExperiment)
+library(GSEABase)
+library(limma)
+setwd(dir = "/scratch/c.c1234567/rnaseq-course/output/shinyngs_app/NAME-YOUR-PROJECT/")
+```
+
+<img src="/assets/img/figure-35.png" alt="Editing the script" width="1000"/>
+
+- What we are doing here is telling R to install these pre-requisite packages. These packages are needed in order for the shinyngs package to install and work correctly.
+
+- Now we can go ahead and run this script.
+- The best way to do this is to click on the 'Run App' button at the top-right of the script.
+- Alternatively, you can run each line by hitting `ctrl + enter` or `cmd + enter`.
+- You will see that the bottom window will be populated with various text.
+- Occaisionally, we will see the text ask us questions such as 'Update all/some/none?'
+- We need to answer these questions before the script keeps running.
+- Answer the questions by clicking in the bottom window, typing the answer and then hitting enter:
+
+```
+Update all/some/none? [a/s/n]
+a
+```
+
+- a = update all
+- s = update some
+- n = update none
+
+- To avoid complications, we want to **update all**
+
+- If everything works, then you should get a pop-up window with the Shiny app.
+- If this is not the case, please let me know so we can do some troubleshooting.
+
+---
+#### Home
+---
+---
+
+- You will be greeted by the homepage. This page contains a small description of the app and how to navigate it.
+
+<img src="/assets/img/figure-36.png" alt="shinyapp homepage" width="1000"/>
+
+---
+#### Sample data
+---
+---
+
+- Clicking on this tab opens a dropdown menu with the following options:
+
+**Experiment**
+- Here you will find a fancy version of the diff-abundance-samplesheet.csv that was generated prior to the pipelines execution.
+- You will see the sample IDs, fastq file paths, and condition information.
+
+**Annotation**
+- Here you will find a table of every gene in the dataset along with the corresponding information.
+
+---
+#### QC/exploratory
+---
+---
+
+- Here you will find all the analyses related to QC and exploring the dataset. This is the same as what you will find in the report web page that we covered earlier.
+- You may be thinking 'Why are we doing this if its already in the report web page?' - because the ShinyNGS app allows us to edit the parameters, filter, and look at specific genes etc!
+
+**Distribution plots**
+- Show's us the distribution of abundance values across the samples.
+- You will see that there are parameters that we can change in the box on the left.
+- You can use these parameters to change the look of the plots, colour by your conditions (if you had nore than one condition column).
+- You can also change between the various data types  by using the matrix dropdown box.
+- Finally, you can also export the plot(s) by clicking on the button in the 'Export' section.
+
+<img src="/assets/img/figure-37.png" alt="distribution plots" width="1000"/>
+
+**PCA**
+- Plots show us how the samples cluster together. We can use this to see how similar or different samples are to eachother.
+- There are 2 types of PCA plot to view here, one that displays the samples, the other displays the top genes. Use the tabs along the top of the plot to view this.
+- Again, there are multiple parameters we can use to edit these plots, from number of PC loadings, to point size, to how many vairable genes to perform the analysis on.
+- We can also switch between 2D and 3D plots.
+- To save the plot(s), hover over the plot and click on the camera icon. This will save the photo directly to your computer.
+
+<img src="/assets/img/figure-38.png" alt="pca plots" width="1000"/>
+
+**I wont cover any more of the QC/Exploratory section as it is the same as the report webpage that I covered earlier. But I hope you get the idea that this app allows you to customise these plots for your needs**
+
+---
+#### Assay data
+---
+---
+
+- The assay data section contains two sub-sections:
+
+**Tables**
+- Here you will find the data tables used for the analysis. The default view is the variance stabilised table. This contains the list of genes present in the dataset and the accompanying variance stabilised gene expression.
+- Again, you can change the table by using the parameters on the left of the window.
+
+**Heatmaps**
+- This section displays a heatmap of the data (top 50 genes by variance).
+- There are some nice options along the left, which allows us to additionally cluster the columns and select the number of top variant genes to perform the analysis on.
+- The 'Scale by' section performs scaling of the gene expression along the chosen parameter. By default, we scale across the row. This takes the expression of each gene across all samples and scales it (usually from -1 to +1). This is to make it easier to see differences in expression of each gene across the samples.
+
+<img src="/assets/img/figure-39.png" alt="heatmap" width="1000"/>
+
+- Another nice function the app provides is the option to zoom in on certain genes/samples. To do this, use your mouse to click and drag over a specific region of the heatmap. You will see the heatmap zoom into your selection. To go back to default, simply click the heatmap.
+
+<img src="/assets/img/d4-gif1.gif" alt="heatmap" width="1000"/>
+
+---
+#### Differential
+---
+---
+
+- This is the section where we will find all the data related to the differential gene expression.
+
+**Tables**
+- This sub-section shows the tables containing the differentially expressed genes (DEGs).
+- You will notice that the table also contains an expression value for each group, this is a 'combined' expression value for that particular group that was used as input for the differential expression testing.
+- Along the side, we can filter this table for various parameters such as fold change expression (which is 2 by default), p value, and q value (adjusted p value).
+- There is also a search box for you to search for your favourite genes.
+
+**Fold change plots**
+- This sub-section shows a scatter plot that compares the mean gene expression value between the two sample groups.
+- Again, theres various filters you can add, and you can also hover over each point on the plot to identify the gene.
+
+<img src="/assets/img/figure-40.png" alt="fold change plot" width="1000"/>
+
+**MA plot**
+- This sub-section shows an MA plot for the data.
+- MA plots visualise the relationship between the magnitude of expression (mean expression) and the fold change across all genes.
+- 'M' for difference: vertical axis. Shows difference in expression between the conditions (log2 fold change).
+- 'A' for average: horizontal axis. Shows how much overall expression there is across both conditions (how 'active' or 'inactive' a gene is).
+- The plot essentially tells us if genes with big changes (along the vertical axis) are generally highly expressed (towards the right on the horizontal axis) or lowly expressed (towards the left on the horizontal axis).
+- A well centred/uniform plot here depicts good normalisation of the dataset.
+
+<img src="/assets/img/figure-41.png" alt="MA plot" width="1000"/>
+
+**Volcano plot**
+- This sub-section shows a volcano plot of the DEGs.
+- It shows us the degree of differential expression.
+- Expression (log2 fold change) along the x-axis.
+- Significance along the y-axis.
+
+<img src="/assets/img/figure-42.png" alt="Volcano plot" width="1000"/>
+
+---
+#### Gene info
+---
+---
+
+- The last section of the app allows us to gather more information about a specific gene.
+- Using the 'Gene name' dropdown menu on the left, you can find your gene of interest and select it.
+- This will populate the main window with a bar plot of the genes expression across your dataset.
+- This is a better way to visualise the expression of a gene across your dataset instead of just pulling the data from the 'Assay data' section.
+
+<img src="/assets/img/figure-43.png" alt="Gene info" width="1000"/>
