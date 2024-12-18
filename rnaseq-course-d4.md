@@ -77,6 +77,8 @@ tmux attach -t diff-abundance
 ```
 
 - In this situation, the process took around 8 minutes. As all of us were using the pipeline at the same time, these times will likely vary. Download times will also depend on the size and number of files being downloaded.
+- You will also notice the following message: "Merged table created with annotations >> saved to 'merged_table.tsv'.
+- At the end of the differential abundance script, we tell HAWK to run another script that I have created that merges the output tables. This will make our lives easier when it comes to playing around with the differentially expressed genes.
 
 ---
 #### Report directory
@@ -107,7 +109,7 @@ tmux attach -t diff-abundance
     - Annotation: annotation matrix.
     - Processed Abundance: processed abundance values from initial processing. i.e. normalised counts from DESeq2.
     - Differential: Results of diferential analysis. filtered and unfiltered tables for expression.
-
+- We will also find 'merged_tables.tsv', the table that we generated at the end of the pipeline. This takes all of the tables and combines them into one.
 ---
 #### Pipeline Information directory
 ---
@@ -143,7 +145,7 @@ tmux attach -t diff-abundance
 ---
 ---
 
-- Lets start with the webpage report. 
+- Lets start with the webpage report.
 - Navigate to `output/report/study.html` using 'Explorer'.
 - Right click on the file and select 'Open Preview'. This will load the webpage in a preview window on your VSCode.
 
@@ -440,3 +442,14 @@ a
 - This is a better way to visualise the expression of a gene across your dataset instead of just pulling the data from the 'Assay data' section.
 
 <img src="/assets/img/figure-43.png" alt="Gene info" width="1000"/>
+
+---
+## Downstream Analyses
+---
+---
+
+- This is as far as we can go with the differential abundance pipeline. Some of you may see that there is an optional Gene Set Enrichment Analysis (GSEA) plotting option on the pipe, but this is clunky at the moment.
+- From here, we can take the DEGs do some extra analyses using free tools online. There is also a very good paid-for tool that the university has a licence for that I would reccommend.
+
+---
+#### Gene Set Enrichment Analysis (GSEA)

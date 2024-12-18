@@ -26,7 +26,7 @@ author: "Alex Gibbs"
 
 ---
 ---
-## Install tools and packages
+#### Install tools and packages
 ---
 
 - Now that we have VSCode installed, we can now install the extensions needed for the whole course.
