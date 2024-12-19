@@ -452,4 +452,26 @@ a
 - From here, we can take the DEGs do some extra analyses using free tools online. There is also a very good paid-for tool that the university has a licence for that I would reccommend.
 
 ---
-#### Gene Set Enrichment Analysis (GSEA)
+### File Preparation
+---
+---
+
+- Before we start doing some more downstream analyses, we need to get our gene list in the correct format(s).
+- When we have a list of differentially expressed genes (DEGs), we have some genes that are positively enriched (i.e. positive log2FC), and some that are negatively enriched (i.e. negative log2FC).
+- This list of genes is often ordered by significance by the pipeline, rather than expression.
+- What we first want to do to our DEG list is filter for significance to give us significant DEGs.
+- Then we want to reorder our significant DEGs so that they go from positive-to-negative log2FC.
+- This allows us to then run analyses on the ordered DEGs and also separate significantly positive and negative DEGs (if needed).
+
+<br>
+
+- We first need to download the `merged_table.tsv` from HAWK.
+- To do this, right click on the file in VSCode and click 'Download'. Then specify where you want to save the file on your PC.
+- Now we can open this file in Excel. To do this, right-click and click `Open With' then choose Excel.
+
+<br>
+
+-**Note:** We now need to use this table to make a few new tables which we will use as input for various tools. I would strongly reccomend firstly duplicating the table and editing the duplicated table.
+
+**Significant DEGs**
+- 
