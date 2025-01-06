@@ -474,4 +474,17 @@ a
 -**Note:** We now need to use this table to make a few new tables which we will use as input for various tools. I would strongly reccomend firstly duplicating the table and editing the duplicated table.
 
 **Significant DEGs**
-- 
+- After duplicating the `merged_table.tsv`, rename it to whatever you want. I would reccommend being as descriptive as you can in your file naming.
+- Example: `786-0_vs_HK-2_sigDEGs.tsv`
+- Example: `786-0_vs_HK-2_sigDEGs_padj0.05.tsv`
+- Now open the file in Excel.
+- The table is currently showing us normalised, tsv, and DEG data.
+
+<img src="/assets/img/figure-44.png" alt="DEG table" width="1000"/>
+
+- We now need to delete columns. **Delete columns C-P**. This leaves us with the DEG only data.
+- We can also then **delete the top row (row 1)** to get rid of the `data_type` information.
+- Lastly, we can now **delete columns C, E, and F** to get rid of the `baseMean`, `lfcSE`, and `pvalue` columns.
+- We should be left with 4 columns: `gene_id`, `gene_name`, `log2FoldChange`, and `padj`.
+
+<img src="/assets/img/figure-45.png" alt="DEG table" width="1000"/>
