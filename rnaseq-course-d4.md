@@ -488,3 +488,116 @@ a
 - We should be left with 4 columns: `gene_id`, `gene_name`, `log2FoldChange`, and `padj`.
 
 <img src="/assets/img/figure-45.png" alt="DEG table" width="1000"/>
+
+- Now we can filter this table for significance. To do this, I would **strongly** reccomend the following:
+- Click on column D to highlight it.
+- Now click 'Sort & Filter' and select 'Sort Smallest to Largest'. Choose the 'Expand the selection' in the next popup window.
+
+<img src="/assets/img/figure-46.png" alt="filtering DEG table" width="1000"/>
+
+- We have now sorted the table by lowest to highest p adjusted value. We can now scroll through this table and delete the non-significant rows.
+- The reason I reccomend doing it this way is that sometimes these tables can be thousands and thousands of rows long. Using the filter function sometimes doesn't work as it should and often slows down your PC whilst filtering.
+- Scroll through the table to find padj < 0.05. For me, this is on row 13,158.
+- Click on cell A13158, then scroll to the end of the table.
+- Now hold `shift` and click on the last cell in column D to highlight the non-significant cells.
+- Right click on the selected cells and click 'Delete...'. In the popup window, click 'Shift cells up'.
+- We are now left with our significant DEGs. Save and then close the table.
+
+**Significant UP and DOWN DEGs**
+- Most of you will only be interested in analysing the significantly upregulated genes in your dataset.
+- It is completely up to you how you go about this, but I always find it easier to have one file for each, i.e. all DEGs = 786-0_vs_HK-2_sigDEGs.tsv. UP DEGs = 786-0_vs_HK-2_sigDEGs_UP.tsv. DOWN DEGs = 786-0_vs_HK-2_sigDEGs_DOWN.tsv.
+- However, I understand that most of you will want to keep things as simple as possible and not want to get bogged down by lost of files.
+- I would strongly reccommend splitting your DEG file into UP and DOWN DEGs, either by creating additional files, or by creating a new sheet for each in the 786-0_vs_HK-2_sigDEGs.tsv file.
+
+**Preranked DEGs for GSEA**
+- For Gene Set Enrichment Analysis, we will need to take these significant DEGs and rank them by log2 Fold Change.
+- To do this, lets duplicate the significant DEG file and name it `preranked-DEGs-GSEA.tsv`.
+- Open the table and **delete columns B and D** to remove the `gene_name` and `padj` columns.
+- We are now left with 2 columns: `gene_id` and `log2FoldChange`.
+- We now need to delete the top row of the table, i.e. delete the headers. We need to do this so that GSEA software can correctly read the file.
+- Lastly, we need to order the `log2FoldChange` column (column B) from highest to lowest. To do this higlight the whole of column B by clicking on it, then click on 'Sort & Filter' and select 'Sort Largest to Smallest'. In the popup window, click 'Expand the selection'.
+
+<img src="/assets/img/figure-47.png" alt="formatting GSEA file" width="1000"/>
+
+- We have now preranked our DEGs. The last thing we now need to do is make sure we save it in the correct format, and rename it so that the software can recognise it.
+- We first need to save the file. Click on 'File' then select 'Save As...'.
+- Select the location to save the file, and then use the 'File Format:' dropdown bowx to select `Tab-delimited Text (.txt)`.
+- You may have a popup window asking 'do you want to keep using this format?', select 'Yes'.
+- We have now saved our file as a tab-delimited text (.txt) file (`preranked-DEGs-GSEA.txt`).
+
+<details>
+<summary><b>What is a tab-delimited text (.txt) file?</b></summary>
+
+<br>
+
+- A .txt file is simple text file that stores tabular data such as text and numbers in a specific structured format.
+- Each line of the file corresponds to one row in the table.
+- Within each line, fields(columns) are separated by tab.
+- For example, the .txt for the table below looks like:
+
+<br>
+
+ <table>
+  <tr>
+    <th>Column-1</th>
+    <th>Column-2</th>
+    <th>Column-3</th>
+  </tr>
+  <tr>
+    <td>input1</td>
+    <td>input2</td>
+    <td>input3</td>
+  </tr>
+  <tr>
+    <td>input4</td>
+    <td>input5</td>
+    <td>input6</td>
+  </tr>
+   <tr>
+    <td>input7</td>
+    <td>input8</td>
+    <td>input9</td>
+  </tr>
+</table>
+
+<br>
+
+<pre><span style="color:crimson;">
+Column-1  Column-2  Column-3
+input1  input2 input3
+input4  input5 input6
+input7  input8 input9
+</span></pre>
+
+<br>
+
+</details>
+
+- However, the GSEA software does not recognize the .txt file as a preranked gene list. We instead need to make the file a ranked file (.rnk)
+- We have already formatted the table to conform to the requirements of a .rnk file, we just now need to simply change the file extension from .txt to .rnk.
+- There are multiple ways to do this. One of the ways is to use the 'rename' option when right clicking on the file. However, in some cases (especially on Mac), users do not have the file extension visible (I believe this is by default), and so renaming the file `preranked-DEGs-GSEA.rnk` will actually make it `preranked-DEGs-GSEA.rnk.txt`.
+- Instead, we will use the terminal window in VSCode to use the `cp` command.
+- Open VSCode again, and click on `File` then select `Open Folder`. Then select the folder where you saved the files.
+- Now click `Terminal` and select `New Terminal` to open a new terminal window at the bottom of your screen. The terminal should be in the correct directory. Check using the `pwd` command. If you are not in the correct directory, use the `cd` command to get there.
+- Now we can use the `cp` command to copy the `preranked-DEGs-GSEA.txt` file to the same location but under a different extension:
+
+```
+# check to see if you're in the correct location
+pwd
+
+# check to see if the file is there
+ls *.txt
+
+# copy the file and change the extension
+cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
+```
+
+**Text here**
+
+---
+### Gene Set Enrichment Analysis (GSEA)
+---
+---
+
+- GSEA is a popular tool used to see what processes/gene sets that our DEGs are enriched in.
+- 
