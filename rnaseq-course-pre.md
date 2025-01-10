@@ -8,6 +8,8 @@ author: "Alex Gibbs"
 
 ---
 ## Install Visual Studio Code (VSCode)
+---
+---
 
 - For this course, we will be using VSCode for everything.
 - VSCode is an Integrated Development Environment (IDE) for code development. It is essentially a customisable notebook for coders.
@@ -106,8 +108,11 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 
 
-
+---
 ## Install R, RStudio, and packages
+---
+---
+
 - We will need to use Rstudio at the end of the course to run the shiny application.
 - Firstly, we need to install R. Then we can install RStudio and then the packages.
 
@@ -141,6 +146,17 @@ library(GSEABase)
 library(limma)
 setwd(dir = "/scratch/c.c1427056/course-test-dir/git-repo-test/rnaseq-course/output/shinyngs_app/NAME-YOUR-PROJECT/")
 
+---
+## Download Gene Set Enrichment Analysis (GSEA) Application
+---
+---
 
+- GSEA application is needed at the end of the course to analyse our DEGs.
+- Go to the following webpage and download GSEA version 4.3.2 (latest version may not work for everyone so we are using this one): https://data.broadinstitute.org/gsea-msigdb/gsea/software/desktop/4.3/
+- Make sure you click on the download relevant to your operating system: GSEA_MacApp for Mac, GSEA_Win for Windows, GSEA_Linux for Linux.
+- Unzip the file by double clicking or right-clicking and selecting unzip.
+- Now you should have, in the same location, your `GSEA_4.3.2.app`.
+- You can move this app to anywhere you want and it will still work when you open it.
+- Double-click the app to ensure that it is working correctly.
 
-
+<img src="/assets/img/figure-48.png" alt="GSEA window" width="1000"/>

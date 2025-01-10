@@ -600,4 +600,96 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 ---
 
 - GSEA is a popular tool used to see what processes/gene sets that our DEGs are enriched in.
-- 
+- We should all have this application installed - if not, please let us know so we can get you sorted ASAP.
+- Lets double-click on the app to open it.
+
+<img src="/assets/img/figure-48.png" alt="GSEA window" width="1000"/>
+
+- We firstly need to load our data into the app. To do this, click on the 'Load Data' option on the left of the app.
+- Then we can either use Method 1 which launches a browser to find your file, or Method 3 which we can simply drag and drop our file into the grey box.
+- I will use Method 3 to drag and drop the `preranked-DEGs-GSEA.rnk` into the box. The file should then appear in the box.
+- Now I can load the file into the app by clickin on 'Load these files!' at the bottom of the box.
+- You will see a small popup window that notifies you that the file was loaded with no errors. If you have anything else, please let us know.
+
+<img src="/assets/img/figure-49.png" alt="Loading files into GSEA" width="1000"/>
+
+- Now we can get to the fun part.
+- As we have preranked our DEG list, we need to use the appropriate analysis tool - GSEAPreranked.
+- Click on the 'Run GSEAPreranked' option on the left of the app in the 'Tools' section.
+- A new window will load in the main section of the app.
+- We now need to edit each parameter here to run the analysis.
+
+<img src="/assets/img/figure-50.png" alt="GSEAPreranked window" width="1000"/>
+
+**Gene Sets Database**
+
+- This section allows us to choose which gene sets database we would like to perform the analysis on.
+- Click on the three dots (...) next to the selection box to launch the 'Select a gene set' window.
+- From here, we can choose between human or mouse collections along the top tabs (or if we had our own gene sets, we could select local).
+- As we are using a human dataset, we will stay on the tab we are currently in.
+- You can see that there is a massive list of gene sets to select from. Don't be scared of this list, it may look like a load of letters and numbers, but it will all make sense.
+- These selections reflect the gene sets located on the Molecular Signatures Database (https://www.gsea-msigdb.org/gsea/msigdb/index.jsp).
+- As you can see, H stands for Hallmark gene sets, and we have a range of gene sets representing C1 - C8.
+- The gene sets are labelled as `CollectionID.SubsetType.DatabaseName.Version.Organism.GeneType.gmt`.
+- So if we look at the top selection: `h.all.v2024.1.Hs.symbols.gmt` - `h` means its from the Hallmark gene sets. `all` means that its all of the hallmark gene sets. It's the 2024 version with Human gene symbols.
+- If we look at: `c2.all.v2024.1.Hs.symbols.gmt` - This means that its from the C2 section which is the curated gene sets and `all` means its all of the curated gene sets.
+- If we look at: `c2.cgp.v2024.1.Hs.symbols.gmt` - This means that its from the C2 - curated gene sets section, and `cgp` means that its the chemical and genetic perturbations.
+- If we look at: `c2.cp.v2024.1.Hs.symbols.gmt` - This means that its from the C2 - curated gene sets section, and `cp` means that its the canonical pathways.
+- If we look at: `c2.cp.biocarta.v2024.1.Hs.symbols.gmt` - This means that its from the C2 - curated gene sets section, and `cp` means that its the canonical pathways. `biocarta` means its the biocarta database subset of the canonical pathways section.
+- We should now understand how these are named and know which ones we want to choose for our analyes.
+- You may be thinking 'If theres the 'all' version there, whats the point of running subsets when I can just run everything?' - The answer is compute power and if your PC is tough enough to handle the data.
+- The way the application works is by downloading the gene set(s) that you have chosen to analyse against and load it into the application. Then it does its thing and gives you your results.
+- Some of these gene sets are small, such as the Hallmarks database which is 50 gene sets. This doesnt take up a lot of space or memory to download and analyse, whereas others, such as C2 all, are > 7000.
+- This can take a while to firstly download the gene sets, and then also take some time to actually run the analysis.
+- Additionally, running the `all` option can also make it difficult to find certain database results in the final results, so running individual database analyses may be better for you.
+- To keep things running smoothly, we will select the smallest database, `h.all.v2024.1.Hs.symbols.gmt`. Double click, or click to highlight and then select 'OK'.
+
+**Number of permutations**
+
+**Ranked List**
+- This is where you tell the application which ranked list of genes you would like to analyse.
+- This section should already be populated. However, if you have uploaded multiple preranked lists, you will need to use the dropdown menu to select the appropriate one.
+
+**Collapse/Remap to gene symbols**
+- This section allows us to select how the app treats our ranked gene list.
+- The genes in our ranked list are Ensemble IDs, i.e. ENSG0000000012345. This is also referred to as gene ids. Gene names, i.e. GENE1, are referred to as gene symbols.
+- Every gene set in the Molecular Signatures Database exists as gene symbols.
+- This means that if we were to run the analysis as it is, the app would be trying to analyse our genes, which are gene ids, against a list of gene symbols. As you can imagine, this wouldn't work.
+- We first need to ensure that our gene list is in the same format as the genes in the gene sets.
+- If we click the dropdown menu here, you will see that there are 3 options.
+- We need to select the `Collapse` option. This takes the information from the chip that we will provide in the next step to convert the gene ids to gene symbols. i.e. it will change ENSG00000012345 to GENE1.
+- If our list was already in the correct format, we would select the `No_Collapse` option. The `Remap_only` option would be selected if we wanted to 
+
+
+[Link to GSEAPreranked Page](https://www.gsea-msigdb.org/gsea/doc/GSEAUserGuideFrame.html?xtools_gsea_GseaPreranked)
+
+
+****** Need to add the following to the diff abundance stuff to remove duplicate gene names from the deg file *******
+
+#!/bin/bash
+
+# Input table file
+input_file="merged_table.tsv"
+
+# Output files
+unique_file="unique_gene_names.tsv"
+duplicates_file="duplicate_gene_names.tsv"
+
+# Extract the two header rows
+head -n 2 "$input_file" > "$unique_file"
+head -n 2 "$input_file" > "$duplicates_file"
+
+# Find duplicate gene_name values (column 2 after skipping 2 header rows)
+awk -F'\t' 'NR > 2 {count[$2]++} END {for (name in count) if (count[name] > 1) print name}' "$input_file" > duplicates_list.txt
+
+# Filter duplicates into a separate file
+awk -F'\t' 'NR <= 2 {next} FNR == NR {dup[$1]; next} $2 in dup' duplicates_list.txt "$input_file" >> "$duplicates_file"
+
+# Filter unique rows into another file
+awk -F'\t' 'NR <= 2 {next} FNR == NR {dup[$1]; next} !($2 in dup)' duplicates_list.txt "$input_file" >> "$unique_file"
+
+# Cleanup intermediate file
+rm duplicates_list.txt
+
+echo "Processing complete. Unique values saved to $unique_file, duplicates saved to $duplicates_file."
+
