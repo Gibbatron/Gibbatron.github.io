@@ -465,8 +465,13 @@ a
 
 <br>
 
-- We first need to download the `merged_table.tsv` from HAWK.
-- To do this, right click on the file in VSCode and click 'Download'. Then specify where you want to save the file on your PC.
+- We first need to download the tables from HAWK.
+- The pipeline that we ran generated three tables for us: `merged_table.tsv`, `merged_table_unique.tsv`, and `duplicate_gene_names.tsv`.
+- `merged_table.tsv` contains all of the data from the pipeline (normalised, tsv, DEG) merged into one.
+- `merged_table_unique.tsv` takes the data from `merged_table.tsv` and removes duplicated genes.
+- `duplicate_gene_names.tsv` contains the duplicated genes from `merged_table.tsv`.
+- **Explanation:** the pipeline does its magic on unique ensemble gene IDs, which you will see that there are no duplicate ensemble IDs in the `merged_table.tsv`. However, when we convert gene ID to gene symbol, there are often multiple gene IDs that map to the same gene. These genes tend to be pseudogenes or ribosomal genes (ones that we are not (usually) interested in). For our downstream analyses, we want to ensure that we dont have any duplicated gene symbols in the data, so we simply remove them and store them in another table.
+- To do download the tables, right click on the file in VSCode and click 'Download'. Then specify where you want to save the file on your PC.
 - Now we can open this file in Excel. To do this, right-click and click `Open With' then choose Excel.
 
 <br>
@@ -474,7 +479,7 @@ a
 -**Note:** We now need to use this table to make a few new tables which we will use as input for various tools. I would strongly reccomend firstly duplicating the table and editing the duplicated table.
 
 **Significant DEGs**
-- After duplicating the `merged_table.tsv`, rename it to whatever you want. I would reccommend being as descriptive as you can in your file naming.
+- After duplicating the `merged_table_unique.tsv`, rename it to whatever you want. I would reccommend being as descriptive as you can in your file naming.
 - Example: `786-0_vs_HK-2_sigDEGs.tsv`
 - Example: `786-0_vs_HK-2_sigDEGs_padj0.05.tsv`
 - Now open the file in Excel.
@@ -644,7 +649,11 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 - Additionally, running the `all` option can also make it difficult to find certain database results in the final results, so running individual database analyses may be better for you.
 - To keep things running smoothly, we will select the smallest database, `h.all.v2024.1.Hs.symbols.gmt`. Double click, or click to highlight and then select 'OK'.
 
+<img src="/assets/img/figure-51.png" alt="Selecting Gene sets database" width="1000"/>
+
 **Number of permutations**
+- This is where we can specify the number of gene set permutations to perform in assessing the statistical significance of the enrichment score. The developers reccomend using 1000 (default) here.
+
 
 **Ranked List**
 - This is where you tell the application which ranked list of genes you would like to analyse.
@@ -657,39 +666,82 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 - This means that if we were to run the analysis as it is, the app would be trying to analyse our genes, which are gene ids, against a list of gene symbols. As you can imagine, this wouldn't work.
 - We first need to ensure that our gene list is in the same format as the genes in the gene sets.
 - If we click the dropdown menu here, you will see that there are 3 options.
-- We need to select the `Collapse` option. This takes the information from the chip that we will provide in the next step to convert the gene ids to gene symbols. i.e. it will change ENSG00000012345 to GENE1.
-- If our list was already in the correct format, we would select the `No_Collapse` option. The `Remap_only` option would be selected if we wanted to 
+- We need to select the `Remap_Only` option, which takes the information from the chip that we will provide in the next step to convert the gene ids to gene symbols. i.e. it will change ENSG00000012345 to GENE1.
 
+<details>
+<summary><b>Remap_Only, Collapse, or No_Collapse?</b></summary>
 
-[Link to GSEAPreranked Page](https://www.gsea-msigdb.org/gsea/doc/GSEAUserGuideFrame.html?xtools_gsea_GseaPreranked)
+<br>
 
+<b>Collapse</b>
+- GSEA was originally run on microarray data (such as Affymetrix), in which you would have multiple probes mapping to the same gene. The Collapse option was then used to collapse multiple probes into one reading for the gene.
+- This method uses mathematical models to collapse the probe information.
 
-****** Need to add the following to the diff abundance stuff to remove duplicate gene names from the deg file *******
+<b>Remap_Only</b>
+- This option is similar to the Collapse option, but instead of condensing multiple probes into a single gene symbol, it just converts the gene ID into gene symbol.
+- It does not perform mathematical calculations.
 
-#!/bin/bash
+<b>No_Collapse</b>
+- This tells the app to use the provided list 'as is' and not perform and collapsing or remapping.
 
-# Input table file
-input_file="merged_table.tsv"
+<br>
 
-# Output files
-unique_file="unique_gene_names.tsv"
-duplicates_file="duplicate_gene_names.tsv"
+</details>
 
-# Extract the two header rows
-head -n 2 "$input_file" > "$unique_file"
-head -n 2 "$input_file" > "$duplicates_file"
+<img src="/assets/img/figure-52.png" alt="Collapse/Remap to gene symbols" width="1000"/>
 
-# Find duplicate gene_name values (column 2 after skipping 2 header rows)
-awk -F'\t' 'NR > 2 {count[$2]++} END {for (name in count) if (count[name] > 1) print name}' "$input_file" > duplicates_list.txt
+**Chip platform**
+- This is where we tell the app what platform to use for the 'Collapse/Remap to gene symbols' function. 
+- As we have Ensemble IDs in our ranked dataset, we need to tell the app this.
+- Click on the three dots (...) next to the box and select `Human_Ensembl_Gene_ID_MSigDB.v2024.1.Hs.chip`.
 
-# Filter duplicates into a separate file
-awk -F'\t' 'NR <= 2 {next} FNR == NR {dup[$1]; next} $2 in dup' duplicates_list.txt "$input_file" >> "$duplicates_file"
+<img src="/assets/img/figure-53.png" alt="Selecting a chip" width="1000"/>
 
-# Filter unique rows into another file
-awk -F'\t' 'NR <= 2 {next} FNR == NR {dup[$1]; next} !($2 in dup)' duplicates_list.txt "$input_file" >> "$unique_file"
+**Basic Fields**
+- There are additional sections that we can edit before we perform the analysis. I would reccommend changing a few in the 'Basic Fields' section.
+- Click the 'Show' button to expand this section.
 
-# Cleanup intermediate file
-rm duplicates_list.txt
+*Analysis name*
+- This is one of the important ones we should change.
+- GSEA app makes a new directory for every analysis it performs. To save you a LOT of time, this option should be changed every time.
+- As we will be running the Hallmarks gene set, lets name this analysis `hallmarks`.
 
-echo "Processing complete. Unique values saved to $unique_file, duplicates saved to $duplicates_file."
+*Erichment Statistic*
+- Here you can select how the running-sum statistic is calculated. I won't go into detail how this works, but we will stick with the default parameter here.
+
+*Max/Min size*
+- These two parameters are filters that the app uses to select gene sets for the analysis.
+- If a gene set (from Hallmarks database, for instance), is above, or below the filter, that gene set is omitted from the analysis.
+- Small gene sets can lead to statistically unstable results as the enrichment scores can be driven by just a few genes which may not be representative.
+- Large gene sets may lack specificity and can dominate the enrichment results, making it harder to detect meaningful patterns.
+- I always stick to default here. But it is completely up to you what you use as your filters.
+
+*Save results in this folder*
+- Lastly, we should also change this section to save the outputs in a specific location.
+- I always reccomend creating a directory somewhere (usually in your results directory) named GSEA, and using this filepath.
+- To specify a location, click on the three dots (...)
+
+**Advanced Fields**
+- I never change any parameters here, so I won't cover anything for this section.
+
+**GSEAPreranked Information Page**
+- If you want to find out more, click this [Link to GSEAPreranked Page](https://www.gsea-msigdb.org/gsea/doc/GSEAUserGuideFrame.html?xtools_gsea_GseaPreranked).
+
+---
+#### Running GSEA
+---
+---
+
+- Now we have uploaded our data and added our parameters, we are ready to run the analysis.
+- To do this, simply click the `Run` button at the bottom of the screen.
+- A small window will pop up notifying you that it is downloading the gene sets. It will then close after it has finished doing so.
+- To view the progress of the analysis (handy for larger gene sets and bigger datasets), check the `GSEA reports` window at the bottom left of the window.
+- You will see that your analysis is 'Running'. If anything goes wrong, you will see 'Error!'. If it has completed, you will see 'Success
+
+<img src="/assets/img/figure-54.png" alt="Running GSEAPreranked" width="1000"/>
+
+---
+#### Viewing the results
+---
+---
 
