@@ -23,17 +23,11 @@ author: "Alex Gibbs"
 - Tick all the boxes in the start up window and click 'Mark Done'.
 
 ---
-
-<br>
-
----
 ---
 #### Install tools and packages
 ---
 
 - Now that we have VSCode installed, we can now install the extensions needed for the whole course.
-
-<br>
 
 **Remote - SSH**
 - This extension allows us to connect remotely to HAWK through a terminal window within the software.
@@ -93,7 +87,7 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 <img src="/assets/img/pre-3.png" alt="Connecting to HAWK" width="1000"/>
 
-
+<br>
 
 
 
@@ -160,3 +154,23 @@ setwd(dir = "/scratch/c.c1427056/course-test-dir/git-repo-test/rnaseq-course/out
 - Double-click the app to ensure that it is working correctly.
 
 <img src="/assets/img/figure-48.png" alt="GSEA window" width="1000"/>
+
+
+<br>
+
+---
+## Learning Materials
+---
+---
+
+- We won't be covering how RNAseq technologies work or the specific details of the nf-core pipelines.
+- Please see the following links to learning materials to cover them:
+
+**Bulk RNA Sequencing**
+- 
+-
+
+**nf-core Pipelines**
+- Details of the fetchngs pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/fetchngs/1.11.0).
+- Details of the rnaseq pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/rnaseq/3.14.0/).
+- Details of the differentialabundance pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/differentialabundance/1.4.0).

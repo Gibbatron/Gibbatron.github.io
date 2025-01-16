@@ -1235,31 +1235,31 @@ enter
 ```
 nano resources/my.config
 
-# change your email and scw account number:
+# change your email:
 
 params {
   config_profile_description = 'Super Computing Wales'
   config_profile_contact = '<b>your-email@cardif.ac.uk</b>'
   config_profile_url = 'https://supercomputing.wales/'
-}
-singularity {
-  enabled = true
-  autoMounts = true
-}
-executor {
-  name = 'slurm'
-  queueSize = 10
-  queue = 'htc'
-}
-params {
   max_memory = 180.GB
   max_cpus = 20
   max_time = 72.h
 }
 
+singularity {
+  enabled = true
+  autoMounts = true
+}
+
 process {
- beforeScript = 'module load singularity-ce/3.11.4'
- clusterOptions = '--account=<b>scw1234</b>'
+  executor = 'slurm'
+  queueSize = 10
+  queue = 'compute_amd'
+}
+
+process {
+beforeScript = 'module load singularity-ce/3.11.4'
+clusterOptions = '--account=scw2345'
 }
 
 # save the file
@@ -1288,9 +1288,22 @@ enter
 
 </details>
 
+**Change to the cla1 node**
+
+- Jan'25 update: we need to change to the amd compute node for the purpose of this course.
+- To do this, enter the following:
+
+```
+ssh cla1
+```
+
+- You will be prompted continue. Type 'yes'.
+- There will be text on the screen saying 'One-time SSH cleanup for Hawk gen 2...'.
+- Wait for this to complete, you will then see '...done'.
+
 **Launch a tmux session**
 
-- From the **parent** directory (rnaseq-course), run the following in the terminal window:
+- From the **parent** directory (`rnaseq-course` - you will need to use the cd command to get there), run the following in the terminal window:
 
 ```
 module load tmux
@@ -1300,6 +1313,8 @@ tmux new -s fetchngs
 - This loads the tmux module in HAWK and opens a new tmux session called fetchngs.
 
 <img src="/assets/img/d1-tmux.gif" alt="Opening a tmux session" width="1000"/>
+
+
 
 **Load Modules**
 
