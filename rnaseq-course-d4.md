@@ -795,3 +795,31 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 
 - There are 2 options to load the data: select from the application cache, or select the GSEA results directory.
 - As we have run this recently, using the application cache may be easier. But if you have run GSEA ages ago and then want to run this analysis, you may need to select the results directory instead.
+- Click on the three dots (...) and a popup window will appear, showing your application cache. Mine contains a fair few from my previous analyses, but the top one is the most recent. You should have only one here. Click on it and then click 'OK'.
+- Now you will see population of the main window of the app with the GSEAPreranked results. To perform the analysis, we need to select which gene sets to use.
+- It is completely up to you which ones you select, you may want to select gene sets that are similar to eachother in order to get more meaningful outputs, or you may want to select all of them.
+- To select one, click on it. To select multiple, hold down `ctrl` or `cmd` and click multiple. To select them all, press `ctrl + a` or `cmd + a`.
+- With the gene sets selected, you can now do 2 things, run a HTML report or run leading edge analysis.
+- I would reccommend clicking on webpage report first, as this requires some compute power. Then click on 'run leading edge analysis'.
+- You will see that clicking 'HTML report' will print the analysis in the 'GSEA reports' window on the bottom left, and clicking 'run leading edge analysis' loads in the main window.
+
+- The leading edge analysis shows 4 plots. The ones that are most useful are: a heatmap of the DEGs in the leading edges (as columns) and the gene sets they are present in (rows), and a barplot of the genes that are present in the most gene sets.
+- Both plots can be saved by clicking 'File > Save Image'.
+- For the barplot, you can use your mouse to click and drag a box over a specific area to zoom in. This allows you to see in more details what genes are involved in X number of gene sets.
+- Clicking on the 'Success' button of the webpage report in the 'GSEA Reports' box will load a webpage of the results.
+
+<img src="/assets/img/figure-58.png" alt="Leading edge analysis results" width="1000"/>
+
+<br>
+
+---
+### g:Profiler
+---
+---
+- g:Profiler 
+
+
+---
+### NEXT TOOL
+---
+---
