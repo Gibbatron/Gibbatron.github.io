@@ -6,6 +6,8 @@ author: "Alex Gibbs"
 
 # Pre-course tasks
 
+<br>
+
 ---
 ## Install Visual Studio Code (VSCode)
 ---
@@ -24,12 +26,12 @@ author: "Alex Gibbs"
 
 ---
 ---
-#### Install tools and packages
+#### Install tools and packages in VSCode
 ---
 
 - Now that we have VSCode installed, we can now install the extensions needed for the whole course.
 
-**Remote - SSH**
+<u><b>Remote - SSH</b></u>
 - This extension allows us to connect remotely to HAWK through a terminal window within the software.
 
 - To install, click on the 'Extensions' button.
@@ -167,10 +169,12 @@ setwd(dir = "/scratch/c.c1427056/course-test-dir/git-repo-test/rnaseq-course/out
 - Please see the following links to learning materials to cover them:
 
 **Bulk RNA Sequencing**
-- 
--
+
+- [Beginners guide to bulk RNA-seq analysis](https://www.youtube.com/watch?v=WW94W-DBf2U)
+- [How Illumina sample prep and sequencing works](https://www.youtube.com/watch?app=desktop&v=fCd6B5HRaZ8)
+- [A Gentle Introduction to: RNA-seq](https://www.youtube.com/watch?v=tlf6wYJrwKY)
 
 **nf-core Pipelines**
 - Details of the fetchngs pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/fetchngs/1.11.0).
-- Details of the rnaseq pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/rnaseq/3.14.0/).
+- Details of the rnaseq pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/rnaseq/3.14.0/). Also a [YouTube video](https://www.youtube.com/watch?v=qMuUt8oVhHw) briefly explaining the pipeline.
 - Details of the differentialabundance pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/differentialabundance/1.4.0).
