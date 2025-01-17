@@ -17,7 +17,7 @@ author: "Alex Gibbs"
 - VSCode is an Integrated Development Environment (IDE) for code development. It is essentially a customisable notebook for coders.
 - The beauty of this tool is that we can install extensions onto the app which means we can do everything in one window.
 
-**To install VSCode**
+<u><b>To install VSCode</u></b>
 - First, head on over to [the download page](https://code.visualstudio.com/Download).
 - Select the version for your operating system, download and install the software.
 - Note: I am not sure how well this app works for Linux users.
@@ -58,7 +58,7 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 <br>
 
-**Optional: Excel Viewer**
+<u><b>Optional: Excel Viewer</u></b>
 - These are not required, but can massively help when editing CSV files.
 - Excel Viewer allows us to open CSV files as a table, rather than a text file.
 - Click 'Extensions' button.
@@ -68,18 +68,12 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 <img src="/assets/img/pre-5.png" alt="Installing Excel Viewer" width="1000"/>
 
+<br>
 
-
-
-
-
-
-
-
-
-
+---
 ## Connecting to HAWK
-
+---
+---
 - To connect to HAWK, click on the 'Remote Explorer' button, then click 'Connect to Host in New Window' button. This opens a new VSCode window with the remote host.
 - You will be prompted (top box) to enter the host operating platform.
 - Click **Linux**.
@@ -90,57 +84,6 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 <img src="/assets/img/pre-3.png" alt="Connecting to HAWK" width="1000"/>
 
 <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-## Install R, RStudio, and packages
----
----
-
-- We will need to use Rstudio at the end of the course to run the shiny application.
-- Firstly, we need to install R. Then we can install RStudio and then the packages.
-
-**Install R**
-- Go to this [link](https://www.stats.bris.ac.uk/R/) and download the app.
-- After installing, open R to initialise everything.
-
-<img src="/assets/img/figure-pre-1.png" alt="R window" width="1000"/>
-
-- Once it has finished opening and initialised, we can go ahead and close it.
-
-**Install RStudio**
-- Go to this [link](https://posit.co/download/rstudio-desktop/) and download the app.
-- After installing, open RStudio.
-
-<img src="/assets/img/figure-pre-2.png" alt="RStudio window" width="1000"/>
-
-**Install Packages**
-
-install.packages('devtools')
-install.packages('markdown')
-install.packages('BiocManager')
-library(BiocManager)
-BiocManager::install("SummarizedExperiment")
-BiocManager::install("GSEABase")
-BiocManager::install("limma")
-devtools::install_github('pinin4fjords/shinyngs')
-library(devtools)
-library(SummarizedExperiment)
-library(GSEABase)
-library(limma)
-setwd(dir = "/scratch/c.c1427056/course-test-dir/git-repo-test/rnaseq-course/output/shinyngs_app/NAME-YOUR-PROJECT/")
 
 ---
 ## Download Gene Set Enrichment Analysis (GSEA) Application
@@ -178,3 +121,7 @@ setwd(dir = "/scratch/c.c1427056/course-test-dir/git-repo-test/rnaseq-course/out
 - Details of the fetchngs pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/fetchngs/1.11.0).
 - Details of the rnaseq pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/rnaseq/3.14.0/). Also a [YouTube video](https://www.youtube.com/watch?v=qMuUt8oVhHw) briefly explaining the pipeline.
 - Details of the differentialabundance pipeline, including what tools/packages etc are used can be found [here](https://nf-co.re/differentialabundance/1.4.0).
+
+**GSEA**
+- [GSEA User Guide](https://www.gsea-msigdb.org/gsea/doc/GSEAUserGuideFrame.html?xtools_gsea_GseaPreranked). Scroll down for info on how to interpret the data.
+- [GSEAPreranked Information Page](https://www.gsea-msigdb.org/gsea/doc/GSEAUserGuideFrame.html?xtools_gsea_GseaPreranked).

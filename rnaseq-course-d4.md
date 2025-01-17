@@ -736,7 +736,7 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 - To do this, simply click the `Run` button at the bottom of the screen.
 - A small window will pop up notifying you that it is downloading the gene sets. It will then close after it has finished doing so.
 - To view the progress of the analysis (handy for larger gene sets and bigger datasets), check the `GSEA reports` window at the bottom left of the window.
-- You will see that your analysis is 'Running'. If anything goes wrong, you will see 'Error!'. If it has completed, you will see 'Success
+- You will see that your analysis is 'Running'. If anything goes wrong, you will see 'Error!'. If it has completed, you will see 'Success'.
 
 <img src="/assets/img/figure-54.png" alt="Running GSEAPreranked" width="1000"/>
 
@@ -745,3 +745,53 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 ---
 ---
 
+- To view the results, simply click on 'Success' in the 'GSEA reports' window. This will load a webpage.
+
+<img src="/assets/img/figure-55.png" alt="GSEA Results Page" width="1000"/>
+
+- There are 2 main sections of this results page, those of na_pos and those of na_neg.
+- In order for us to understand what these are, lets take a look at one of some example enplots:
+
+<img src="/assets/img/figure-56.png" alt="Enplot" width="1000"/>
+
+- The enrichment, or enplot, is split into 3 sections horizontally.
+- Lets focus on the bottom section first. This section shows our preranked DEG list on its side. Instead of the list going from top-to-bottom, it is going from left-to-right. This means that our most expressed DEGs are on the left, and least expressed DEGs are on the right. In other words, we have positive log2FC on the left, and negative log2FC on the right.
+- Depending on where the switch from positive- to negative-log2FC is, this is where the software adds the label 'Zero cross'. It also tells us where the zero cross is, in this example, at row 6049, the DEGs turn from positive-to-negative.
+- You will also see that the software has added 'na_pos (positively correlated)' and 'na_neg (negatively correlated)' to this section. This means that the DEGs in this particular section are positively- or negatively-correlated for the particular gene set we are analysing (if they are present in the gene set, that is).
+- When we run the analysis, the software starts at the top of the preranked DEG list (or as we look at this plot, the left), and walks down the list until it reaches the bottom. Each time we get a 'hit', i.e. a DEG in our list that is present in the gene set, it is scored. The more hits, the greater this score gets.
+- As we go down our list (from left-to-right) the value of this ranking metric decreases, meaning that genes at the top of our list will score higher if they are present in the gene set. The ranking metric as we go down the list is indicated by the grey bars in the bottom of the plot.
+- This score is known as the enrichment score (ES). As we walk down our DEG list, if there are no 'hits', then the ES slowly decreases, and further 'hits' will then add to the score. The 'overall' ES score is where the ES is maximally deviated from zero.
+- If we look at the top of the plot, we can see a graphical representation of the ES via the green line. We can see that this ES shoots up towards the top of our DEG list, and then slowly decreases as we go down it.
+- When we assess whether we get positive- or negative-enrichment, we look at the ES. This score is what we should use if we are looking at a single gene set.
+- However, as we are looking at all the gene sets that are a part of the Hallmarks database, we should use the normalised enrichment score (NES).
+- The NES adjusts the ES by normalising it to account for differences in the size and variations of gene sets.
+- The middle section of the plot shows the gene 'hits' as vertical bars.
+- Lastly, the software also identifies the 'leading edge' of the DEG list. The leading edge is the subset of DEGs that contribute most to the ES. For a gene set that is positively enriched, the leading edge is seen at the top of our DEG list, and is the DEGs that are present before the peak ES.
+
+- Now going back to the webpage results that we have opened. The 'na_pos' section is referring to our posititely-regulated genes, i.e. our positive log2FC DEGs. Likewise, the 'na_neg' refers to our negatively-regulated genes.
+- If we look at the results for the 'na_pos' section, the software has determined that 23/50 of the gene sets in the Hallmarks database are enriched in our positive log2FC DEGs. I.e. our DEGs are positively enriched for 23/50 Hallmark gene sets.
+- 5 of these gene sets are significant with a false discovery rate (FDR) < 25%. The FDR is the estimated probability that a gene set with a given NES represents a faslse positive finding. This means that 3/4 times, the results are valid.
+- 4 of the gene sets are significantly enriched at a nominal p value < 1%, and 6 at < 5%. The nominal p value estimates the statistical significance of the enrichment score for a single gene set. **Note:** This p value is not corrected for gene set sizes and multiple hypothesis testing, so don't use this for comparing between gene sets.
+- The snapshot of enrichment results is a clickable link which loads a new webpage containing the top 20 enriched gene sets. You can also get these results as a webpage table, or a downloadable table.
+- Additionally, there is a link which explains how to interpret all the data.
+
+- We can also view these results in the folder that we told the software to save to. Opening this folder will show you a million and one things. Don't freak out.
+- The files we want to look at are the .png files (should be at the top of the folder) named `enplot_HALLMARK_GENE.SET.NAME.png`. These are the enplots.
+- To get the information into tabular format, look for the `gsea_report_for_na_pos_1234567.tsv` or `gsea_report_for_na_neg_1234567.tsv`. These are also available in .html format.
+- Additionally, if you want more information on a specific gene set result - look for `HALLMARK_GENE.SET.NAME.html`. This will load a webpage with the enplot and information on each gene that is present in that gene set.
+
+<br>
+
+---
+#### Running Leading Edge Analysis on the GSEAPreranked results
+---
+---
+- We can also run an extra analysis on the GSEA app - Leading Edge Analysis.
+- This takes the DEGs at the leading edge of our dataset for each analysis, and analyses them.
+- This analysis is useful to see which DEGs in your dataset are bigger players in the gene sets.
+- To run the analysis, click on 'Leading edge analysis' on the left side of the GSEA app window.
+
+<img src="/assets/img/figure-57.png" alt="Leading edge analysis" width="1000"/>
+
+- There are 2 options to load the data: select from the application cache, or select the GSEA results directory.
+- As we have run this recently, using the application cache may be easier. But if you have run GSEA ages ago and then want to run this analysis, you may need to select the results directory instead.
