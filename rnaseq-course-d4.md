@@ -816,7 +816,49 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 ### g:Profiler
 ---
 ---
-- g:Profiler 
+- g:Profiler is a web-based tool for functional profiling of gene or protein lists and is one of my go-to tools.
+- The tool has a super user-friendly interface and is easy to use.
+- To start, load the webpage up using this [link](https://biit.cs.ut.ee/gprofiler/gost).
+
+<img src="/assets/img/figure-59.png" alt="g:Profiler" width="1000"/>
+
+- As you can see along the top, we have 4 tools that the authors have created: g:GOSt, g:Convert, g:Orth, and g:SNPense.
+- Clicking on any of these will load the respective tool. We will be using the g:GOSt tool.
+- What we actually analyse is completely up to you. I often see that researchers tend to paste the full DEG list into these tools, which is usually fine.
+- However, most of these tools don't have the capacity to split the results into UP- and DOWN-DEGs, meaning that you won't know what functions are positively- or negatively- regulated in your gene list.
+- This tool can allow for this, though I would reccommend splitting your DEGs into UP- and DOWN-DEGs and then pasting them into the tool separately.
+
+- I will go with the assumption that most of us will only be interested in the positvely-enriched DEGs. Therefore we will just analyse the UP-DEGs from here on.
+- Again, this is completely up to you what you analyse. As we have a pretty big dataset, I am going to only analyse DEGs with a log2FC  > 2.
+- We have already made a file that has the DEGs ordered by log2FC (the file we used in GSEA).
+- Let's duplicate this file, open it, and copy the `gene_id`s for log2FC > 2.
+- Then paste your list into the big white input box on the g:GOSt tool.
+- As we are working with Human data, we can keep the `Organism` option as default. If we were working with any other organism, then we would need to change this using the dropdown menu.
+- As the list we have pasted into the box is ordered from highest-to-lowest log2FC, we can tick the `Ordered Query` box.
+- The `Ordered Query` can interpret this list by order of decreasing importance.
+- The incremental enrichment analysis in g:Profiler for ordered queries involves testing increasingly larger numbers of genes starting from the top of the list. This option allows users to determine if functional terms are evenly distributed across the gene list or enriched primarily at the top.
+- By running an ordered query, specific functional terms associated with the most significant changes in the experimental setup can be identified, as well as broader terms that characterize the gene set as a whole.
+- It's important to note that the results of ordered queries in g:Profiler should not be treated as p-values. Instead, users should only infer whether genes belonging to a term are evenly distributed across the query or primarily located at the top.
+- I find this analysis is hit-or-miss in terms of understanding what is happening in your gene set.
+
+- Instead, I like to start with running the query without ticking the `Ordered Query` box and running the analysis as default.
+- There are some aditional stuff we can change, such as which data sources to use for the analysis. By default, all data sources are selected, but if you didn't want a specific one to be used, such as KEGG for example, you can simply click to expand the `Data Sources` section and untick the corresponding box.
+
+<img src="/assets/img/figure-60.png" alt="g:Profiler options" width="1000"/>
+
+- Let's continue using the <b>default</b> analysis and click on `Run Query` to start the analysis.
+- Scroll down to see the results.
+
+<img src="/assets/img/figure-61.png" alt="g:Profiler Results" width="1000"/>
+
+- A nice feature of the results is the Manhattan plot. This plot is interactive. Hovering your mouse over one of the results will tell you more information about it. The number of genes represented by the term is in brackets.
+- The X-axis represents functional terms that are grouped and colour-coded by the various data sources.
+- The Y-axis shows the adjusted enrichment p-values in a negative log10 scale.
+- The circle sizes are in accordance with the corresponding term size. Terms containing more genes have bigger circles.
+- The term location on the X-axis is fixed and terms from the same GO subtree are located closer to eachother, making it faster to interpret the results.
+- The number in brackets next to the source name on the X-axis denotes how many terms are significantly enriched.
+- If we click on a circle of interest to select it, you will see that it is added to the table below the plot. By default, the analysis selects random results to populate this table.
+
 
 
 ---
