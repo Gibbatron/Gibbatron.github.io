@@ -125,3 +125,9 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 **GSEA**
 - [GSEA User Guide](https://www.gsea-msigdb.org/gsea/doc/GSEAUserGuideFrame.html?xtools_gsea_GseaPreranked). Scroll down for info on how to interpret the data.
 - [GSEAPreranked Information Page](https://www.gsea-msigdb.org/gsea/doc/GSEAUserGuideFrame.html?xtools_gsea_GseaPreranked).
+
+**g:Profiler**
+- [g:Profiler Docs page](https://biit.cs.ut.ee/gprofiler/page/docs)
+
+**EnrichR**
+- Link to the Enrichr-KG [tutorial page](https://maayanlab.cloud/enrichr-kg/tutorial).

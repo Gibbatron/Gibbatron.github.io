@@ -857,11 +857,58 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 - The circle sizes are in accordance with the corresponding term size. Terms containing more genes have bigger circles.
 - The term location on the X-axis is fixed and terms from the same GO subtree are located closer to eachother, making it faster to interpret the results.
 - The number in brackets next to the source name on the X-axis denotes how many terms are significantly enriched.
-- If we click on a circle of interest to select it, you will see that it is added to the table below the plot. By default, the analysis selects random results to populate this table.
+- If we click on a circle of interest to select it, you will see that it is added to the table below the plot. By default, the analysis selects random results to populate this table. To remove selected terms, simply click on them again. Selected terms are also highlighted in the `Detailed Results` section.
+- We can also change the view of the plot by unchecking the `Capped` box. By default, the analysis caps the plot to only show terms with p-values < 10^-16, which fixes the Y-axis scale to make it easier to compare across terms. Terms below this threshold can also be statistically classed as highly significant. Unticking this box will show results outside of this threshold.
+
+- We can also dive a bit deeper into the results by clickin on the `Detailed Results` tab.
+
+<img src="/assets/img/figure-62.png" alt="g:Profiler Detailed Results" width="1000"/>
+
+- For the figure above, I have expanded the legend section and also clicked on 'Show Evidence Codes`.
+- This section gives us a more detailed look at the results.
+- Clicking the `>>` button next to the stats section will expand the table slightly to give us some more information.
+- T = term size, how many genes are in the term. Q = query size, how many genes we have pasted into the box. TnQ = Overlap size. number of genes in our pasted list that are present in the term. U = Domain size, how many genes in total are present in the database.
+
+<br>
+
+---
+### Enrichr
+---
+---
+- This is another one of my go-to tools for gene list analysis. This tool has been around for ages and the creators at the Ma'ayan lab have been modernising it lately to include some really neat extras.
+- Let's head to the main webpage by clicking this [link](https://maayanlab.cloud/Enrichr/).
+- Here you will see another input box where we can paste our genes, and a box where we can name our analysis/gene list.
+- This is the OG Enrichr tool, but you can see below the input box that there's multiple tools to use: PFOCRummage, L2S2, Rummagene, RummaGEO, Enrichr-KG.
+- At the bottom of the page is the Enrichr tool for various other organisms. These tools also provide orthologue conversions.
+
+<img src="/assets/img/figure-63.png" alt="Enrichr" width="1000"/>
+
+- Enrichr-KG is the new, more user-friendly version of Enrichr. The other tools are separate from Enrichr, but serve as great tools! We will cover these after Enrichr.
+- Lets click on `Enrichr-KG` to load the new version of the tool.
+
+<img src="/assets/img/figure-64.png" alt="Enrichr-KG" width="1000"/>
+
+- We have a nice user-friendly interface here. You have a visual representation of the databases that we can use at the top. We can click on these to select them. We can select a maximum of 5 per analysis (you can de-select and select others post-analysis to rerun).
+- We need to paste our positive-DEGs into the box as gene symbols. The best way to do this is to open our UP DEGs table we created and copy and paste the `gene_name` column. As this list is so big, I would reccommend making a log2FC filter of your choice. Log2FC > 2.5 is common.
+- Paste the gene list into the input box and then select some of the databases. Then click 'Submit'.
+- Once the analysis has run, scroll down to see a network view of the results. You will see the enriched terms are central nodes and are coloured differently, with the genes in our list that are associated with that term around the outside.
+- You can click and drag each node or gene to move it around. Clicking on a gene or node will highlight that interaction or genes associated with the node.
+- You may be thinking 'We gave the tool a load of genes, why is there so little in the results?' - The tool, by default, will only show us the top 5 processes from each database. To change this, we can click on the 'Input Gene Set' at the top left of the page to edit this. To increase the number of results shown, move the sliders next to each respective database and then click 'Resubmit'. **Note:** Increasing the number of results will cause the browser to get slower and/or could crash it.
+- Clicking the 'Legend' icon will give you a legend, showing the colours assigned to each database nodes.
+- We can also see a tabluar format of the results by clicking on 'Table View' along the top. Here, you can see the stats of the analyses as well.
+- You can visualise the table by clicking on 'Enrichment Bar Charts'.
+
+
+
+
 
 
 
 ---
-### NEXT TOOL
+### New Tools
 ---
 ---
+- We are now in a new era of technology where we can use AI to assist us in our analyses.
+- One particular tool that I have stumbled across is ChatGPT Gene Info. This GPT was created by Stephen Turner.
+- This tool takes a list of human gene symbols and 'tells you a story about what they're doing'.
+- These are a work-in-progress, so may or may not work all the time. I have tried inputting ~800 genes into this tool and it failed during parsing.
