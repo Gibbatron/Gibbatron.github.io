@@ -76,7 +76,7 @@ author: "Alex Gibbs"
 - <b>Note:</b> I am not sure how well this app works for Linux users.
 
 - Once the app has downloaded, it should automatically open.
-- Tick all the boxes in the start up window and click 'Mark Done'.
+- Exit the startup page by clicking on the 'X' on the tab at the top of the window.
 
 <br>
 
@@ -151,7 +151,7 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 - GSEA application is needed at the end of the course to analyse our DEGs.
 - Go to the following [webpage and download GSEA version 4.3.2](https://data.broadinstitute.org/gsea-msigdb/gsea/software/desktop/4.3/) (latest version may not work for everyone so we are using this one).
 - Make sure you click on the download relevant to your operating system: GSEA_MacApp for Mac, GSEA_Win for Windows, GSEA_Linux for Linux.
-- Unzip the file by double clicking or right-clicking and selecting unzip.
+- Unzip the file by double clicking or right-clicking and selecting unzip. Windows users: you may need to run as administrator if you are getting any problems with your antivirus software.
 - Now you should have, in the same location, your `GSEA_4.3.2.app`.
 - You can move this app to anywhere you want and it will still work when you open it.
 - Double-click the app to ensure that it is working correctly.
