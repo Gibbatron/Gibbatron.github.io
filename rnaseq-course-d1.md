@@ -981,8 +981,8 @@ SRR23454126
 ---
 
 - Lets first log onto HAWK. We will be doing all of our coding within VSCode which we should all have installed and set-up.
-- If you do not have VSCode set-up, please let me know now so that we can get you up and running.
-- Note: those of you using Linux will have to use code to do this. I will include the code below each section.
+- <b>If you do not have VSCode set-up, please let me know now so that we can get you up and running.</b>
+- Note: those of you using Linux may have to use code to do this. I will include the code below each section.
 
 ---
 
@@ -996,7 +996,7 @@ SRR23454126
 ***Linux Users***
 - In your shell, log into HAWK with:
 ```
-ssh c.c1234567@hawklogin01.cf.ac.uk
+ssh c.c1234567@hawklogin.cf.ac.uk
 #Enter Password
 ```
 
