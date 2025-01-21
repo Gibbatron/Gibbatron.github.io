@@ -985,7 +985,7 @@ SRR23454126
 - Note: those of you using Linux may have to use code to do this. I will include the code below each section.
 
 ---
-
+- Firstly, make sure you are connected to the VPN.
 - In VSCode, click on the 'Remote Explorer' button, then click 'Connect to Host in New Window' button. This opens a new VSCode window with the remote host.
 - You will be prompted (top box) to enter your password. Do this and hit enter.
 - You are now connected to HAWK.
@@ -1007,7 +1007,7 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 ---
 ---
 
-- To get the project directory from GitHub, we simply just copy and paste one line of code below.
+- To get the project directory from GitHub, we simply copy and paste one line of code below.
 - We will first want to **move into our scratch directory**.
 - To do this, we first need to click on 'Explorer' and then 'Open Folder'.
 - A drop-down box appears at the top of the screen with a filepath. We need to change this to `/scratch/c.c1234567` and then click 'OK'.
@@ -1103,6 +1103,8 @@ chmod +x *.sh
 - **Note: We will be executing the pipeline from the parent directory (rnaseq-course)**
 - **Note: In addition to above note, all file paths are in relation to the parent directory**
 
+<br>
+
 ###### resources/ids.csv
 
 - Now that we have the sample IDs, we can go ahead and add them to the `ids.csv` file.
@@ -1159,7 +1161,7 @@ input7,input8,input9
 <br>
 
 - To add our IDs to the .csv, we need to open `ids.csv`, delete the text already there, then paste our list straight in.
-- To open the file in VSCode, we can either click on it which will open the file in the main window, or we can right-click on the file and click 'Open With...'. This will open a drop-down menu at the top of the screen. Select 'CSV Editor'.
+- To open the file in VSCode, we can click on it which will open the file in the main window, or we can right-click on the file and click 'Open With...'. This will open a drop-down menu at the top of the screen. Select 'CSV Editor'.
 - This will load the file into the main window as a table rather than its native format - this will make it easier for you to edit and understand the structure of the file.
 
 <img src="/assets/img/d1-fig5.png" alt="Opening a .csv file" width="1000"/>
@@ -1288,10 +1290,13 @@ enter
 
 </details>
 
+---
 **Change to the cla1 node**
 
-- Jan'25 update: we need to change to the amd compute node for the purpose of this course.
-- To do this, enter the following:
+---
+
+- <b>Jan'25 update:</b> we need to change to the amd compute node for the purpose of this course.
+- To do this, enter the following in the terminal window:
 
 ```
 ssh cla1
@@ -1301,7 +1306,10 @@ ssh cla1
 - There will be text on the screen saying 'One-time SSH cleanup for Hawk gen 2...'.
 - Wait for this to complete, you will then see '...done'.
 
+---
 **Launch a tmux session**
+
+---
 
 - From the **parent** directory (`rnaseq-course` - you will need to use the cd command to get there), run the following in the terminal window:
 
@@ -1315,8 +1323,10 @@ tmux new -s fetchngs
 <img src="/assets/img/d1-tmux.gif" alt="Opening a tmux session" width="1000"/>
 
 
-
+---
 **Load Modules**
+
+---
 
 - With the tmux session opened, paste the following:
 
@@ -1327,7 +1337,10 @@ module load singularity/singularity-ce/3.11.4
 
 - This loads the required modules for the pipeline to run.
 
+---
 **Execute pipeline**
+
+---
 
 - Now we can go ahead and execute the pipeline.
 - Usually, we would run the pipeline by typing out the command followed by the options etc etc.
