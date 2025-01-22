@@ -898,11 +898,29 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 - We can also see a tabluar format of the results by clicking on 'Table View' along the top. Here, you can see the stats of the analyses as well.
 - You can visualise the table by clicking on 'Enrichment Bar Charts'.
 
+<br>
+
+- Now we can take a look at the other tools by this team.
+
+---
+#### Rummagene
+---
+---
 
 
+---
+#### PFOCRummage
+---
+---
+- If we follow the [link](https://pfocrummage.maayanlab.cloud/), you will find the PFOCRummage tool, or the Pathway Figure Optical Character Recognition tool.
+- This nifty tool takes your gene list and rummages through > 52,000 gene sets that have been extracted from > 44,000 articles.
+- As the name suggests, these gene sets have been extracted from publication figures.
+- To get going, lets paste in our gene list (as gene symbols) into the box and click 'Submit'.
 
+<img src="/assets/img/figure-65.png" alt="PFOCRummage" width="1000"/>
 
-
+- The results can be really neat if you are looking for similar papers/datasets to yours.
+- The software also provides us with stats similar to the other tools we have. The Gene Set Size refers to the size of the gene set from the figure that it has compared to. Overlap refers to how many of our inputted genes are found in that gene set. Odds refers to the odds ratio, which measures the strength of the association between the interactions, a higher ratio indicates a stronger association. We also then have the P value and adjusted P values.
 
 ---
 ### New Tools

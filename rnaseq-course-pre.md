@@ -72,7 +72,9 @@ author: "Alex Gibbs"
 <u><b>To install VSCode</b></u>
 - First, head on over to [the download page](https://code.visualstudio.com/Download).
 - Select the version for your operating system, download and install the software.
-<b>Windows Users</b>: navigate to the location where you downloaded the file, right click on it, and click 'Run as administator'. This should avoid any problems with your antivirus software.
+
+- <b>Windows Users</b>: navigate to the location where you downloaded the file, right click on it, and click 'Run as administator'. This should avoid any problems with your antivirus software.
+
 - <b>Note:</b> I am not sure how well this app works for Linux users.
 
 - Once the app has downloaded, it should automatically open.
