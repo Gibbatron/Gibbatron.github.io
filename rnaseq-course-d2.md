@@ -45,6 +45,12 @@ author: "Alex Gibbs"
 - In the terminal window at the bottom of your screen, paste the following:
 
 ```
+# log on to the cla1 node
+ssh cla1
+
+# move to the working directory (scratch)
+cd /scratch/c.c1234567/rnaseq-course
+
 #load tmux
 module load tmux
 
@@ -63,10 +69,13 @@ You should also see the following text at the end (we will cover the message sho
 ***Linux Users***
 ```
 #log onto HAWK
-c.c1234567@hawklogin02.cf.ac.uk
+c.c1234567@hawklogin.cf.ac.uk
 PASSWORD
 
-#move to the working directory (scratch)
+# Swap to the cla1 node
+ssh cla1
+
+# move to the working directory (scratch)
 cd /scratch/c.c134567/rnaseq-course
 
 #load tmux
@@ -256,8 +265,8 @@ enter
 ---
 
 - Now that we have the files ready for the pipeline, we can go ahead and execute it.
-- To run the pipeline, we need to be in the **parent directory (rnaseq-course)** directory.
-- First of all, lets exit the prefetch tmux session and create a new one for the rnaseq pipeline.
+- To run the pipeline, we need to be in the **parent directory (rnaseq-course)** directory and also make sure we are on the **cla1 node**.
+- First of all, lets exit the prefetch tmux session, log onto the cla1 node, and create a new one for the rnaseq pipeline.
 - In the terminal window at the bottom of your screen:
 
 ```
@@ -280,7 +289,7 @@ module load singularity/singularity-ce/3.11.4
 ./bin/rnaseq.sh
 
 #leave pipeline running for a few minutes to ensure its working, then we can close the session:
-crtl +b
+crtl + b
 d
 ```
 

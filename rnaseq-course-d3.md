@@ -44,10 +44,16 @@ author: "Alex Gibbs"
 - In the terminal window at the bottom of your screen, paste the following:
 
 ```
-#load tmux
+# log on to the cla1 node
+ssh cla1
+
+# move to the working directory (scratch)
+cd /scratch/c.c1234567/rnaseq-course
+
+# load tmux
 module load tmux
 
-#open our tmux session
+# open our tmux session
 tmux attach -t rnaseq
 ```
 
@@ -60,6 +66,9 @@ tmux attach -t rnaseq
 #log onto HAWK
 c.c1234567@hawklogin02.cf.ac.uk
 PASSWORD
+
+# log on to the cla1 node
+ssh cla1
 
 #move to the working directory (scratch)
 cd /scratch/c.c134567/rnaseq-course

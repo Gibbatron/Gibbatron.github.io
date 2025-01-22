@@ -1084,6 +1084,7 @@ chmod +x *.sh
     │   ├── download-ref-genome.sh
     │   ├── fetchngs.sh
     │   ├── generate-samplesheet.sh
+    │   ├── make-table-diff-abundance.sh
     │   └── rnaseq.sh
     ├── resources/
     │   ├── conditions.csv
@@ -1314,6 +1315,7 @@ ssh cla1
 - From the **parent** directory (`rnaseq-course` - you will need to use the cd command to get there), run the following in the terminal window:
 
 ```
+cd /scratch/c.c1234567/rnaseq-course/
 module load tmux
 tmux new -s fetchngs
 ```
