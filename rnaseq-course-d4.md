@@ -906,7 +906,15 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 #### Rummagene
 ---
 ---
+- If we follow the [link](https://rummagene.com/), you will find the Rummagene tool, or the Pathway Figure Optical Character Recognition tool.
+- Rummagene was the first of the rummager tools develped by the Ma'ayan lab.
+- It takes your genes as input and rummages through > 800,000 supporting tables from papers to find the most similar gene sets that match.
+- This can be a really useful tool if you are trying to find simliar research to yours. I also find this is a helpful tool for study confirmation, i.e. If I sequenced keratinoytes, my DEGs should be enriched for keratinocyte markers which should then show up in the results of this tool.
 
+- Lets paste our genes into the tool and click 'Submit'.
+- The Gene Set Size refers to the size of the gene set from the figure that it has compared to. Overlap refers to how many of our inputted genes are found in that gene set. Odds refers to the odds ratio, which measures the strength of the association between the interactions, a higher ratio indicates a stronger association. We also then have the P value and adjusted P values.
+
+<img src="/assets/img/figure-66.png" alt="Rummagene" width="1000"/>
 
 ---
 #### PFOCRummage
@@ -920,7 +928,7 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 <img src="/assets/img/figure-65.png" alt="PFOCRummage" width="1000"/>
 
 - The results can be really neat if you are looking for similar papers/datasets to yours.
-- The software also provides us with stats similar to the other tools we have. The Gene Set Size refers to the size of the gene set from the figure that it has compared to. Overlap refers to how many of our inputted genes are found in that gene set. Odds refers to the odds ratio, which measures the strength of the association between the interactions, a higher ratio indicates a stronger association. We also then have the P value and adjusted P values.
+- The software also provides us with the same stats as Rummagene.
 
 ---
 ### New Tools

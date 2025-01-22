@@ -191,3 +191,7 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 **EnrichR**
 - Link to the Enrichr-KG [tutorial page](https://maayanlab.cloud/enrichr-kg/tutorial).
+
+**Rummagene**
+- Link to the [paper describing the tools and implemented stats](https://www.nature.com/articles/s42003-024-06177-7)
+-
