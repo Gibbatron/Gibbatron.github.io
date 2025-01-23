@@ -49,10 +49,13 @@ author: "Alex Gibbs"
 - In the terminal window at the bottom of your screen, paste the following:
 
 ```
-#load tmux
+# log onto cla1 node
+ssh cla1
+
+# load tmux
 module load tmux
 
-#open our tmux session
+# open our tmux session
 tmux attach -t diff-abundance
 ```
 
@@ -62,17 +65,20 @@ tmux attach -t diff-abundance
 
 ***Linux Users***
 ```
-#log onto HAWK
-c.c1234567@hawklogin01.cf.ac.uk
+# log onto HAWK
+c.c1234567@hawklogin.cf.ac.uk
 PASSWORD
 
-#move to the working directory (scratch)
+# log onto cla1 node
+ssh cla1
+
+# move to the working directory (scratch)
 cd /scratch/c.c1234567/rnaseq
 
-#load tmux
+# load tmux
 module load tmux
 
-#open our tmux session
+# open our tmux session
 tmux attach -t diff-abundance
 ```
 
@@ -931,10 +937,59 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 - The software also provides us with the same stats as Rummagene.
 
 ---
-### New Tools
+#### RummaGEO
 ---
 ---
-- We are now in a new era of technology where we can use AI to assist us in our analyses.
-- One particular tool that I have stumbled across is ChatGPT Gene Info. This GPT was created by Stephen Turner.
-- This tool takes a list of human gene symbols and 'tells you a story about what they're doing'.
-- These are a work-in-progress, so may or may not work all the time. I have tried inputting ~800 genes into this tool and it failed during parsing.
+- If we follow the [link](https://rummageo.com/), you will find the RummaGEO tool.
+- GEO currently only supports searching of metadata describing studies and samples to locate relevant studies.
+- This tool allows users to search gene expression signatures against all human and mouse RNAseq studies that have been deposited in GEO.
+- The database currently contains > 178,000 human and > 200,000 mouse gene sets from > 30,000 GEO studies.
+
+- Let's paste our DEGs into the box and click 'Submit'.
+- The results are really useful for finding similar datasets to ours. As you can see, the top results are actually from the GEO dataset that we have used for this course.
+- The results are accompanied by some stats and information about the resulting datasets.
+- The stats are the same as Rummagene, with the addition of the Silhouette Score, which is a data-level confidence score of the condition groups. This is based on a PCA of normalised expression data. A value of 1 indicates perfect clustering and -1 indicates poor clustering.
+
+---
+### Paid Tool - Ingenuity Pathway Analysis (IPA)
+---
+---
+- Cardiff University has a licence for IPA which users can pay to have access to.
+- This is a brilliant tool which I use all the time!
+- I won't be doing a live demo, as we will be here all day, but I will brush up on some of the features.
+
+**Data Upload**
+- You can upload your data table(s) 'as is'. The software has an 'Infer Observations' feature that reads the table and predicts which columns you want to perform your analysis on.
+- Sometimes it gets it wrong, but this is a handy feature. For RNAseq data, we need to use the log2FC and adjusted P value columns for analysis.
+
+<img src="/assets/img/figure-67.png" alt="IPA" width="1000"/>
+
+**Upload for Analysis**
+- Then we can upload the data to their cloud servers for analysis.
+
+<img src="/assets/img/figure-68.png" alt="IPA" width="1000"/>
+
+- The handy part here is that we can then choose to filter the data before uploading. This means that we don't have to bother filtering our data before-hand which can save you a load of time!
+
+<img src="/assets/img/figure-69.png" alt="IPA" width="1000"/>
+
+**Results**
+- Once the analysis has been completed, you will be notified by email.
+- Upon opening the results, you will be greeted by a summary page.
+
+<img src="/assets/img/figure-70.png" alt="IPA" width="1000"/>
+
+- There is also a graphical summary page which provides a network summary of the results. The purpose of this network is to give you a quick overview of the major biological themes in the analysis.
+
+<img src="/assets/img/figure-71.png" alt="IPA" width="1000"/>
+
+- The Pathways section gives us a detailed look at all of the pathway results. We have options here to change the look of the graph, too. There is also an option to see the machine learning disease pathways.
+
+<img src="/assets/img/figure-72.png" alt="IPA" width="1000"/>
+
+- The upstream regulator section shows us the results of the upstream analysis that the software performs. The aim here is to identify any 'molecules' that are upstream of the dataset that may have an influence. The software also provides activation z-scores for each molecule. Z-scores combine expression and significance. a positive Z-score indicates activation, and the higher the score indicates the degree of activation. The same thing applies for negative z-scores.
+- You can see from the figure that the software highlights molecules that it believes are activated or inhibited outside of the dataset which may then be causing the changes in our dataset.
+- You can also dive deeper by selecting a results and then clicking on 'Display as Network', which shows us the selected molecule in the middle on the network and its interactions with our DEGs.
+
+<img src="/assets/img/figure-73.png" alt="IPA" width="1000"/>
+

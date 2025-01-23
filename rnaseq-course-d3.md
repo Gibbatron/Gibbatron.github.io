@@ -447,7 +447,7 @@ d
 tmux new -s diff-abundance
 
 # load modules
-module load nextflow/23.10.0
+module load nextflow/24.10.4
 module load singularity/singularity-ce/3.11.4
 ```
 

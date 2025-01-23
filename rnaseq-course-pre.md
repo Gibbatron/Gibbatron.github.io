@@ -152,7 +152,7 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 - GSEA application is needed at the end of the course to analyse our DEGs.
 - Go to the following [webpage and download GSEA version 4.3.2](https://data.broadinstitute.org/gsea-msigdb/gsea/software/desktop/4.3/) (latest version may not work for everyone so we are using this one).
-- Make sure you click on the download relevant to your operating system: GSEA_MacApp for Mac, GSEA_Win for Windows, GSEA_Linux for Linux.
+- Make sure you click on the download relevant to your operating system: GSEA_MacApp for Mac, GSEA_Win for Windows, GSEA_Linux for Linux. **Make sure you download the installer (.exe for Windows)**
 - Unzip the file by double clicking or right-clicking and selecting unzip. Windows users: you may need to run as administrator if you are getting any problems with your antivirus software.
 - Now you should have, in the same location, your `GSEA_4.3.2.app`.
 - You can move this app to anywhere you want and it will still work when you open it.
@@ -194,4 +194,9 @@ ssh c.c1234567@hawklogin.cf.ac.uk
 
 **Rummagene**
 - Link to the [paper describing the tools and implemented stats](https://www.nature.com/articles/s42003-024-06177-7)
--
+
+**RummaGEO**
+- Link to the [User Manual](https://rummageo.com/usermanual)
+
+**Ingenuity Pathway Analysis (IPA)**
+- Link to the [Help Page](https://qiagen.my.salesforce-sites.com/KnowledgeBase/KnowledgeNavigatorPage?categoryName=IPA)
