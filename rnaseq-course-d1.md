@@ -119,7 +119,7 @@ This is a shell. We can use this to type commands etc.
 - Both HPC's are the same, but set-up slightly different - we will be working with HAWK.
 - If we need to run analyses/softwares/code that requires a lot of computing power, we need to use HPC's.
 - The way we interact with HAWK is through the command line via Bash.
-- Think of HAWK as a computer that's located in the cloud. We can connect to it via out Unix shells - Terminal, MobaXterm, and FileZilla.
+- Think of HAWK as a computer that's located in the cloud. We can connect to it via our Unix shells.
 
 ---
 
@@ -725,7 +725,7 @@ mkdir directory1/directory1.1
 ---
 ---
 
-- Open a shell on your PC.
+- Open VSCode, click on 'Terminal' at the top of your screen and select 'New Terminal'.
 - Find out where you are.
 - Find where the unix-practical directory is.
 - Move into the unix-practical directory and list the contents.
@@ -797,8 +797,8 @@ You can use multiple wildcards to list the contents further down: <pre><span sty
 
 <br>
 
-Use nano editor to correct the typo in script.sh: <pre><span style="color:crimson;"> nano script.sh *</span></pre>
-Change the permissions by using chmod: <pre><span style="color:crimson;"> chmod +x script.sh *</span></pre>
+Use nano editor to correct the typo in script.sh: <pre><span style="color:crimson;"> nano script.sh </span></pre>
+Change the permissions by using chmod: <pre><span style="color:crimson;"> chmod +x script.sh </span></pre>
 
 </details>
 
@@ -869,7 +869,7 @@ Change the permissions by using chmod: <pre><span style="color:crimson;"> chmod 
 
 <img src="/assets/img/figure-12.png" alt="Dataset that we will be using" width="1000"/>
 
-- Clicking on the dataset title will load the series record for that dataset.
+- Clicking on the dataset title will load the series record for that dataset. Can everyone follow this [link](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE225253) and follow along.
 
 <img src="/assets/img/figure-13.png" alt="GEO series record" width="500"/>
 
@@ -980,12 +980,12 @@ SRR23454126
 ---
 ---
 
-- Lets first log onto HAWK. We will be doing all of our coding within VSCode which we should all have installed and set-up.
+- Lets first log onto HAWK. We will be doing all of our coding within VSCode.
 - <b>If you do not have VSCode set-up, please let me know now so that we can get you up and running.</b>
 - Note: those of you using Linux may have to use code to do this. I will include the code below each section.
 
 ---
-- Firstly, make sure you are connected to the VPN.
+- Firstly, make sure you are connected to the VPN. If you are on-campus, theres no need.
 - In VSCode, click on the 'Remote Explorer' button, then click 'Connect to Host in New Window' button. This opens a new VSCode window with the remote host.
 - You will be prompted (top box) to enter your password. Do this and hit enter.
 - You are now connected to HAWK.
@@ -1144,7 +1144,7 @@ chmod +x *.sh
     <td>input8</td>
     <td>input9</td>
   </tr>
-</table> 
+</table>
 
 <br>
 
@@ -1155,7 +1155,7 @@ input4,input5,input6
 input7,input8,input9
 </span></pre>
 
-<br> 
+<br>
 
 </details>
 
@@ -1164,6 +1164,7 @@ input7,input8,input9
 - To add our IDs to the .csv, we need to open `ids.csv`, delete the text already there, then paste our list straight in.
 - To open the file in VSCode, we can click on it which will open the file in the main window, or we can right-click on the file and click 'Open With...'. This will open a drop-down menu at the top of the screen. Select 'CSV Editor'.
 - This will load the file into the main window as a table rather than its native format - this will make it easier for you to edit and understand the structure of the file.
+- I would reccomend just clicking on it to open though, as the file has only one column.
 
 <img src="/assets/img/d1-fig5.png" alt="Opening a .csv file" width="1000"/>
 
@@ -1229,7 +1230,7 @@ enter
 
 - This file contains all of the configuration code required for the pipeline to run correctly on HAWK.
 
-- **We only need to change the email and scw account sections.**
+- **We only need to change the email.**
 
 - Open the file in VSCode by simply clicking on it, then change your email address and scw account.
 - Then save the file by clicking `File > Save`. Close the file by clicking the 'X' next to the filename along the top of your window.
@@ -1242,7 +1243,7 @@ nano resources/my.config
 
 params {
   config_profile_description = 'Super Computing Wales'
-  config_profile_contact = '<b>your-email@cardif.ac.uk</b>'
+  config_profile_contact = 'your-email@cardif.ac.uk'
   config_profile_url = 'https://supercomputing.wales/'
   max_memory = 180.GB
   max_cpus = 20
@@ -1256,8 +1257,11 @@ singularity {
 
 process {
   executor = 'slurm'
-  queueSize = 10
   queue = 'compute_amd'
+}
+
+executor {
+  queueSize=10
 }
 
 process {
@@ -1322,9 +1326,6 @@ tmux new -s fetchngs
 
 - This loads the tmux module in HAWK and opens a new tmux session called fetchngs.
 
-<img src="/assets/img/d1-tmux.gif" alt="Opening a tmux session" width="1000"/>
-
-
 ---
 **Load Modules**
 
@@ -1354,6 +1355,8 @@ module load singularity/singularity-ce/3.11.4
 ```
 
 - This will run the pipeline for us. Leave the pipeline run for a few minutes to ensure it is working, then we can close the session by doing the following:
+
+<img src="/assets/img/d1-tmux.gif" alt="Opening a tmux session" width="1000"/>
 
 <img src="/assets/img/d1-fig6.png" alt="Executing the fetchngs pipeline" width="1000"/>
 

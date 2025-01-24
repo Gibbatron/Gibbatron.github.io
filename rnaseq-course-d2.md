@@ -168,6 +168,8 @@ You can use this checksum to verify that the file hasn’t changed. For example,
 ## nf-core/rnaseq pipeline
 ---
 ---
+- the rnaseq pipeline takes the files we downloaded yesterday and processes them by doing the following: Quality contol (QC), read trimming, alignment to the human genome, and produces a gene expression matrix.
+- Full details on what the pipeline does can be found on the [pipeline introduction page](https://nf-co.re/rnaseq/3.14.0/).
 
 Required files:
 

@@ -58,13 +58,13 @@ tmux attach -t rnaseq
 ```
 
 - Upon opening the session, we should have a window that looks like this:
-# add screenshot here
+
 <img src="/assets/img/d3-fig1.png" alt="tmux rnaseq completed run" width="1000"/>
 
 ***Linux Users***
 ```
 #log onto HAWK
-c.c1234567@hawklogin02.cf.ac.uk
+c.c1234567@hawklogin.cf.ac.uk
 PASSWORD
 
 # log on to the cla1 node
@@ -187,7 +187,7 @@ scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star
 - As we are only analysing the 2 groups and can see that there is a clear separation between them, this is as far as we need to go for this analysis.
 - We will keep in mind, though, that we may have some outliers for the other sample group as they are more dispersed from each other.
 
-<b>INSERT FIGURE</b>
+<img src="/assets/img/figure-83.png" alt="PCA" width="1000"/>
 
 ---
 ###### QualiMap
@@ -214,14 +214,14 @@ scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star
 - What we are looking for is high quality scores across the length of the sequences.
 - Here we can see that we have a mean score of 30 for all samples for both raw and trimmed.
 
-<b>INSERT FIGURE</b>
+<img src="/assets/img/figure-84.png" alt="Sequence Quality Histograms" width="1000"/>
 
 **Per Sequence GC Content**
 - This plot shows us the average GC content of reads for each sample.
 - We expect this value to be between 40% and 60% in humans and 40% and 50% in mice.
 - Here we can see our GC content falls around 50% in this dataset for both raw and trimmed reads.
 
-<b>INSERT FIGURE</b>
+<img src="/assets/img/figure-85.png" alt="Per Sequence GC Content" width="1000"/>
 
 ---
 #### star_salmon directory
@@ -234,6 +234,8 @@ scp c.c1234567@hawklogin.cf.ac.uk:/scratch/c.c1234567/rnaseq/output/multiqc/star
 - For those who don't plan on running the differentialabundance pipeline (completely fine and up to you!), the files you may need to run your downstream differential analyses are:
   - ```SAMPLE/quant.genes.sf``` : Salmon gene-level quantification of the sample, including feature length, effective length, TPM, and number of reads.
   - ```SAMPLE/quant.sf```: Salmon transcript-level quantification of the sample, including feature length, effective length, TPM, and number of reads.
+
+<br>
 
 ---
 ## nf-core/differentialabundance pipeline
@@ -275,7 +277,7 @@ sampleB_3|path/to/file|path/to/file|auto|GroupB
 
 
 <details>
-<summary>See here how to add extra columns to perform extra comparisons</summary>
+<summary><b>See here how to add extra columns to perform extra comparisons</b></summary>
 
 <br>
 
@@ -373,7 +375,7 @@ outdir: output
 matrix: output/star_salmon/salmon.merged.gene_counts.tsv
 transcript_length_matrix: output/star_salmon/salmon.merged.gene_lengths.tsv
 contrasts: resources/contrasts.csv
-differential_min_fold_change: 1.5
+differential_min_fold_change: 2
 gtf: resources/Homo_sapiens.GRCh38.110.gtf
 email: <b>YOUR-EMAIL@cardiff.ac.uk</b>
 study_name: <b>MY-STUDY-NAME</b>
