@@ -993,3 +993,60 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 
 <img src="/assets/img/figure-73.png" alt="IPA" width="1000"/>
 
+- Then theres the disease and functions section that shows us all of the disesases and functions that are up or down in our datasets.
+- We can dive deeper into this visualisation by clicking on the boxes.
+- A table of the results is also below. We can also display one of the results as a network by highlighting one and selecting 'Display as Network'.
+
+<img src="/assets/img/figure-74.png" alt="IPA" width="1000"/>
+
+- We also get a regualtor effect analysis, which is a table of predicted regulators of our dataset.
+- Again, clicking on a regulator and selecting 'Display as Network' shows you a detailed network.
+
+<img src="/assets/img/figure-75.png" alt="IPA" width="1000"/>
+
+- The software also attempt to create networks of genes from the DEGs we provide, these can be seen in the networks section.
+- You can view these networks by clicking on 'View Networks'.
+
+<img src="/assets/img/figure-76.png" alt="IPA" width="1000"/>
+
+- You can also see what these networks are involved in by clicking on the 'Functions' button.
+
+<img src="/assets/img/figure-77.png" alt="IPA" width="1000"/>
+
+- We can also do a biomarker analysis, which analyses your DEGs for potential biomarkers
+- This can be a handy tool, as you can use filters to return a list of desired feature. For example, if you wanted to identify cell surface markers in your DEGs, you can use the filter to do this.
+
+<img src="/assets/img/figure-78.png" alt="IPA" width="1000"/>
+
+- We can also use the software to search for our favourite gene/pathway/disease.
+- In the example here, we have searched for a pathway. In the results, we clicked on the pathway which loaded up the pathway diagram.
+
+<img src="/assets/img/figure-79.png" alt="IPA" width="1000"/>
+
+- We can go one step futher here also, by overlaying our DEGs onto the pathway using the overlay.
+- Here you can see on the left tab, what DEGs are present in this pathway and their expression.
+- We can also see on the diagram where they are.
+
+<img src="/assets/img/figure-80.png" alt="IPA" width="1000"/>
+
+- Lastly, there is also a build tool that allows us to build, using IPA's knowledge base, on top of our gene(s).
+- For instance, if you wanted to see what a particular gene binds up/downstream to, you can use the build tool to do this.
+- Or if you wanted to find a connection between two genes, the build tool can also do this.
+- Take an example of GATA1 and GATA2 genes. I have searched for both and added them into a new pathway.
+- From there, I selected both, then selected the build tool and then selected the connect sub-tool.
+- From here, I am given multiple parameters such as up/downstream binding, or both, species, diseases etc.
+- Then running the tool shows that there is indeed a connection between the 2 genes. Connections are also accompanied by evidence, here you can see E and PD, meaning expression and protein-dna binding.
+
+<img src="/assets/img/figure-81.png" alt="IPA" width="1000"/>
+
+- I can also then use the grow sub-tool to see what GATA2 interacts with.
+
+<img src="/assets/img/figure-82.png" alt="IPA" width="1000"/>
+
+- As you can see, there are many many tools available in IPA to assist you in your analysis.
+
+---
+---
+# End of Course
+---
+---
