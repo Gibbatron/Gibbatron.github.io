@@ -1,7 +1,7 @@
 ---
 title: "RNAseq Data Processing & Analysing Course"
 author: "Alex Gibbs"
-#full-width: true
+full-width: true
 ---
 
 # Day 3 - Performing differential gene expression with nf-core/differentialabundance pipeline
