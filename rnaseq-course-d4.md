@@ -116,6 +116,7 @@ tmux attach -t diff-abundance
     - Processed Abundance: processed abundance values from initial processing. i.e. normalised counts from DESeq2.
     - Differential: Results of diferential analysis. filtered and unfiltered tables for expression.
 - We will also find 'merged_tables.tsv', the table that we generated at the end of the pipeline. This takes all of the tables and combines them into one.
+
 ---
 #### Pipeline Information directory
 ---
