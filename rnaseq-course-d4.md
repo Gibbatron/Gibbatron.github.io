@@ -284,7 +284,7 @@ tmux attach -t diff-abundance
 - We can install and load these packages by editing this script.
 - To do this, click on the script and hit enter a few times to move the code lower down the page.
 - We can now copy and paste the code below into the top of the script.
-- **Note: Make sure you change the your username:**
+- **Note: Make sure you change the your username and project directory name:**
 
 ```
 install.packages('devtools')
