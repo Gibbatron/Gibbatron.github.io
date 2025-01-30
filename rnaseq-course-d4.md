@@ -1048,6 +1048,14 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 
 ---
 ---
+# Other Tools
+---
+- There are many many more toos available to analyse your DEGs!
+- I have collated a growing [list of tools for you to check out](https://heathbioi.github.io/what-to-do-with-a-gene-list/).
+- I have also made videos and tutorials for a few of these tools, so be sure to click on the links. 
+
+---
+---
 # End of Course
 ---
 ---
