@@ -39,7 +39,7 @@ full-width: true
 <img src="/assets/img/pre-3.png" alt="Connecting to HAWK" width="1000"/>
 
 - Click on 'Explorer' and then 'Open Folder'.
-- A drop-down box appears at the top of the screen with a filepath. We need to change this to `/scratch/c.c1234567/rnaseq-course` and then click 'OK'.
+- A drop-down box appears at the top of the screen with a filepath. We need to change this to `/scratch/c.c1234567/nfcore-rnaseq` and then click 'OK'.
 - You may be prompted 'Do you trust the authors this folder?'. Click 'Trust all authors' or 'Yes'.
 - You will now see that the directory will be open on the left of the window.
 
@@ -73,7 +73,7 @@ PASSWORD
 ssh cla1
 
 # move to the working directory (scratch)
-cd /scratch/c.c1234567/rnaseq
+cd /scratch/c.c1234567/nfcore-rnaseq
 
 # load tmux
 module load tmux
@@ -275,7 +275,7 @@ tmux attach -t diff-abundance
 - Now we have an RStudio server opened up which will allow us to run whatever we want without using our own computers resources. It also means that we can work directly with the files on our HAWK account without having to transfer them to our computers.
 - We now want to open the shinyngs app directory and launch the app. To do this, we first need to navigate to it.
 - Click on 'File > Open File...', this launches a popup window.
-- Navigate to `rnaseq-course/output/shinyngs_app/MY-STUDY-NAME` and click on `app.R and then 'Open'.
+- Navigate to `nfcore-rnaseq/output/shinyngs_app/MY-STUDY-NAME` and click on `app.R and then 'Open'.
 
 <img src="/assets/img/figure-34.png" alt="Opening app.R" width="1000"/>
 
@@ -299,7 +299,7 @@ library(devtools)
 library(SummarizedExperiment)
 library(GSEABase)
 library(limma)
-setwd(dir = "/scratch/c.c1234567/rnaseq-course/output/shinyngs_app/NAME-YOUR-PROJECT/")
+setwd(dir = "/scratch/c.c1234567/nfcore-rnaseq/output/shinyngs_app/NAME-YOUR-PROJECT/")
 ```
 
 <img src="/assets/img/figure-35.png" alt="Editing the script" width="1000"/>
