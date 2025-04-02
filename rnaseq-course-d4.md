@@ -1056,6 +1056,11 @@ cp preranked-DEGs-GSEA.txt preranked-DEGs-GSEA.rnk
 
 ---
 ---
+
+Thank you for taking part in the course. For those of you who have made it this far and would like to see video recaps of the whole course/process, please [click here](https://cardiff.cloud.panopto.eu/Panopto/Pages/Sessions/List.aspx?folderID=037af815-9df6-49d6-a829-b28100fac15f). This link will take you to Panopto video recordings of each process.
+
+---
+---
 # End of Course
 ---
 ---
